@@ -18,7 +18,7 @@
     "href": "dagnammit.html#levels-and-methods-of-explainability",
     "title": "DAG Nammit",
     "section": "Levels and methods of explainability",
-    "text": "Levels and methods of explainability\n\n\nLevels of explainability\n\nGlobal\n\nWhich variables seem “important” and how do they impact the model’s predictions?\n\nLocal\n\nExplaining individual predictions\n\n\n\nMethods of explainability\n\nModel-specific\n\nModel coefficients\nInspect tree structure 🌲\n\nModel-agnostic\n\nCan be applied to any prediction model ⚠️"
+    "text": "Levels and methods of explainability\n\n\nLevels of explainability\n\nGlobal\n\nWhich variables seem “important” and how do they impact the model’s predictions?\n\nLocal\n\nExplaining individual predictions\n\n\n\nMethods of explainability\n\nModel-specific\n\nModel coefficients\nInspect tree structure 🌲\n\nModel-agnostic\n\nCan be applied to any prediction model ⚠️\n\n🧑‍💻 Lots of good software!"
   },
   {
     "objectID": "dagnammit.html#black-box-vs.-glass-box-models",
