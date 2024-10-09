@@ -193,7 +193,7 @@
     "href": "dagnammit.html#retention-example-cont.-1",
     "title": "DAG Nammit",
     "section": "Retention example (cont.)",
-    "text": "Retention example (cont.)\nAssume strong domain expertise has allowed us to generate the following DAG:"
+    "text": "Retention example (cont.)\nAssume strong domain expertise has allowed us to generate the following DAG:\n\n\n\n%3\n\n\n\nBugs reported\n\nBugs reported\n\n\n\nMonthly usage\n\nMonthly usage\n\n\n\nAd spend\n\nAd spend\n\n\n\nMonthly usage-&gt;Ad spend\n\n\n\n\n\nBugs faced\n\nBugs faced\n\n\n\nMonthly usage-&gt;Bugs faced\n\n\n\n\n\nDid renew\n\nDid renew\n\n\n\nMonthly usage-&gt;Did renew\n\n\n\n\n\nSales calls\n\nSales calls\n\n\n\nInteractions\n\nInteractions\n\n\n\nSales calls-&gt;Interactions\n\n\n\n\n\nProduct need\n\nProduct need\n\n\n\nSales calls-&gt;Product need\n\n\n\n\n\nSales calls-&gt;Did renew\n\n\n\n\n\nEconomy\n\nEconomy\n\n\n\nEconomy-&gt;Did renew\n\n\n\n\n\nDiscount\n\nDiscount\n\n\n\nDiscount-&gt;Did renew\n\n\n\n\n\nLast upgrade\n\nLast upgrade\n\n\n\nLast upgrade-&gt;Ad spend\n\n\n\n\n\nLast upgrade-&gt;Did renew\n\n\n\n\n\nInteractions-&gt;Did renew\n\n\n\n\n\nProduct need-&gt;Bugs reported\n\n\n\n\n\nProduct need-&gt;Monthly usage\n\n\n\n\n\nProduct need-&gt;Discount\n\n\n\n\n\nProduct need-&gt;Did renew\n\n\n\n\n\nBugs faced-&gt;Bugs reported\n\n\n\n\n\nBugs faced-&gt;Did renew"
   },
   {
     "objectID": "dagnammit.html#retention-example-cont.-2",

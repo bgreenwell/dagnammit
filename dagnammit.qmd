@@ -10,6 +10,7 @@ format:
     css: custom.css
     slide-number: true
     code-copy: true
+    embed-resources: true
   
 ---
 
