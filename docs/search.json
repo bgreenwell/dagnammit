@@ -1,0 +1,352 @@
+[
+  {
+    "objectID": "dagnammit.html#about-me",
+    "href": "dagnammit.html#about-me",
+    "title": "DAG Nammit",
+    "section": "About me",
+    "text": "About me\n\n\n\nB.S. and M.S. in Applied Statistics (WSU)\nPh.D. in Applied Matehmatics (AFIT)\nDirector, Data Science at 84.51˚\nCurrent UC LCB adjunct 👨‍🏫 (~7 years)\n\nSome R packages 📦 :\n\npdp (partial dependence plots)\nvip (variable importance plots)\nfastshap (faster SHAP values)\n\nSome books 📚 :\n\nHands-On Machine Learning with R\nTree-Based Methods for Statistical Learning"
+  },
+  {
+    "objectID": "dagnammit.html#why-does-explainability-matter",
+    "href": "dagnammit.html#why-does-explainability-matter",
+    "title": "DAG Nammit",
+    "section": "Why does explainability matter?",
+    "text": "Why does explainability matter?\n\n\n\nModel debugging - Why did my model Netflix make this mistake?\nFeature Engineering - How can I improve my model?\nDetecting fairness issues - Does my model discriminate?\nHuman-AI cooperation - How can I understand and trust the model’s decisions?\nRegulatory compliance - Does my model satisfy legal requirements?\nHigh-risk applications - Healthcare, finance, judicial, …\nCommon sense"
+  },
+  {
+    "objectID": "dagnammit.html#levels-and-methods-of-explainability",
+    "href": "dagnammit.html#levels-and-methods-of-explainability",
+    "title": "DAG Nammit",
+    "section": "Levels and methods of explainability",
+    "text": "Levels and methods of explainability\n\n\nLevels of explainability\n\nGlobal\n\nWhich variables seem “important?” (vip)\nHow does each feature impact the model’s predictions? (pdp)\n\nLocal\n\nExplaining individual predictions (fastshap)\n\n\n\nMethods of explainability\n\nModel-specific\n\nModel coefficients\nInspect tree structure 🌲\n\nModel-agnostic\n\nCan be applied to any prediction model ⚠️"
+  },
+  {
+    "objectID": "dagnammit.html#black-box-vs.-glass-box-models",
+    "href": "dagnammit.html#black-box-vs.-glass-box-models",
+    "title": "DAG Nammit",
+    "section": "Black-box vs. glass-box models",
+    "text": "Black-box vs. glass-box models\n\n\nBlack-box models ⬛:\n\nOften require (expensive) post-hoc techniques that require additional assumptions to explain\n\n👀 Looking at you permutation methods! 😏\n\nOften misleading without proper constraints (e.g., interactions and monotonicity)\nIMO, multicollinearity is even more of a problem here!\n\n\nglass-box models 🧊:\n\nNatutrally interpretable structure\nBusiness rules and rule-based models (e.g., CORELS)\nSmall decision trees\nAdditive linear and nonlinear models (e.g., GLMs, GAMs, and GA2Ms)\nExplainable boosting machines!"
+  },
+  {
+    "objectID": "dagnammit.html#interpretability-vs.-explainability",
+    "href": "dagnammit.html#interpretability-vs.-explainability",
+    "title": "DAG Nammit",
+    "section": "Interpretability vs. explainability",
+    "text": "Interpretability vs. explainability\n\nExplainable machine learning: “use of post hoc methods to understand how a model makes predictions”\n\n\n\nInterpretable machine learning: “the ability to explain or to present in understandable terms to a human.”\n\n\n\n\nIn essense: “interpretability &gt; explainability”\nDefinitions vary across the literature and I tend to use these two synonymously!"
+  },
+  {
+    "objectID": "dagnammit.html#useful-resources",
+    "href": "dagnammit.html#useful-resources",
+    "title": "DAG Nammit",
+    "section": "Useful resources",
+    "text": "Useful resources"
+  },
+  {
+    "objectID": "dagnammit.html#the-problem-with-observational-data",
+    "href": "dagnammit.html#the-problem-with-observational-data",
+    "title": "DAG Nammit",
+    "section": "The problem with observational data…",
+    "text": "The problem with observational data…"
+  },
+  {
+    "objectID": "dagnammit.html#causation-is-a-controversial-topic",
+    "href": "dagnammit.html#causation-is-a-controversial-topic",
+    "title": "DAG Nammit",
+    "section": "Causation is a controversial topic",
+    "text": "Causation is a controversial topic\n\n“Causation is for other people… it is very dicey… You know, we have real problems to solve. I can’t dick around, frankly, thinking about other things like causation right now.”\n   --Chief Analytics Officer (NYC Mayor's office, 2013?)"
+  },
+  {
+    "objectID": "dagnammit.html#correlation-does-not-imply-causation",
+    "href": "dagnammit.html#correlation-does-not-imply-causation",
+    "title": "DAG Nammit",
+    "section": "Correlation does not imply causation",
+    "text": "Correlation does not imply causation\n\n“…but this does not necessarily stop people from drawing causal inferences from correlational staements.”\n\n\n\n\nCausal fallacies:\n\nPost hoc ergo propter hoc (i.e., “rooster syndrome”)\n\nDoes the rooster’s crowing cause the sun to rise?\nCoincidental vaccine adverse events\n\nCum hoc ergo propter hoc\n\nShoe size and reading ability\nIce cream sales and shark attacks\nSpurious correlations by Tyler Vigen"
+  },
+  {
+    "objectID": "dagnammit.html#some-causal-fallacies-in-the-wild",
+    "href": "dagnammit.html#some-causal-fallacies-in-the-wild",
+    "title": "DAG Nammit",
+    "section": "Some causal fallacies in the wild",
+    "text": "Some causal fallacies in the wild"
+  },
+  {
+    "objectID": "dagnammit.html#customer-retention-example",
+    "href": "dagnammit.html#customer-retention-example",
+    "title": "DAG Nammit",
+    "section": "Customer retention example",
+    "text": "Customer retention example\n\nInitial goal is to train a model to predict whether a customer will renew their software subscription (taken from Lundberg et al. (2021))\nEight features were identified for predicting retention (Did.renew=0/1):\n\nCustomer discount offered upon renewal (Discount)\nAd spending on this type of customer since last renewal (Ad.spend)\nCustomer’s monthly usage (Monthly.usage)\nTime since last upgrade upon renewal (Last.upgrade)\nNo. bugs reported by customer since last renewal (Bugs.reported)\nNo. interactions with customer since last renewal (Interactions)\nNo. sales calls with customer since last renewal (Sales.calls)\nHealth of regional economy upon renewal (Economy)\n\n10k total records: 8k for training and 2k for validation"
+  },
+  {
+    "objectID": "dagnammit.html#interpreting-a-linear-model",
+    "href": "dagnammit.html#interpreting-a-linear-model",
+    "title": "DAG Nammit",
+    "section": "Interpreting a linear model",
+    "text": "Interpreting a linear model\nOutput from an additive logistic regression fit:\n\n\n              Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept)     -0.665      0.134  -4.961    0.000\nSales.calls      0.074      0.060   1.238    0.216\nInteractions     0.091      0.056   1.612    0.107\nEconomy          0.597      0.091   6.589    0.000\nLast.upgrade    -0.022      0.005  -4.190    0.000\nDiscount        -5.950      0.311 -19.106    0.000\nMonthly.usage    0.351      0.146   2.406    0.016\nAd.spend         0.602      0.062   9.766    0.000\nBugs.reported    0.259      0.035   7.345    0.000\n\n\n\n\n\n\n\n\nTip\n\n\nChecking variance inflation factors (VIFs) is always a good idea!"
+  },
+  {
+    "objectID": "dagnammit.html#correlation-matrix",
+    "href": "dagnammit.html#correlation-matrix",
+    "title": "DAG Nammit",
+    "section": "Correlation matrix",
+    "text": "Correlation matrix"
+  },
+  {
+    "objectID": "dagnammit.html#interpreting-an-ml-model",
+    "href": "dagnammit.html#interpreting-an-ml-model",
+    "title": "DAG Nammit",
+    "section": "Interpreting an ML model",
+    "text": "Interpreting an ML model\n\nNo “simple” prediction formula for most black-box models!\nUsually rely on post-hoc techniques to explain\nMost of these require good visualizations\nReadily available in different software (open-source and propprietary)\nOften misapplied and/or misinterpreted!"
+  },
+  {
+    "objectID": "dagnammit.html#retention-example-cont.",
+    "href": "dagnammit.html#retention-example-cont.",
+    "title": "DAG Nammit",
+    "section": "Retention example (cont.)",
+    "text": "Retention example (cont.)\nVariable importance scores from an XGBoost fit:"
+  },
+  {
+    "objectID": "dagnammit.html#partial-dependence-pd-plots",
+    "href": "dagnammit.html#partial-dependence-pd-plots",
+    "title": "DAG Nammit",
+    "section": "Partial dependence (PD) plots",
+    "text": "Partial dependence (PD) plots"
+  },
+  {
+    "objectID": "dagnammit.html#interpreting-the-pd-plots",
+    "href": "dagnammit.html#interpreting-the-pd-plots",
+    "title": "DAG Nammit",
+    "section": "Interpreting the PD plots",
+    "text": "Interpreting the PD plots\n\nAd.spend and Discount are important to this (fictional) business because they can be directly manipulated 🎛️\n\n\n\n🙌🎉🥳 Hurrah! We can improve retention by\n\n⬆️ Increasing ad spend\n⬇️ Decreasing discount amount\n\n\n\n\n\nNOT SO FAST!!!"
+  },
+  {
+    "objectID": "dagnammit.html#the-true-data-generator",
+    "href": "dagnammit.html#the-true-data-generator",
+    "title": "DAG Nammit",
+    "section": "The true data generator",
+    "text": "The true data generator\n\\[\n\\begin{aligned}\n\\mathsf{logit}\\left(p\\right) = 1.26 &\\times \\mathtt{Product.need} + \\\\\n0.56 &\\times\\mathtt{Monthly.usage} + \\\\\n0.7 &\\times \\mathtt{Economy} + \\\\\n0.35 &\\times \\mathtt{Discount} + \\\\\n0.35 &\\times \\left(1 - \\mathtt{Bugs.faced} / 20\\right) + \\\\\n0.035 &\\times \\mathtt{Sales.calls} + \\\\\n0.105 &\\times \\mathtt{Interactions} + \\\\\n0.7 &\\times \\left(\\mathtt{Last.upgrade} / 4 + 0.25\\right)^{-1} + \\\\\n0 &\\times \\mathtt{Ad.spend} + \\\\\n&-3.15 + \\epsilon\\\n\\end{aligned}\n\\]"
+  },
+  {
+    "objectID": "dagnammit.html#partial-dependence-vs.-truth",
+    "href": "dagnammit.html#partial-dependence-vs.-truth",
+    "title": "DAG Nammit",
+    "section": "Partial dependence vs. truth! 😱",
+    "text": "Partial dependence vs. truth! 😱\nPD plot (black) vs. true causal relationship (red)"
+  },
+  {
+    "objectID": "dagnammit.html#even-the-experts-slip-up",
+    "href": "dagnammit.html#even-the-experts-slip-up",
+    "title": "DAG Nammit",
+    "section": "Even the experts slip up!",
+    "text": "Even the experts slip up!\n\nStatistical Learning with Big Data (fantastic talk!)"
+  },
+  {
+    "objectID": "dagnammit.html#so-now-what",
+    "href": "dagnammit.html#so-now-what",
+    "title": "DAG Nammit",
+    "section": "So now what?",
+    "text": "So now what?\n\n\n\nCausal interpretation requires a causal model!!\n\n\n\n\n\n\n\n\n\n\nWatch the first talk by Peter Tennant!\n\n\nInterpretable Machine Learning & Causal Inference Workshop"
+  },
+  {
+    "objectID": "dagnammit.html#directed-asyclic-graphs-dags",
+    "href": "dagnammit.html#directed-asyclic-graphs-dags",
+    "title": "DAG Nammit",
+    "section": "Directed asyclic graphs (DAGs)",
+    "text": "Directed asyclic graphs (DAGs)\n\nUseful for representing causal relationships and assumptions\n\nDirected: One-sided arrows (→) connect (assumed) causes and effects\nAsyclic: no directed path can form a closed loop\n\nHelp determine whether the effect(s) of interest can be estimated from available data\nBased on strong assumptions that are often unverifiable"
+  },
+  {
+    "objectID": "dagnammit.html#dags-in-machine-learning",
+    "href": "dagnammit.html#dags-in-machine-learning",
+    "title": "DAG Nammit",
+    "section": "DAGs in machine learning",
+    "text": "DAGs in machine learning\nAssume we have five features (X1–X5) and a response (Y). Causally interpreting an ML model assumes a very particular DAG!\n\n\nHow your algorithm sees it:\n\n\n\n\n\nflowchart TB\n  X1 --&gt; Y\n  X2 --&gt; Y\n  X3 --&gt; Y\n  X4 --&gt; Y\n  X5 --&gt; Y\n\n\n\n\n\n\n\nHow the universe works:\n\n\n\n\n\nflowchart TB\n  X1 --&gt; X3\n  X1 --&gt; Y\n  X2 --&gt; X3\n  X2 --&gt; Y\n  X3 --&gt; X4\n  X3 --&gt; Y\n  X4 --&gt; Y\n  X5 --&gt; Y"
+  },
+  {
+    "objectID": "dagnammit.html#estimation-and-confounding",
+    "href": "dagnammit.html#estimation-and-confounding",
+    "title": "DAG Nammit",
+    "section": "Estimation and confounding",
+    "text": "Estimation and confounding\n\nIn causal inference, a common goal is to estimate the average (caual) effect of some “treatment” on an outcome of interest (e.g., effect of an ad campaign on sales)\n\nWhen the treatment is binary, the effect estimate is referred to as the average treatment effect (ATE)\n\nEstimation typically requires adjusting (and not adjusting) for certain variables\nA confounder is a variable that effects both the treatment and outcome\n\nConfounders must be identified, measured, and appropriately adjusted for in the analysis\n\nNeed to be careful with other covariate roles, like colliders, mediators, etc."
+  },
+  {
+    "objectID": "dagnammit.html#adjustment-sets-are-key",
+    "href": "dagnammit.html#adjustment-sets-are-key",
+    "title": "DAG Nammit",
+    "section": "Adjustment sets are key",
+    "text": "Adjustment sets are key\n\n\n\n\n\nflowchart LR\n  X1 --&gt; X3\n  X1 --&gt; Y\n  X2 --&gt; X3\n  X2 --&gt; Y\n  X3 --&gt; X4\n  X3 --&gt; Y\n  X4 --&gt; Y\n  X5 --&gt; Y\n\n\n\n\n\n\n\nMinimal sufficient adjustment set for estimating\n\nTotal effect of X3 on Y: {X1, X2}\nDirect effect of X3 on Y: {X1, X2, X4}\n\nTools like DAGitty can help automate this!"
+  },
+  {
+    "objectID": "dagnammit.html#dagitty-copy-and-paste",
+    "href": "dagnammit.html#dagitty-copy-and-paste",
+    "title": "DAG Nammit",
+    "section": "DAGitty (copy and paste)",
+    "text": "DAGitty (copy and paste)\ndag {\nbb=\"0,0,1,1\"\nX1 [pos=\"0.462,0.332\"]\nX2 [pos=\"0.425,0.238\"]\nX3 [exposure,pos=\"0.532,0.277\"]\nX4 [pos=\"0.529,0.396\"]\nX5 [pos=\"0.363,0.416\"]\nY [outcome,pos=\"0.439,0.464\"]\nX1 -&gt; X3\nX1 -&gt; Y\nX2 -&gt; X3\nX2 -&gt; Y\nX3 -&gt; X4\nX3 -&gt; Y\nX4 -&gt; Y\nX5 -&gt; Y\n}"
+  },
+  {
+    "objectID": "dagnammit.html#useful-resources-1",
+    "href": "dagnammit.html#useful-resources-1",
+    "title": "DAG Nammit",
+    "section": "Useful resources",
+    "text": "Useful resources"
+  },
+  {
+    "objectID": "dagnammit.html#retention-example-cont.-1",
+    "href": "dagnammit.html#retention-example-cont.-1",
+    "title": "DAG Nammit",
+    "section": "Retention example (cont.)",
+    "text": "Retention example (cont.)\nAssume strong domain expertise has allowed us to generate the following DAG:"
+  },
+  {
+    "objectID": "dagnammit.html#retention-example-cont.-2",
+    "href": "dagnammit.html#retention-example-cont.-2",
+    "title": "DAG Nammit",
+    "section": "Retention example (cont.)",
+    "text": "Retention example (cont.)\nCan we interpret any of the PD plots causally?\n\nMaybe for Economy?!\n\nPD plotPearson correlations"
+  },
+  {
+    "objectID": "dagnammit.html#mathematical-background",
+    "href": "dagnammit.html#mathematical-background",
+    "title": "DAG Nammit",
+    "section": "Mathematical background",
+    "text": "Mathematical background\nThe partial dependence (PD) of \\(Y\\) on \\(X_S\\) is defined as\n\\[\n\\begin{aligned}\ng_s\\left(x_s\\right) &= E_{X_c}\\left[g\\left(x_s, X_c\\right)\\right] \\\\\n&= \\int g\\left(x_S, x_C\\right) dP\\left(x_C\\right) \\\\\n&\\approx \\frac{1}{N}\\sum_{i=1}^N g\\left(x_S, X_{iC}\\right)\n\\end{aligned}\n\\]\n\n\nThis is the same as Pearl’s back-door adjustment formula\nUnder certain conditions, PD plots can be interpreted causally!"
+  },
+  {
+    "objectID": "dagnammit.html#retention-example-cont.-3",
+    "href": "dagnammit.html#retention-example-cont.-3",
+    "title": "DAG Nammit",
+    "section": "Retention example (cont.)",
+    "text": "Retention example (cont.)\nUsing another XGBoost model, here’s the estimated PD of Did.renew on Ad.spend, conditional on Monthly.usage and Last.upgrade: … 🥁\n\n\n\n\n\n\n\n\n\n\n\n\nUmmm … maybe a case of estimand vs. estimate? 🤔"
+  },
+  {
+    "objectID": "dagnammit.html#stop-permuting-features",
+    "href": "dagnammit.html#stop-permuting-features",
+    "title": "DAG Nammit",
+    "section": "Stop permuting features?! 😱",
+    "text": "Stop permuting features?! 😱\n\n\n…PaP metrics can vastly over-emphasize correlated features in both variable importance measures and partial dependence plots."
+  },
+  {
+    "objectID": "dagnammit.html#retention-example-cont.-4",
+    "href": "dagnammit.html#retention-example-cont.-4",
+    "title": "DAG Nammit",
+    "section": "Retention example (cont.)",
+    "text": "Retention example (cont.)"
+  },
+  {
+    "objectID": "dagnammit.html#doubledebiased-machine-learning",
+    "href": "dagnammit.html#doubledebiased-machine-learning",
+    "title": "DAG Nammit",
+    "section": "Double/debiased machine learning",
+    "text": "Double/debiased machine learning\nGiven a causal model, double ML essentially involves three steps:\n\nPredict the outcome (\\(y\\)) from an appropriate adjustment set and get the residuals (\\(r_y\\))\nPredict the treatment (\\(x\\)) from an appropriate adjustment set and get the residuals (\\(r_x\\))\nRegress \\(r_y\\) on \\(r_x\\) to create a model of the heterogeneous treatment effect"
+  },
+  {
+    "objectID": "dagnammit.html#double-ml-for-ad.spend",
+    "href": "dagnammit.html#double-ml-for-ad.spend",
+    "title": "DAG Nammit",
+    "section": "Double ML for Ad.spend",
+    "text": "Double ML for Ad.spend\n\nR codeResults\n\n\n\ndml_data &lt;- DoubleML::DoubleMLData$new(\n  data = ret.trn,                              # training data\n  y_col = \"Did.renew\",                         # response\n  d_cols = \"Ad.spend\",                         # treatment\n  x_cols = c(\"Last.upgrade\", \"Monthly.usage\")  # adjustment set\n)\nlrnr &lt;- mlr3::lrn(\"regr.ranger\", num.trees = 500)\nset.seed(1810)  # for reproducibility\ndml_plr = DoubleML::DoubleMLPLR$new(\n  dml_data, ml_l = lrnr$clone(), ml_m = lrnr$clone()\n)\ndml_plr$fit()\n\n\n\n\n# Print results\nprint(dml_plr)\n# ------------------ Fit summary       ------------------\n#   Estimates and significance testing of the effect of target variables\n#          Estimate. Std. Error t value Pr(&gt;|t|)\n# Ad.spend  -0.09634    0.25197  -0.382    0.702\n\n# Compute 95% confidence interval\nprint(dml_plr$confint())\n#               2.5 %   97.5 %\n# Ad.spend -0.5901917 0.397511"
+  },
+  {
+    "objectID": "dagnammit.html#challenges-with-dag-based-inference",
+    "href": "dagnammit.html#challenges-with-dag-based-inference",
+    "title": "DAG Nammit",
+    "section": "Challenges with DAG-based inference",
+    "text": "Challenges with DAG-based inference\n\nFaithful DAGs seem hard to come by\n\nWhat if you have 800 potential features?\nIs the right domain expertise even available?\n\nWhat about unmeasured confounders?\nDAGs are based on strong (and often unverifiable) assumptions\nOftentimes multiple reasonable DAGs will exist\n\nSensitivity analysis!"
+  },
+  {
+    "objectID": "dagnammit.html#designed-experiments",
+    "href": "dagnammit.html#designed-experiments",
+    "title": "DAG Nammit",
+    "section": "Designed experiments",
+    "text": "Designed experiments\n\nRCTs are arguably still the gold standard, but …\n\n😇 There can be ethical concerns\n💰 Can be expensive to implement\n\n\nHowever…\n\n\n\n\n\n\n\nTip\n\n\nResponsible, transparent use of machine learning can help narrow down the hypothesis space!"
+  },
+  {
+    "objectID": "dagnammit.html#ingot-cracking-example",
+    "href": "dagnammit.html#ingot-cracking-example",
+    "title": "DAG Nammit",
+    "section": "Ingot cracking example",
+    "text": "Ingot cracking example\nI’m reminded of an old (but still fantastic) data mining lecture from Richard De Veaux (skip to the 44:30 mark)\n\n20,000 lb. ingots made in a giant mold\nRoughtly 25% of ingots develop cracks\nCracked ingots cost $30,000 to recast\nRoughly 900 observations (ingots) on 149 variables\nWhat’s causing them to crack?"
+  },
+  {
+    "objectID": "dagnammit.html#ingot-cracking-example-cont.",
+    "href": "dagnammit.html#ingot-cracking-example-cont.",
+    "title": "DAG Nammit",
+    "section": "Ingot cracking example (cont.)",
+    "text": "Ingot cracking example (cont.)\n\n\nLots of iterations, but… “Looks like Chrome(!?)”\n🕵️ A glass-box model gave clues for generating a hypothesis (i.e., which variable to focus on)\nFollow-up randomized experiments led to substantial improvement!"
+  },
+  {
+    "objectID": "dagnammit.html#adding-constraints-where-feasible",
+    "href": "dagnammit.html#adding-constraints-where-feasible",
+    "title": "DAG Nammit",
+    "section": "Adding constraints (where feasible)",
+    "text": "Adding constraints (where feasible)\n\nOften useful to constrain the functional form of the model in some way\n\nBusiness considerations\nDomain knowledge\n\nEnforcing sparsity (e.g., EBMs with Sparsity)\nEnforcing monotonicty between features and the predicted output can be done in several ways during training (e.g., linear and tree-based models)\n\nCan also be accomplished through model editing"
+  },
+  {
+    "objectID": "dagnammit.html#pneumonia-example",
+    "href": "dagnammit.html#pneumonia-example",
+    "title": "DAG Nammit",
+    "section": "Pneumonia example",
+    "text": "Pneumonia example\n\nData contains 46 features on 14199 pneumonia patients\n\nPatient demographics (e.g., age)\n📐 Various measuremnts (e.g., heart rate)\n🔬 Lab test results (e.g., WBC)\n🩻 Chest x-ray results (e.g., pleural effusion)\n\nToo many to construct a useful DAG?\nGoal is to predict probability of death (0/1)\nData from Caruana et al. (2015) and Wang et al. (2022)"
+  },
+  {
+    "objectID": "dagnammit.html#pneumonia-example-cont.",
+    "href": "dagnammit.html#pneumonia-example-cont.",
+    "title": "DAG Nammit",
+    "section": "Pneumonia example (cont.)",
+    "text": "Pneumonia example (cont.)\nLiving past 100 decreases risk?"
+  },
+  {
+    "objectID": "dagnammit.html#pneumonia-example-cont.-1",
+    "href": "dagnammit.html#pneumonia-example-cont.-1",
+    "title": "DAG Nammit",
+    "section": "Pneumonia example (cont.)",
+    "text": "Pneumonia example (cont.)\nAdding monotonic constraints can be helpful!"
+  },
+  {
+    "objectID": "dagnammit.html#pneumonia-example-cont.-2",
+    "href": "dagnammit.html#pneumonia-example-cont.-2",
+    "title": "DAG Nammit",
+    "section": "Pneumonia example (cont.)",
+    "text": "Pneumonia example (cont.)\nHaving asthma lowers a patient’s risk of dying from pneumonia?"
+  },
+  {
+    "objectID": "dagnammit.html#pneumonia-example-cont.-3",
+    "href": "dagnammit.html#pneumonia-example-cont.-3",
+    "title": "DAG Nammit",
+    "section": "Pneumonia example (cont.)",
+    "text": "Pneumonia example (cont.)\nAccording to the doctors, asthmatic patients (A) would likely receive better care earlier (T):\n\n\n\n\n\n\n\nG\n\n\n\nA\n\nA\n\n\n\nD\n\nD\n\n\n\nA-&gt;D\n\n\n\n\n\nT\n\nT\n\n\n\nA-&gt;T\n\n\n\n\n\nT-&gt;D"
+  },
+  {
+    "objectID": "dagnammit.html#pneumonia-example-cont.-4",
+    "href": "dagnammit.html#pneumonia-example-cont.-4",
+    "title": "DAG Nammit",
+    "section": "Pneumonia example (cont.)",
+    "text": "Pneumonia example (cont.)\n\nIf we use the model as is to make hospital admission decisions, asthmatic patients are likely to miss out on care they need\nInterpretability and causal knowledge can help identify such dangerous patterns and improve the model:\n\nForce monotonicity (e.g., A &gt; !A)\nRemove the asthma feature\nEdit the effect out 😱"
+  },
+  {
+    "objectID": "dagnammit.html#gam-changer",
+    "href": "dagnammit.html#gam-changer",
+    "title": "DAG Nammit",
+    "section": "GAM Changer",
+    "text": "GAM Changer"
+  },
+  {
+    "objectID": "dagnammit.html#causal-discovery",
+    "href": "dagnammit.html#causal-discovery",
+    "title": "DAG Nammit",
+    "section": "Causal discovery? 🤔",
+    "text": "Causal discovery? 🤔"
+  },
+  {
+    "objectID": "dagnammit.html#key-takeaways",
+    "href": "dagnammit.html#key-takeaways",
+    "title": "DAG Nammit",
+    "section": "Key takeaways",
+    "text": "Key takeaways\n\nML is great at identifying and utilizing patterns and associations in data to make predictions\nCausal knowledge can be used to improve models!\nSome quotes I like from Becoming A Data Head:\n\n\n\n\n“There are clever ways to use observational data to suggest some causal relationships. [They ALL] rely on strong assumptions and clever statistics.”\n\n\n“Any claims of causality with observational data should be met with skeptimicism.”"
+  },
+  {
+    "objectID": "dagnammit.html#questions",
+    "href": "dagnammit.html#questions",
+    "title": "DAG Nammit",
+    "section": "Questions? 🙋",
+    "text": "Questions? 🙋\n\nSource: xkcd comic"
+  }
+]

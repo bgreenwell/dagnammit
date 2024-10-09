@@ -1,0 +1,1653 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-html/tabby.min.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/light-border.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-html.min.css" rel="stylesheet" data-mode="light">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles"><meta charset="utf-8">
+  <meta name="generator" content="quarto-1.5.57">
+
+  <meta name="author" content="Brandon M. Greenwell">
+  <title>dagnammit – DAG Nammit</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reset.css">
+  <link rel="stylesheet" href="site_libs/revealjs/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    div.columns{display: flex; gap: min(4vw, 1.5em);}
+    div.column{flex: auto; overflow-x: auto;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    ul.task-list li input[type="checkbox"] {
+      width: 0.8em;
+      margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+      vertical-align: middle;
+    }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
+  </style>
+  <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
+  <link rel="stylesheet" href="custom.css">
+  <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/reveal-menu/quarto-menu.css" rel="stylesheet">
+  <link href="site_libs/revealjs/plugin/quarto-support/footer.css" rel="stylesheet">
+  <style type="text/css">
+
+  .callout {
+    margin-top: 1em;
+    margin-bottom: 1em;  
+    border-radius: .25rem;
+  }
+
+  .callout.callout-style-simple { 
+    padding: 0em 0.5em;
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+    display: flex;
+  }
+
+  .callout.callout-style-default {
+    border-left: solid #acacac .3rem;
+    border-right: solid 1px silver;
+    border-top: solid 1px silver;
+    border-bottom: solid 1px silver;
+  }
+
+  .callout .callout-body-container {
+    flex-grow: 1;
+  }
+
+  .callout.callout-style-simple .callout-body {
+    font-size: 1rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-style-default .callout-body {
+    font-size: 0.9rem;
+    font-weight: 400;
+  }
+
+  .callout.callout-titled.callout-style-simple .callout-body {
+    margin-top: 0.2em;
+  }
+
+  .callout:not(.callout-titled) .callout-body {
+      display: flex;
+  }
+
+  .callout:not(.no-icon).callout-titled.callout-style-simple .callout-content {
+    padding-left: 1.6em;
+  }
+
+  .callout.callout-titled .callout-header {
+    padding-top: 0.2em;
+    margin-bottom: -0.2em;
+  }
+
+  .callout.callout-titled .callout-title  p {
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+    
+  .callout.callout-titled.callout-style-simple .callout-content  p {
+    margin-top: 0;
+  }
+
+  .callout.callout-titled.callout-style-default .callout-content  p {
+    margin-top: 0.7em;
+  }
+
+  .callout.callout-style-simple div.callout-title {
+    border-bottom: none;
+    font-size: .9rem;
+    font-weight: 600;
+    opacity: 75%;
+  }
+
+  .callout.callout-style-default  div.callout-title {
+    border-bottom: none;
+    font-weight: 600;
+    opacity: 85%;
+    font-size: 0.9rem;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-default div.callout-content {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  .callout.callout-style-simple .callout-icon::before {
+    height: 1rem;
+    width: 1rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 1rem 1rem;
+  }
+
+  .callout.callout-style-default .callout-icon::before {
+    height: 0.9rem;
+    width: 0.9rem;
+    display: inline-block;
+    content: "";
+    background-repeat: no-repeat;
+    background-size: 0.9rem 0.9rem;
+  }
+
+  .callout-title {
+    display: flex
+  }
+    
+  .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  .callout.no-icon::before {
+    display: none !important;
+  }
+
+  .callout.callout-titled .callout-body > .callout-content > :last-child {
+    padding-bottom: 0.5rem;
+    margin-bottom: 0;
+  }
+
+  .callout.callout-titled .callout-icon::before {
+    margin-top: .5rem;
+    padding-right: .5rem;
+  }
+
+  .callout:not(.callout-titled) .callout-icon::before {
+    margin-top: 1rem;
+    padding-right: .5rem;
+  }
+
+  /* Callout Types */
+
+  div.callout-note {
+    border-left-color: #4582ec !important;
+  }
+
+  div.callout-note .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEU0lEQVRYCcVXTWhcVRQ+586kSUMMxkyaElstCto2SIhitS5Ek8xUKV2poatCcVHtUlFQk8mbaaziwpWgglJwVaquitBOfhQXFlqlzSJpFSpIYyXNjBNiTCck7x2/8/LeNDOZxDuEkgOXe++553zfefee+/OYLOXFk3+1LLrRdiO81yNqZ6K9cG0P3MeFaMIQjXssE8Z1JzLO9ls20MBZX7oG8w9GxB0goaPrW5aNMp1yOZIa7Wv6o2ykpLtmAPs/vrG14Z+6d4jpbSKuhdcSyq9wGMPXjonwmESXrriLzFGOdDBLB8Y6MNYBu0dRokSygMA/mrun8MGFN3behm6VVAwg4WR3i6FvYK1T7MHo9BK7ydH+1uurECoouk5MPRyVSBrBHMYwVobG2aOXM07sWrn5qgB60rc6mcwIDJtQrnrEr44kmy+UO9r0u9O5/YbkS9juQckLed3DyW2XV/qWBBB3ptvI8EUY3I9p/67OW+g967TNr3Sotn3IuVlfMLVnsBwH4fsnebJvyGm5GeIUA3jljERmrv49SizPYuq+z7c2H/jlGC+Ghhupn/hcapqmcudB9jwJ/3jvnvu6vu5lVzF1fXyZuZZ7U8nRmVzytvT+H3kilYvH09mLWrQdwFSsFEsxFVs5fK7A0g8gMZjbif4ACpKbjv7gNGaD8bUrlk8x+KRflttr22JEMRUbTUwwDQScyzPgedQHZT0xnx7ujw2jfVfExwYHwOsDTjLdJ2ebmeQIlJ7neo41s/DrsL3kl+W2lWvAga0tR3zueGr6GL78M3ifH0rGXrBC2aAR8uYcIA5gwV8zIE8onoh8u0Fca/ciF7j1uOzEnqcIm59sEXoGc0+z6+H45V1CvAvHcD7THztu669cnp+L0okAeIc6zjbM/24LgGM1gZk7jnRu1aQWoU9sfUOuhrmtaPIO3YY1KLLWZaEO5TKUbMY5zx8W9UJ6elpLwKXbsaZ4EFl7B4bMtDv0iRipKoDQT2sNQI9b1utXFdYisi+wzZ/ri/1m7QfDgEuvgUUEIJPq3DhX/5DWNqIXDOweC2wvIR90Oq3lDpdMIgD2r0dXvGdsEW5H6x6HLRJYU7C69VefO1x8Gde1ZFSJLfWS1jbCnhtOPxmpfv2LXOA2Xk2tvnwKKPFuZ/oRmwBwqRQDcKNeVQkYcOjtWVBuM/JuYw5b6isojIkYxyYAFn5K7ZBF10fea52y8QltAg6jnMqNHFBmGkQ1j+U43HMi2xMar1Nv0zGsf1s8nUsmUtPOOrbFIR8bHFDMB5zL13Gmr/kGlCkUzedTzzmzsaJXhYawnA3UmARpiYj5ooJZiUoxFRtK3X6pgNPv+IZVPcnwbOl6f+aBaO1CNvPW9n9LmCp01nuSaTRF2YxHqZ8DYQT6WsXT+RD6eUztwYLZ8rM+rcPxamv1VQzFUkzFXvkiVrySGQgJNvXHJAxiU3/NwiC03rSf05VBaPtu/Z7/B8Yn/w7eguloAAAAAElFTkSuQmCC');
+  }
+
+  div.callout-note.callout-style-default .callout-title {
+    background-color: #dae6fb
+  }
+
+  div.callout-important {
+    border-left-color: #d9534f !important;
+  }
+
+  div.callout-important .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAEKklEQVRYCcVXTWhcVRS+575MJym48A+hSRFr00ySRQhURRfd2HYjk2SSTokuBCkU2o0LoSKKraKIBTcuFCoidGFD08nkBzdREbpQ1EDNIv8qSGMFUboImMSZd4/f9zJv8ibJMC8xJQfO3HPPPef7zrvvvnvviIkpC9nsw0UttFunbUhpFzFtarSd6WJkStVMw5xyVqYTvkwfzuf/5FgtkVoB0729j1rjXwThS7Vio+Mo6DNnvLfahoZ+i/o32lULuJ3NNiz7q6+pyAUkJaFF6JwaM2lUJlV0MlnQn5aTRbEu0SEqHUa0A4AdiGuB1kFXRfVyg5d87+Dg4DL6m2TLAub60ilj7A1Ec4odSAc8X95sHh7+ZRPCFo6Fnp7HfU/fBng/hi10CjCnWnJjsxvDNxWw0NfV6Rv5GgP3I3jGWXumdTD/3cbEOP2ZbOZp69yniG3FQ9z1jD7bnBu9Fc2tKGC2q+uAJOQHBDRiZX1x36o7fWBs7J9ownbtO+n0/qWkvW7UPIfc37WgT6ZGR++EOJyeQDSb9UB+DZ1G6DdLDzyS+b/kBCYGsYgJbSQHuThGKRcw5xdeQf8YdNHsc6ePXrlSYMBuSIAFTGAtQo+VuALo4BX83N190NWZWbynBjhOHsmNfFWLeL6v+ynsA58zDvvAC8j5PkbOcXCMg2PZFk3q8MjI7WAG/Dp9AwP7jdGBOOQkAvlFUB+irtm16I1Zw9YBcpGTGXYmk3kQIC/Cds55l+iMI3jqhjAuaoe+am2Jw5GT3Nbz3CkE12NavmzN5+erJW7046n/CH1RO/RVa8lBLozXk9uqykkGAyRXLWlLv5jyp4RFsG5vGVzpDLnIjTWgnRy2Rr+tDKvRc7Y8AyZq10jj8DqXdnIRNtFZb+t/ZRtXcDiVnzpqx8mPcDWxgARUqx0W1QB9MeUZiNrV4qP+Ehc+BpNgATsTX8ozYKL2NtFYAHc84fG7ndxUPr+AR/iQSns7uSUufAymwDOb2+NjK27lEFocm/EE2WpyIy/Hi66MWuMKJn8RvxIcj87IM5Vh9663ziW36kR0HNenXuxmfaD8JC7tfKbrhFr7LiZCrMjrzTeGx+PmkosrkNzW94ObzwocJ7A1HokLolY+AvkTiD/q1H0cN48c5EL8Crkttsa/AXQVDmutfyku0E7jShx49XqV3MFK8IryDhYVbj7Sj2P2eBxwcXoe8T8idsKKPRcnZw1b+slFTubwUwhktrfnAt7J++jwQtLZcm3sr9LQrjRzz6cfMv9aLvgmnAGvpoaGLxM4mAEaLV7iAzQ3oU0IvD5x9ix3yF2RAAuYAOO2f7PEFWCXZ4C9Pb2UsgDeVnFSpbFK7/IWu7TPTvBqzbGdCHOJQSxiEjt6IyZmxQyEJHv6xyQsYk//moVFsN2zP6fRImjfq7/n/wFDguUQFNEwugAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-important.callout-style-default .callout-title {
+    background-color: #f7dddc
+  }
+
+  div.callout-warning {
+    border-left-color: #f0ad4e !important;
+  }
+
+  div.callout-warning .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAAETklEQVRYCeVWW2gcVRg+58yaTUnizqbipZeX4uWhBEniBaoUX1Ioze52t7sRq6APio9V9MEaoWlVsFasRq0gltaAPuxms8lu0gcviE/FFOstVbSIxgcv6SU7EZqmdc7v9+9mJtNks51NTUH84ed889/PP+cmxP+d5FIbMJmNbpREu4WUkiTtCicKny0l1pIKmBzovF2S+hIJHX8iEu3hZJ5lNZGqyRrGSIQpq15AzF28jgpeY6yk6GVdrfFqdrD6Iw+QlB8g0YS2g7dyQmXM/IDhBhT0UCiRf59lfqmmDvzRt6kByV/m4JjtzuaujMUM2c5Z2d6JdKrRb3K2q6mA+oYVz8JnDdKPmmNthzkAk/lN63sYPgevrguc72aZX/L9C6x09GYyxBgCX4NlvyGUHOKELlm5rXeR1kchuChJt4SSwyddZRXgvwMGvYo4QSlk3/zkHD8UHxwVJA6zjZZqP8v8kK8OWLnIZtLyCAJagYC4rTGW/9Pqj92N/c+LUaAj27movwbi19tk/whRCIE7Q9vyI6yvRpftAKVTdUjOW40X3h5OXsKCdmFcx0xlLJoSuQngnrJe7Kcjm4OMq9FlC7CMmScQANuNvjfP3PjGXDBaUQmbp296S5L4DrpbrHN1T87ZVEZVCzg1FF0Ft+dKrlLukI+/c9ENo+TvlTDbYFvuKPtQ9+l052rXrgKoWkDAFnvh0wTOmYn8R5f4k/jN/fZiCM1tQx9jQQ4ANhqG4hiL0qIFTGViG9DKB7GYzgubnpofgYRwO+DFjh0Zin2m4b/97EDkXkc+f6xYAPX0KK2I/7fUQuwzuwo/L3AkcjugPNixC8cHf0FyPjWlItmLxWw4Ou9YsQCr5fijMGoD/zpdRy95HRysyXA74MWOnscpO4j2y3HAVisw85hX5+AFBRSHt4ShfLFkIMXTqyKFc46xdzQM6XbAi702a7sy04J0+feReMFKp5q9esYLCqAZYw/k14E/xcLLsFElaornTuJB0svMuJINy8xkIYuL+xPAlWRceH6+HX7THJ0djLUom46zREu7tTkxwmf/FdOZ/sh6Q8qvEAiHpm4PJ4a/doJe0gH1t+aHRgCzOvBvJedEK5OFE5jpm4AGP2a8Dxe3gGJ/pAutug9Gp6he92CsSsWBaEcxGx0FHytmIpuqGkOpldqNYQK8cSoXvd+xLxXADw0kf6UkJNFtdo5MOgaLjiQOQHcn+A6h5NuL2s0qsC2LOM75PcF3yr5STuBSAcGG+meA14K/CI21HcS4LBT6tv0QAh8Dr5l93AhZzG5ZJ4VxAqdZUEl9z7WJ4aN+svMvwHHL21UKTd1mqvChH7/Za5xzXBBKrUcB0TQ+Ulgkfbi/H/YT5EptrGzsEK7tR1B7ln9BBwckYfMiuSqklSznIuoIIOM42MQO+QnduCoFCI0bpkzjCjddHPN/F+2Yu+sd9bKNpVwHhbS3LluK/0zgfwD0xYI5dXuzlQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-warning.callout-style-default .callout-title {
+    background-color: #fcefdc
+  }
+
+  div.callout-tip {
+    border-left-color: #02b875 !important;
+  }
+
+  div.callout-tip .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAADr0lEQVRYCe1XTWgTQRj9ZjZV8a9SPIkKgj8I1bMHsUWrqYLVg4Ue6v9BwZOxSYsIerFao7UiUryIqJcqgtpimhbBXoSCVxUFe9CTiogUrUp2Pt+3aUI2u5vdNh4dmMzOzHvvezuz8xNFM0mjnbXaNu1MvFWRXkXEyE6aYOYJpdW4IXuA4r0fo8qqSMDBU0v1HJUgVieAXxzCsdE/YJTdFcVIZQNMyhruOMJKXYFoLfIfIvVIMWdsrd+Rpd86ZmyzzjJmLStqRn0v8lzkb4rVIXvnpScOJuAn2ACC65FkPzEdEy4TPWRLJ2h7z4cArXzzaOdKlbOvKKX25Wl00jSnrwVxAg3o4dRxhO13RBSdNvH0xSARv3adTXbBdTf64IWO2vH0LT+cv4GR1DJt+DUItaQogeBX/chhbTBxEiZ6gftlDNXTrvT7co4ub5A6gp9HIcHvzTa46OS5fBeP87Qm0fQkr4FsYgVQ7Qg+ZayaDg9jhg1GkWj8RG6lkeSacrrHgDaxdoBiZPg+NXV/KifMuB6//JmYH4CntVEHy/keA6x4h4CU5oFy8GzrBS18cLJMXcljAKB6INjWsRcuZBWVaS3GDrqB7rdapVIeA+isQ57Eev9eCqzqOa81CY05VLd6SamW2wA2H3SiTbnbSxmzfp7WtKZkqy4mdyAlGx7ennghYf8voqp9cLSgKdqNfa6RdRsAAkPwRuJZNbpByn+RrJi1RXTwdi8RQF6ymDwGMAtZ6TVE+4uoKh+MYkcLsT0Hk8eAienbiGdjJHZTpmNjlbFJNKDVAp2fJlYju6IreQxQ08UJDNYdoLSl6AadO+fFuCQqVMB1NJwPm69T04Wv5WhfcWyfXQB+wXRs1pt+nCknRa0LVzSA/2B+a9+zQJadb7IyyV24YAxKp2Jqs3emZTuNnKxsah+uabKbMk7CbTgJx/zIgQYErIeTKRQ9yD9wxVof5YolPHqaWo7TD6tJlh7jQnK5z2n3+fGdggIOx2kaa2YI9QWarc5Ce1ipNWMKeSG4DysFF52KBmTNMmn5HqCFkwy34rDg05gDwgH3bBi+sgFhN/e8QvRn8kbamCOhgrZ9GJhFDgfcMHzFb6BAtjKpFhzTjwv1KCVuxHvCbsSiEz4CANnj84cwHdFXAbAOJ4LTSAawGWFn5tDhLMYz6nWeU2wJfIhmIJBefcd/A5FWQWGgrWzyORZ3Q6HuV+Jf0Bj+BTX69fm1zWgK7By1YTXchFDORywnfQ7GpzOo6S+qECrsx2ifVQAAAABJRU5ErkJggg==');
+  }
+
+  div.callout-tip.callout-style-default .callout-title {
+    background-color: #ccf1e3
+  }
+
+  div.callout-caution {
+    border-left-color: #fd7e14 !important;
+  }
+
+  div.callout-caution .callout-icon::before {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAAXNSR0IArs4c6QAAAERlWElmTU0AKgAAAAgAAYdpAAQAAAABAAAAGgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAIKADAAQAAAABAAAAIAAAAACshmLzAAACV0lEQVRYCdVWzWoUQRCuqp2ICBLJXgITZL1EfQDBW/bkzUMUD7klD+ATSHBEfAIfQO+iXsWDxJsHL96EHAwhgzlkg8nBg25XWb0zIb0zs9muYYWkoKeru+vn664fBqElyZNuyh167NXJ8Ut8McjbmEraKHkd7uAnAFku+VWdb3reSmRV8PKSLfZ0Gjn3a6Xlcq9YGb6tADjn+lUfTXtVmaZ1KwBIvFI11rRXlWlatwIAAv2asaa9mlB9wwygiDX26qaw1yYPzFXg2N1GgG0FMF8Oj+VIx7E/03lHx8UhvYyNZLN7BwSPgekXXLribw7w5/c8EF+DBK5idvDVYtEEwMeYefjjLAdEyQ3M9nfOkgnPTEkYU+sxMq0BxNR6jExrAI31H1rzvLEfRIdgcv1XEdj6QTQAS2wtstEALLG1yEZ3QhH6oDX7ExBSFEkFINXH98NTrme5IOaaA7kIfiu2L8A3qhH9zRbukdCqdsA98TdElyeMe5BI8Rs2xHRIsoTSSVFfCFCWGPn9XHb4cdobRIWABNf0add9jakDjQJpJ1bTXOJXnnRXHRf+dNL1ZV1MBRCXhMbaHqGI1JkKIL7+i8uffuP6wVQAzO7+qVEbF6NbS0LJureYcWXUUhH66nLR5rYmva+2tjRFtojkM2aD76HEGAD3tPtKM309FJg5j/K682ywcWJ3PASCcycH/22u+Bh7Aa0ehM2Fu4z0SAE81HF9RkB21c5bEn4Dzw+/qNOyXr3DCTQDMBOdhi4nAgiFDGCinIa2owCEChUwD8qzd03PG+qdW/4fDzjUMcE1ZpIAAAAASUVORK5CYII=');
+  }
+
+  div.callout-caution.callout-style-default .callout-title {
+    background-color: #ffe5d0
+  }
+
+  </style>
+  <style type="text/css">
+    .reveal div.sourceCode {
+      margin: 0;
+      overflow: auto;
+    }
+    .reveal div.hanging-indent {
+      margin-left: 1em;
+      text-indent: -1em;
+    }
+    .reveal .slide:not(.center) {
+      height: 100%;
+    }
+    .reveal .slide.scrollable {
+      overflow-y: auto;
+    }
+    .reveal .footnotes {
+      height: 100%;
+      overflow-y: auto;
+    }
+    .reveal .slide .absolute {
+      position: absolute;
+      display: block;
+    }
+    .reveal .footnotes ol {
+      counter-reset: ol;
+      list-style-type: none; 
+      margin-left: 0;
+    }
+    .reveal .footnotes ol li:before {
+      counter-increment: ol;
+      content: counter(ol) ". "; 
+    }
+    .reveal .footnotes ol li > p:first-child {
+      display: inline-block;
+    }
+    .reveal .slide ul,
+    .reveal .slide ol {
+      margin-bottom: 0.5em;
+    }
+    .reveal .slide ul li,
+    .reveal .slide ol li {
+      margin-top: 0.4em;
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide ul[role="tablist"] li {
+      margin-bottom: 0;
+    }
+    .reveal .slide ul li > *:first-child,
+    .reveal .slide ol li > *:first-child {
+      margin-block-start: 0;
+    }
+    .reveal .slide ul li > *:last-child,
+    .reveal .slide ol li > *:last-child {
+      margin-block-end: 0;
+    }
+    .reveal .slide .columns:nth-child(3) {
+      margin-block-start: 0.8em;
+    }
+    .reveal blockquote {
+      box-shadow: none;
+    }
+    .reveal .tippy-content>* {
+      margin-top: 0.2em;
+      margin-bottom: 0.7em;
+    }
+    .reveal .tippy-content>*:last-child {
+      margin-bottom: 0.2em;
+    }
+    .reveal .slide > img.stretch.quarto-figure-center,
+    .reveal .slide > img.r-stretch.quarto-figure-center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-left,
+    .reveal .slide > img.r-stretch.quarto-figure-left  {
+      display: block;
+      margin-left: 0;
+      margin-right: auto; 
+    }
+    .reveal .slide > img.stretch.quarto-figure-right,
+    .reveal .slide > img.r-stretch.quarto-figure-right  {
+      display: block;
+      margin-left: auto;
+      margin-right: 0; 
+    }
+  </style>
+  <script src="site_libs/quarto-diagram/mermaid.min.js"></script>
+  <script src="site_libs/quarto-diagram/mermaid-init.js"></script>
+  <link href="site_libs/quarto-diagram/mermaid.css" rel="stylesheet">
+</head>
+<body class="quarto-light">
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide" class="quarto-title-block center">
+  <h1 class="title">DAG Nammit</h1>
+  <p class="subtitle">The Challenges and Dagners of Causally Interpreting Machine Learning Models</p>
+
+<div class="quarto-title-authors">
+<div class="quarto-title-author">
+<div class="quarto-title-author-name">
+Brandon M. Greenwell 
+</div>
+        <p class="quarto-title-affiliation">
+            Slides: https://github.com/bgreenwell/dagnammit
+          </p>
+    </div>
+</div>
+
+</section>
+
+
+<section id="about-me" class="slide level2 smaller">
+<h2>About me</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li>B.S. and M.S. in Applied Statistics (WSU)</li>
+<li>Ph.D.&nbsp;in Applied Matehmatics (AFIT)</li>
+<li>Director, Data Science at 84.51˚</li>
+<li>Current UC LCB adjunct <span class="emoji" data-emoji="man_teacher">👨‍🏫</span> (~7 years)</li>
+</ul>
+<p>Some R packages <span class="emoji" data-emoji="package">📦</span> :</p>
+<ul>
+<li><a href="https://CRAN.R-project.org/package=pdp">pdp</a> (partial dependence plots)</li>
+<li><a href="https://CRAN.R-project.org/package=vip">vip</a> (variable importance plots)</li>
+<li><a href="https://CRAN.R-project.org/package=fastshap">fastshap</a> (faster SHAP values)</li>
+</ul>
+<p>Some books <span class="emoji" data-emoji="books">📚</span> :</p>
+<ul>
+<li><a href="https://bradleyboehmke.github.io/HOML/">Hands-On Machine Learning with R</a></li>
+<li><a href="https://www.routledge.com/Tree-Based-Methods-for-Statistical-Learning-in-R/Greenwell/p/book/9780367532468?srsltid=AfmBOoq9xbq6yMdXzO2BUsLfLVm0XyVDFyFmqu4sh5xkCcZBLXMUZ4jI">Tree-Based Methods for Statistical Learning</a></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/logos.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+</figure>
+</div>
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/books.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+</figure>
+</div>
+</div></div>
+</section>
+<section id="why-does-explainability-matter" class="slide level2 smaller">
+<h2>Why does explainability matter?</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<ul>
+<li><strong>Model debugging</strong> - Why did <del>my model</del> <strong><span style="color: red;">Netflix</span></strong> make this mistake?</li>
+<li><strong>Feature Engineering</strong> - How can I improve my model?</li>
+<li><strong>Detecting fairness issues</strong> - Does my model discriminate?</li>
+<li><strong>Human-AI cooperation</strong> - How can I understand and trust the model’s decisions?</li>
+<li><strong>Regulatory compliance</strong> - Does my model satisfy legal requirements?</li>
+<li><strong>High-risk applications</strong> - Healthcare, finance, judicial, …</li>
+<li>Common sense</li>
+</ul>
+</div><div class="column" style="width:40%;">
+<p><img data-src="images/netflix.png"></p>
+</div></div>
+</section>
+<section id="levels-and-methods-of-explainability" class="slide level2">
+<h2>Levels and methods of explainability</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><span style="color: forestgreen;"><strong>Levels of explainability</strong></span></p>
+<ul>
+<li>Global
+<ul>
+<li><a href="https://journal.r-project.org/archive/2020/RJ-2020-013/index.html">Which variables seem “important?”</a> (<a href="https://cran.r-project.org/package=vip">vip</a>)</li>
+<li><a href="https://journal.r-project.org/archive/2017/RJ-2017-016/index.html">How does each feature impact the model’s predictions?</a> (<a href="https://cran.r-project.org/package=pdp">pdp</a>)</li>
+</ul></li>
+<li>Local
+<ul>
+<li>Explaining individual predictions (<a href="https://cran.r-project.org/package=fastshap">fastshap</a>)</li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><span style="color: forestgreen;"><strong>Methods of explainability</strong></span></p>
+<ul>
+<li>Model-specific
+<ul>
+<li>Model coefficients</li>
+<li>Inspect tree structure <span class="emoji" data-emoji="evergreen_tree">🌲</span></li>
+</ul></li>
+<li>Model-agnostic
+<ul>
+<li>Can be applied to any prediction model <span class="emoji" data-emoji="warning">⚠️</span></li>
+</ul></li>
+</ul>
+</div></div>
+</section>
+<section id="black-box-vs.-glass-box-models" class="slide level2 smaller">
+<h2>Black-box vs.&nbsp;<span style="color: dodgerblue;">glass</span>-box models</h2>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Black</strong>-box models <span class="emoji" data-emoji="black_large_square">⬛</span>:</p>
+<ul>
+<li>Often require (expensive) post-hoc techniques that require additional assumptions to explain
+<ul>
+<li><span class="emoji" data-emoji="eyes">👀</span> Looking at you permutation methods! <span class="emoji" data-emoji="smirk">😏</span></li>
+</ul></li>
+<li>Often misleading without proper constraints (e.g., interactions and monotonicity)</li>
+<li>IMO, <a href="https://en.wikipedia.org/wiki/Multicollinearity"><em>multicollinearity</em></a> is even more of a problem here!</li>
+</ul>
+</div><div class="column" style="width:50%;">
+<p><strong><span style="color: dodgerblue;">glass</span></strong>-box models <span class="emoji" data-emoji="ice_cube">🧊</span>:</p>
+<ul>
+<li>Natutrally interpretable structure</li>
+<li>Business rules and rule-based models (e.g., CORELS)</li>
+<li>Small decision trees</li>
+<li>Additive linear and nonlinear models (e.g., GLMs, GAMs, and GA2Ms)</li>
+<li><a href="https://interpret.ml/docs/ebm.html">Explainable boosting machines</a>! <img data-src="images/iml-logo.png" class="quarto-figure quarto-figure-center" style="width:60.0%"></li>
+</ul>
+</div></div>
+</section>
+<section id="interpretability-vs.-explainability" class="slide level2">
+<h2>Interpretability vs.&nbsp;explainability</h2>
+<ul>
+<li><span style="color: cornflowerblue;"><em>Explainable machine learning</em></span>: “use of post hoc methods to understand how a model makes predictions”</li>
+</ul>
+<div class="fragment">
+<ul>
+<li><span style="color: cornflowerblue;"><em>Interpretable machine learning</em></span>: “the ability to explain or to present in understandable terms to a human.”</li>
+</ul>
+</div>
+<div class="fragment">
+<ul>
+<li><p>In essense: “<span style="color: darkorange;">interpretability</span> &gt; <span style="color: darkorange;">explainability</span>”</p></li>
+<li><p>Definitions vary across the literature and I tend to use these two synonymously!</p></li>
+</ul>
+</div>
+</section>
+<section id="useful-resources" class="slide level2">
+<h2>Useful resources</h2>
+
+<img data-src="images/iml-books.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section id="the-problem-with-observational-data" class="slide level2">
+<h2>The problem with observational data…</h2>
+<iframe data-external="1" src="https://www.youtube.com/embed/ntnalq-2nNU?si=VmgMiBQmFxQr4eOC" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</section>
+<section id="causation-is-a-controversial-topic" class="slide level2">
+<h2>Causation is a controversial topic</h2>
+<blockquote>
+<p>“Causation is for other people… it is very dicey… You know, we have real problems to solve. I can’t dick around, frankly, thinking about other things like causation right now.”</p>
+<pre><code>   --Chief Analytics Officer (NYC Mayor's office, 2013?)</code></pre>
+</blockquote>
+
+<img data-src="images/ellie-tweet.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="correlation-does-not-imply-causation" class="slide level2 smaller">
+<h2>Correlation does not imply causation</h2>
+<div class="fragment">
+<p><a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10194916/">“…but this does not necessarily stop people from drawing causal inferences from correlational staements.”</a></p>
+</div>
+<div class="fragment">
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong>Causal fallacies</strong>:</p>
+<ul>
+<li>Post hoc ergo propter hoc (i.e., “rooster syndrome”)
+<ul>
+<li>Does the rooster’s crowing cause the sun to rise?</li>
+<li>Coincidental vaccine adverse events</li>
+</ul></li>
+<li>Cum hoc ergo propter hoc
+<ul>
+<li>Shoe size and reading ability</li>
+<li>Ice cream sales and shark attacks</li>
+<li><a href="https://www.tylervigen.com/spurious-correlations">Spurious correlations by Tyler Vigen</a></li>
+</ul></li>
+</ul>
+</div><div class="column" style="width:50%;">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="images/rock-a-doodle.jpg" class="quarto-figure quarto-figure-center" style="width:60.0%"></p>
+</figure>
+</div>
+</div></div>
+</div>
+</section>
+<section id="some-causal-fallacies-in-the-wild" class="slide level2">
+<h2>Some causal fallacies in the wild</h2>
+
+<img data-src="images/headlines.png" class="r-stretch"></section>
+<section id="customer-retention-example" class="slide level2 smaller">
+<h2>Customer retention example</h2>
+<ul>
+<li>Initial goal is to train a model to predict whether a customer will renew their software subscription (taken from <a href="https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html">Lundberg et al.&nbsp;(2021)</a>)</li>
+<li>Eight features were identified for predicting retention (<code>Did.renew</code>=0/1):
+<ol type="1">
+<li>Customer discount offered upon renewal (<code>Discount</code>)</li>
+<li>Ad spending on this type of customer since last renewal (<code>Ad.spend</code>)</li>
+<li>Customer’s monthly usage (<code>Monthly.usage</code>)</li>
+<li>Time since last upgrade upon renewal (<code>Last.upgrade</code>)</li>
+<li>No.&nbsp;bugs reported by customer since last renewal (<code>Bugs.reported</code>)</li>
+<li>No.&nbsp;interactions with customer since last renewal (<code>Interactions</code>)</li>
+<li>No.&nbsp;sales calls with customer since last renewal (<code>Sales.calls</code>)</li>
+<li>Health of regional economy upon renewal (<code>Economy</code>)</li>
+</ol></li>
+<li>10k total records: 8k for training and 2k for validation</li>
+</ul>
+</section>
+<section id="interpreting-a-linear-model" class="slide level2">
+<h2>Interpreting a linear model</h2>
+<p>Output from an additive logistic regression fit:</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>              Estimate Std. Error z value Pr(&gt;|z|)
+(Intercept)     -0.665      0.134  -4.961    0.000
+Sales.calls      0.074      0.060   1.238    0.216
+Interactions     0.091      0.056   1.612    0.107
+Economy          0.597      0.091   6.589    0.000
+Last.upgrade    -0.022      0.005  -4.190    0.000
+Discount        -5.950      0.311 -19.106    0.000
+Monthly.usage    0.351      0.146   2.406    0.016
+Ad.spend         0.602      0.062   9.766    0.000
+Bugs.reported    0.259      0.035   7.345    0.000</code></pre>
+</div>
+</div>
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Checking <a href="https://en.wikipedia.org/wiki/Variance_inflation_factor"><em>variance inflation factor</em></a>s (VIFs) is always a good idea!</p>
+</div>
+</div>
+</div>
+</section>
+<section id="correlation-matrix" class="slide level2">
+<h2>Correlation matrix</h2>
+
+<img data-src="dagnammit_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section id="interpreting-an-ml-model" class="slide level2">
+<h2>Interpreting an ML model</h2>
+<ul>
+<li>No “simple” prediction formula for most black-box models!</li>
+<li>Usually rely on post-hoc techniques to explain</li>
+<li>Most of these require good visualizations</li>
+<li>Readily available in different software (open-source and propprietary)</li>
+<li>Often misapplied and/or misinterpreted!</li>
+</ul>
+</section>
+<section id="retention-example-cont." class="slide level2">
+<h2>Retention example (cont.)</h2>
+<p>Variable importance scores from an <a href="https://xgboost.readthedocs.io/en/stable/">XGBoost</a> fit:</p>
+
+<img data-src="dagnammit_files/figure-revealjs/variable-importance-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"></section>
+<section id="partial-dependence-pd-plots" class="slide level2">
+<h2><a href="https://christophm.github.io/interpretable-ml-book/pdp.html">Partial dependence (PD) plots</a></h2>
+
+<img data-src="dagnammit_files/figure-revealjs/partial-dependence-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"></section>
+<section id="interpreting-the-pd-plots" class="slide level2">
+<h2>Interpreting the PD plots</h2>
+<ul>
+<li><code>Ad.spend</code> and <code>Discount</code> are important to this (fictional) business because they can be directly manipulated <span class="emoji" data-emoji="control_knobs">🎛️</span></li>
+</ul>
+<div class="fragment">
+<ul>
+<li><span class="emoji" data-emoji="raised_hands">🙌</span><span class="emoji" data-emoji="tada">🎉</span><span class="emoji" data-emoji="partying_face">🥳</span> Hurrah! We can improve retention by
+<ul>
+<li><span class="emoji" data-emoji="arrow_up">⬆️</span> <strong>Increasing</strong> ad spend</li>
+<li><span class="emoji" data-emoji="arrow_down">⬇️</span> <strong>Decreasing</strong> discount amount</li>
+</ul></li>
+</ul>
+</div>
+<div class="fragment">
+<div class="r-stack">
+<p><strong><span style="color: red;">NOT SO FAST</span>!!!</strong></p>
+</div>
+</div>
+</section>
+<section id="the-true-data-generator" class="slide level2 smaller">
+<h2>The true data generator</h2>
+<p><span class="math display">\[
+\begin{aligned}
+\mathsf{logit}\left(p\right) = 1.26 &amp;\times \mathtt{Product.need} + \\
+0.56 &amp;\times\mathtt{Monthly.usage} + \\
+0.7 &amp;\times \mathtt{Economy} + \\
+0.35 &amp;\times \mathtt{Discount} + \\
+0.35 &amp;\times \left(1 - \mathtt{Bugs.faced} / 20\right) + \\
+0.035 &amp;\times \mathtt{Sales.calls} + \\
+0.105 &amp;\times \mathtt{Interactions} + \\
+0.7 &amp;\times \left(\mathtt{Last.upgrade} / 4 + 0.25\right)^{-1} + \\
+0 &amp;\times \mathtt{Ad.spend} + \\
+&amp;-3.15 + \epsilon\
+\end{aligned}
+\]</span></p>
+</section>
+<section id="partial-dependence-vs.-truth" class="slide level2">
+<h2>Partial dependence vs.&nbsp;truth! <span class="emoji" data-emoji="scream">😱</span></h2>
+<p>PD plot (<strong>black</strong>) vs.&nbsp;true causal relationship (<span style="color: red;"><strong>red</strong></span>)</p>
+
+<img data-src="dagnammit_files/figure-revealjs/partial-dependence-vs-truth-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"></section>
+<section id="even-the-experts-slip-up" class="slide level2">
+<h2>Even the experts slip up!</h2>
+
+<img data-src="images/sorry.png" class="r-stretch"><p><a href="https://www.youtube.com/watch?v=0EWJZIC4JxA">Statistical Learning with Big Data</a> (fantastic talk!)</p>
+</section>
+<section id="so-now-what" class="slide level2">
+<h2>So now what?</h2>
+<div class="fragment">
+<p><br></p>
+<div class="r-stack">
+<p><strong>Causal interpretation requires a <a href="https://en.wikipedia.org/wiki/Causal_model">causal model</a>!!</strong></p>
+</div>
+<p><br></p>
+</div>
+<div class="fragment">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Watch the first talk by Peter Tennant!</strong></p>
+</div>
+<div class="callout-content">
+<p><a href="https://www.youtube.com/watch?v=0S8LZUxi0eg">Interpretable Machine Learning &amp; Causal Inference Workshop</a></p>
+</div>
+</div>
+</div>
+<iframe data-external="1" src="https://www.youtube.com/embed/0S8LZUxi0eg?si=_vYsI49QjFqr-xWJ" title="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+</div>
+</section>
+<section id="directed-asyclic-graphs-dags" class="slide level2">
+<h2><a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">Directed asyclic graph</a>s (DAGs)</h2>
+<ul>
+<li>Useful for representing causal relationships and assumptions
+<ul>
+<li><strong><span style="color: cornflowerblue;">Directed</span></strong>: One-sided arrows (→) connect (assumed) causes and effects</li>
+<li><strong><span style="color: cornflowerblue;">Asyclic</span></strong>: no directed path can form a closed loop</li>
+</ul></li>
+<li>Help determine whether the effect(s) of interest <em>can</em> be estimated from available data</li>
+<li>Based on strong assumptions that are often unverifiable</li>
+</ul>
+</section>
+<section id="dags-in-machine-learning" class="slide level2">
+<h2>DAGs in machine learning</h2>
+<p>Assume we have five features (<code>X1</code>–<code>X5</code>) and a response (<code>Y</code>). Causally interpreting an ML model assumes a very particular DAG!</p>
+<div class="columns">
+<div class="column" style="width:50%;">
+<p><strong><span style="color: red;">How your algorithm sees it</span></strong>:</p>
+<div class="cell" data-reveal="true" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  X1 --&gt; Y
+  X2 --&gt; Y
+  X3 --&gt; Y
+  X4 --&gt; Y
+  X5 --&gt; Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div><div class="column" style="width:50%;">
+<p><strong><span style="color: forestgreen;">How the universe works</span></strong>:</p>
+<div class="cell" data-reveal="true" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart TB
+  X1 --&gt; X3
+  X1 --&gt; Y
+  X2 --&gt; X3
+  X2 --&gt; Y
+  X3 --&gt; X4
+  X3 --&gt; Y
+  X4 --&gt; Y
+  X5 --&gt; Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</div></div>
+</section>
+<section id="estimation-and-confounding" class="slide level2 smaller">
+<h2>Estimation and confounding</h2>
+<ul>
+<li><p>In causal inference, a common goal is to estimate the average (caual) effect of some “treatment” on an outcome of interest (e.g., effect of an ad campaign on sales)</p>
+<ul>
+<li>When the treatment is binary, the effect estimate is referred to as the <a href="https://en.wikipedia.org/wiki/Average_treatment_effect"><em>average treatment effect</em></a> (ATE)</li>
+</ul></li>
+<li><p>Estimation typically requires <a href="https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf">adjusting (and not adjusting) for certain variables</a></p></li>
+<li><p>A <em>confounder</em> is a variable that effects both the treatment and outcome</p>
+<ul>
+<li>Confounders must be identified, measured, and appropriately adjusted for in the analysis</li>
+</ul></li>
+<li><p>Need to be careful with other <a href="https://dagitty.net/learn/graphs/roles.html">covariate roles</a>, like <a href="https://en.wikipedia.org/wiki/Collider_(statistics)"><em>colliders</em></a>, <em>mediators</em>, etc.</p></li>
+</ul>
+</section>
+<section id="adjustment-sets-are-key" class="slide level2">
+<h2>Adjustment sets are key</h2>
+<div class="cell" data-reveal="true" data-layout-align="center">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<pre class="mermaid mermaid-js">flowchart LR
+  X1 --&gt; X3
+  X1 --&gt; Y
+  X2 --&gt; X3
+  X2 --&gt; Y
+  X3 --&gt; X4
+  X3 --&gt; Y
+  X4 --&gt; Y
+  X5 --&gt; Y
+</pre>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+<ul>
+<li><p>Minimal sufficient adjustment set for estimating</p>
+<ul>
+<li><em><span style="color: forestgreen;">Total effect</span></em> of <code>X3</code> on <code>Y</code>: {<code>X1</code>, <code>X2</code>}</li>
+<li><em><span style="color: forestgreen;">Direct effect</span></em> of <code>X3</code> on <code>Y</code>: {<code>X1</code>, <code>X2</code>, <code>X4</code>}</li>
+</ul></li>
+<li><p>Tools like <a href="https://www.dagitty.net/">DAGitty</a> can help automate this!</p></li>
+</ul>
+</section>
+<section id="dagitty-copy-and-paste" class="slide level2">
+<h2><a href="https://www.dagitty.net/">DAGitty</a> (copy and paste)</h2>
+<pre><code>dag {
+bb="0,0,1,1"
+X1 [pos="0.462,0.332"]
+X2 [pos="0.425,0.238"]
+X3 [exposure,pos="0.532,0.277"]
+X4 [pos="0.529,0.396"]
+X5 [pos="0.363,0.416"]
+Y [outcome,pos="0.439,0.464"]
+X1 -&gt; X3
+X1 -&gt; Y
+X2 -&gt; X3
+X2 -&gt; Y
+X3 -&gt; X4
+X3 -&gt; Y
+X4 -&gt; Y
+X5 -&gt; Y
+}</code></pre>
+</section>
+<section id="useful-resources-1" class="slide level2">
+<h2>Useful resources</h2>
+
+<img data-src="images/ci-books.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section id="retention-example-cont.-1" class="slide level2">
+<h2>Retention example (cont.)</h2>
+<p>Assume strong domain expertise has allowed us to generate <a href="(https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be careful when interpreting predictive models in search of causal insights.html)">the following DAG</a>:</p>
+
+<img data-src="images/dag.svg" class="quarto-figure quarto-figure-center r-stretch" style="width:80.0%"></section>
+<section id="retention-example-cont.-2" class="slide level2 smaller">
+<h2>Retention example (cont.)</h2>
+<p>Can we interpret any of the PD plots causally?</p>
+<div class="fragment">
+<p>Maybe for <code>Economy</code>?!</p>
+<div class="panel-tabset">
+<ul id="tabset-1" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-1-1">PD plot</a></li><li><a href="#tabset-1-2">Pearson correlations</a></li></ul>
+<div class="tab-content">
+<div id="tabset-1-1">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="dagnammit_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div id="tabset-1-2">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="dagnammit_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section class="slide level2">
+
+<h3 id="causal-interpretations-of-black-box-models">“<a href="https://www.tandfonline.com/doi/full/10.1080/07350015.2019.1624293?scroll=top&amp;needAccess=true">Causal Interpretations of Black-Box Models</a>”</h3>
+<p><br></p>
+
+<img data-src="images/article.png" class="quarto-figure quarto-figure-center r-stretch" style="width:100.0%"></section>
+<section id="mathematical-background" class="slide level2">
+<h2>Mathematical background</h2>
+<p>The <a href="https://projecteuclid.org/journals/annals-of-statistics/volume-29/issue-5/Greedy-function-approximation-A-gradient-boosting-machine/10.1214/aos/1013203451.full">partial dependence</a> (PD) of <span class="math inline">\(Y\)</span> on <span class="math inline">\(X_S\)</span> is defined as</p>
+<p><span class="math display">\[
+\begin{aligned}
+g_s\left(x_s\right) &amp;= E_{X_c}\left[g\left(x_s, X_c\right)\right] \\
+&amp;= \int g\left(x_S, x_C\right) dP\left(x_C\right) \\
+&amp;\approx \frac{1}{N}\sum_{i=1}^N g\left(x_S, X_{iC}\right)
+\end{aligned}
+\]</span></p>
+<div class="fragment">
+<ul>
+<li><p>This is the same as <a href="https://projecteuclid.org/journals/statistical-science/volume-8/issue-3/Bayesian-Analysis-in-Expert-Systems--Comment--Graphical-Models/10.1214/ss/1177010894.full">Pearl’s <em>back-door adjustment formula</em></a></p></li>
+<li><p>Under <em><strong>certain conditions</strong></em>, PD plots can be interpreted causally!</p></li>
+</ul>
+</div>
+</section>
+<section id="retention-example-cont.-3" class="slide level2">
+<h2>Retention example (cont.)</h2>
+<p>Using another XGBoost model, here’s the estimated PD of <code>Did.renew</code> on <code>Ad.spend</code>, conditional on <code>Monthly.usage</code> and <code>Last.upgrade</code>: … <span class="emoji" data-emoji="drum">🥁</span></p>
+<div class="fragment">
+<div class="cell" data-layout-align="center">
+<div class="cell-output-display">
+<div class="quarto-figure quarto-figure-center">
+<figure>
+<p><img data-src="dagnammit_files/figure-revealjs/adjusted-partial-dependence-1.png" class="quarto-figure quarto-figure-center" width="576"></p>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<div class="fragment">
+<p>Ummm … maybe a case of <em>estimand</em> vs.&nbsp;<em>estimate</em>? <span class="emoji" data-emoji="thinking">🤔</span></p>
+</div>
+</section>
+<section id="stop-permuting-features" class="slide level2 smaller">
+<h2>Stop permuting features?! <span class="emoji" data-emoji="scream">😱</span></h2>
+
+<img data-src="images/stop-permuting.png" class="quarto-figure quarto-figure-center r-stretch"><blockquote>
+<p>…PaP metrics can vastly over-emphasize correlated features in both variable importance measures and partial dependence plots.</p>
+</blockquote>
+</section>
+<section id="retention-example-cont.-4" class="slide level2">
+<h2>Retention example (cont.)</h2>
+
+<img data-src="dagnammit_files/figure-revealjs/retention-splom-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"></section>
+<section id="doubledebiased-machine-learning" class="slide level2">
+<h2>Double/debiased machine learning</h2>
+<p>Given a causal model, double ML <em><a href="https://docs.doubleml.org/stable/workflow/workflow.html">essentially</a></em> involves three steps:</p>
+<ol type="1">
+<li><p>Predict the outcome (<span class="math inline">\(y\)</span>) from an <span style="color: forestgreen;">appropriate adjustment set</span> and get the residuals (<span class="math inline">\(r_y\)</span>)</p></li>
+<li><p>Predict the treatment (<span class="math inline">\(x\)</span>) from an <span style="color: green;">appropriate adjustment set</span> and get the residuals (<span class="math inline">\(r_x\)</span>)</p></li>
+<li><p><em>Regress</em> <span class="math inline">\(r_y\)</span> on <span class="math inline">\(r_x\)</span> to create a model of the heterogeneous treatment effect</p></li>
+</ol>
+</section>
+<section id="double-ml-for-ad.spend" class="slide level2">
+<h2>Double ML for <code>Ad.spend</code></h2>
+<div class="panel-tabset">
+<ul id="tabset-2" class="panel-tabset-tabby"><li><a data-tabby-default="" href="#tabset-2-1">R code</a></li><li><a href="#tabset-2-2">Results</a></li></ul>
+<div class="tab-content">
+<div id="tabset-2-1">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a>dml_data <span class="ot">&lt;-</span> DoubleML<span class="sc">::</span>DoubleMLData<span class="sc">$</span><span class="fu">new</span>(</span>
+<span id="cb4-2"><a></a>  <span class="at">data =</span> ret.trn,                              <span class="co"># training data</span></span>
+<span id="cb4-3"><a></a>  <span class="at">y_col =</span> <span class="st">"Did.renew"</span>,                         <span class="co"># response</span></span>
+<span id="cb4-4"><a></a>  <span class="at">d_cols =</span> <span class="st">"Ad.spend"</span>,                         <span class="co"># treatment</span></span>
+<span id="cb4-5"><a></a>  <span class="at">x_cols =</span> <span class="fu">c</span>(<span class="st">"Last.upgrade"</span>, <span class="st">"Monthly.usage"</span>)  <span class="co"># adjustment set</span></span>
+<span id="cb4-6"><a></a>)</span>
+<span id="cb4-7"><a></a>lrnr <span class="ot">&lt;-</span> mlr3<span class="sc">::</span><span class="fu">lrn</span>(<span class="st">"regr.ranger"</span>, <span class="at">num.trees =</span> <span class="dv">500</span>)</span>
+<span id="cb4-8"><a></a><span class="fu">set.seed</span>(<span class="dv">1810</span>)  <span class="co"># for reproducibility</span></span>
+<span id="cb4-9"><a></a>dml_plr <span class="ot">=</span> DoubleML<span class="sc">::</span>DoubleMLPLR<span class="sc">$</span><span class="fu">new</span>(</span>
+<span id="cb4-10"><a></a>  dml_data, <span class="at">ml_l =</span> lrnr<span class="sc">$</span><span class="fu">clone</span>(), <span class="at">ml_m =</span> lrnr<span class="sc">$</span><span class="fu">clone</span>()</span>
+<span id="cb4-11"><a></a>)</span>
+<span id="cb4-12"><a></a>dml_plr<span class="sc">$</span><span class="fu">fit</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+<div id="tabset-2-2">
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="co"># Print results</span></span>
+<span id="cb5-2"><a></a><span class="fu">print</span>(dml_plr)</span>
+<span id="cb5-3"><a></a><span class="co"># ------------------ Fit summary       ------------------</span></span>
+<span id="cb5-4"><a></a><span class="co">#   Estimates and significance testing of the effect of target variables</span></span>
+<span id="cb5-5"><a></a><span class="co">#          Estimate. Std. Error t value Pr(&gt;|t|)</span></span>
+<span id="cb5-6"><a></a><span class="co"># Ad.spend  -0.09634    0.25197  -0.382    0.702</span></span>
+<span id="cb5-7"><a></a></span>
+<span id="cb5-8"><a></a><span class="co"># Compute 95% confidence interval</span></span>
+<span id="cb5-9"><a></a><span class="fu">print</span>(dml_plr<span class="sc">$</span><span class="fu">confint</span>())</span>
+<span id="cb5-10"><a></a><span class="co">#               2.5 %   97.5 %</span></span>
+<span id="cb5-11"><a></a><span class="co"># Ad.spend -0.5901917 0.397511</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="challenges-with-dag-based-inference" class="slide level2">
+<h2>Challenges with DAG-based inference</h2>
+<ul>
+<li>Faithful DAGs seem hard to come by
+<ul>
+<li>What if you have 800 potential features?</li>
+<li>Is the right domain expertise even available?</li>
+</ul></li>
+<li>What about unmeasured confounders?</li>
+<li>DAGs are based on strong (and often unverifiable) assumptions</li>
+<li>Oftentimes multiple reasonable DAGs will exist
+<ul>
+<li><a href="https://cran.r-project.org/package=causalsens">Sensitivity analysis</a>!</li>
+</ul></li>
+</ul>
+</section>
+<section id="designed-experiments" class="slide level2">
+<h2>Designed experiments</h2>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Randomized_controlled_trial">RCT</a>s are arguably still the gold standard, but …
+<ul>
+<li><span class="emoji" data-emoji="innocent">😇</span> There can be ethical concerns</li>
+<li><span class="emoji" data-emoji="moneybag">💰</span> Can be expensive to implement</li>
+</ul></li>
+</ul>
+<p>However…</p>
+<div class="fragment">
+<div class="callout callout-tip callout-titled callout-style-default">
+<div class="callout-body">
+<div class="callout-title">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<p><strong>Tip</strong></p>
+</div>
+<div class="callout-content">
+<p>Responsible, transparent use of machine learning can help narrow down the hypothesis space!</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="ingot-cracking-example" class="slide level2">
+<h2>Ingot cracking example</h2>
+<p>I’m reminded of an old (but still fantastic) <a href="https://www.youtube.com/watch?v=mgNI8Gloass">data mining lecture from Richard De Veaux</a> (skip to the 44:30 mark)</p>
+<ul>
+<li>20,000 lb. ingots made in a giant mold</li>
+<li>Roughtly 25% of ingots develop cracks</li>
+<li>Cracked ingots cost $30,000 to recast</li>
+<li>Roughly 900 observations (ingots) on 149 variables</li>
+<li>What’s <strong>causing</strong> them to crack?</li>
+</ul>
+
+<img data-src="images/ingot.jpg" class="quarto-figure quarto-figure-center r-stretch" style="width:50.0%"></section>
+<section id="ingot-cracking-example-cont." class="slide level2">
+<h2>Ingot cracking example (cont.)</h2>
+
+<img data-src="images/ingot-tree.png" class="quarto-figure quarto-figure-center r-stretch" style="width:50.0%"><ul>
+<li>Lots of iterations, but… “Looks like Chrome(!?)”</li>
+<li><span class="emoji" data-emoji="detective">🕵️</span> A <span style="color: dodgerblue;">glass</span>-box model gave clues for generating a hypothesis (i.e., which variable to focus on)</li>
+<li><span style="color: forestgreen;">Follow-up randomized experiments led to substantial improvement!</span></li>
+</ul>
+</section>
+<section id="adding-constraints-where-feasible" class="slide level2">
+<h2>Adding constraints (where feasible)</h2>
+<ul>
+<li><p>Often useful to constrain the functional form of the model in some way</p>
+<ul>
+<li>Business considerations</li>
+<li>Domain knowledge</li>
+</ul></li>
+<li><p>Enforcing sparsity (e.g., <a href="https://arxiv.org/abs/2311.07452">EBMs with Sparsity</a>)</p></li>
+<li><p><a href="https://xgboost.readthedocs.io/en/latest/tutorials/monotonic.html">Enforcing monotonicty</a> between features and the <em>predicted output</em> can be done in several ways during training (e.g., linear and tree-based models)</p>
+<ul>
+<li>Can also be accomplished through <a href="https://dl.acm.org/doi/10.1145/3534678.3539074"><em>model editing</em></a></li>
+</ul></li>
+</ul>
+</section>
+<section id="pneumonia-example" class="slide level2">
+<h2>Pneumonia example</h2>
+<ul>
+<li>Data contains 46 features on 14199 pneumonia patients
+<ul>
+<li>Patient demographics (e.g., age)</li>
+<li><span class="emoji" data-emoji="triangular_ruler">📐</span> Various measuremnts (e.g., heart rate)</li>
+<li><span class="emoji" data-emoji="microscope">🔬</span> Lab test results (e.g., WBC)</li>
+<li><span class="emoji" data-emoji="x_ray">🩻</span> Chest x-ray results (e.g., pleural effusion)</li>
+</ul></li>
+<li>Too many to construct a useful DAG?</li>
+<li>Goal is to predict probability of death (0/1)</li>
+<li>Data from <a href="https://www.microsoft.com/en-us/research/wp-content/uploads/2017/06/KDD2015FinalDraftIntelligibleModels4HealthCare_igt143e-caruanaA.pdf">Caruana et al.&nbsp;(2015)</a> and <a href="https://dl.acm.org/doi/10.1145/3534678.3539074">Wang et al.&nbsp;(2022)</a></li>
+</ul>
+</section>
+<section id="pneumonia-example-cont." class="slide level2">
+<h2>Pneumonia example (cont.)</h2>
+<p>Living past 100 decreases risk?</p>
+
+<img data-src="dagnammit_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"></section>
+<section id="pneumonia-example-cont.-1" class="slide level2">
+<h2>Pneumonia example (cont.)</h2>
+<p>Adding monotonic constraints can be helpful!</p>
+
+<img data-src="dagnammit_files/figure-revealjs/unnamed-chunk-8-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"></section>
+<section id="pneumonia-example-cont.-2" class="slide level2">
+<h2>Pneumonia example (cont.)</h2>
+<p>Having asthma lowers a patient’s risk of dying from pneumonia?</p>
+
+<img data-src="dagnammit_files/figure-revealjs/unnamed-chunk-9-1.png" class="quarto-figure quarto-figure-center r-stretch" width="576"></section>
+<section id="pneumonia-example-cont.-3" class="slide level2">
+<h2>Pneumonia example (cont.)</h2>
+<p>According to the doctors, asthmatic patients (<code>A</code>) would likely receive better care earlier (<code>T</code>):</p>
+<div class="cell" data-layout-align="default">
+<div class="cell-output-display">
+<div>
+<p></p><figure class=""><p></p>
+<div>
+<svg width="960" height="480" viewbox="0.00 0.00 116.23 106.42" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" style="; max-width: none; max-height: none; display: block; margin: auto auto auto auto">
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 102.42)">
+<title>G</title>
+<polygon fill="white" stroke="transparent" points="-4,4 -4,-102.42 112.23,-102.42 112.23,4 -4,4"></polygon>
+<!-- A -->
+<g id="node1" class="node">
+<title>A</title>
+<ellipse fill="none" stroke="black" cx="18.01" cy="-79.93" rx="18.02" ry="18.02"></ellipse>
+<text text-anchor="middle" x="18.01" y="-75.73" font-family="Times,serif" font-size="14.00">A</text>
+</g>
+<!-- D -->
+<g id="node2" class="node">
+<title>D</title>
+<ellipse fill="none" stroke="black" cx="90.22" cy="-80.41" rx="18.02" ry="18.02"></ellipse>
+<text text-anchor="middle" x="90.22" y="-76.21" font-family="Times,serif" font-size="14.00">D</text>
+</g>
+<!-- A&#45;&gt;D -->
+<g id="edge2" class="edge">
+<title>A-&gt;D</title>
+<path fill="none" stroke="black" d="M36.23,-80.05C44.01,-80.1 53.28,-80.17 61.92,-80.22"></path>
+<polygon fill="black" stroke="black" points="61.98,-83.72 72,-80.29 62.03,-76.72 61.98,-83.72"></polygon>
+</g>
+<!-- T -->
+<g id="node3" class="node">
+<title>T</title>
+<ellipse fill="none" stroke="red" stroke-dasharray="5,2" cx="54.6" cy="-18" rx="18" ry="18"></ellipse>
+<text text-anchor="middle" x="54.6" y="-13.8" font-family="Times,serif" font-size="14.00">T</text>
+</g>
+<!-- A&#45;&gt;T -->
+<g id="edge1" class="edge">
+<title>A-&gt;T</title>
+<path fill="none" stroke="black" d="M27.24,-64.31C31.11,-57.75 35.71,-49.98 40.02,-42.69"></path>
+<polygon fill="black" stroke="black" points="43.17,-44.23 45.24,-33.84 37.14,-40.67 43.17,-44.23"></polygon>
+</g>
+<!-- T&#45;&gt;D -->
+<g id="edge3" class="edge">
+<title>T-&gt;D</title>
+<path fill="none" stroke="black" d="M63.59,-33.75C67.36,-40.35 71.83,-48.19 76.02,-55.53"></path>
+<polygon fill="black" stroke="black" points="73.11,-57.5 81.11,-64.45 79.19,-54.03 73.11,-57.5"></polygon>
+</g>
+</g>
+</svg>
+</div>
+<p></p></figure><p></p>
+</div>
+</div>
+</div>
+</section>
+<section id="pneumonia-example-cont.-4" class="slide level2">
+<h2>Pneumonia example (cont.)</h2>
+<ul>
+<li>If we use the model as is to make hospital admission decisions, asthmatic patients are likely to miss out on care they need</li>
+<li>Interpretability and causal knowledge can help identify such dangerous patterns and improve the model:
+<ul>
+<li>Force monotonicity (e.g., <code>A</code> &gt; <code>!A</code>)</li>
+<li>Remove the asthma feature</li>
+<li>Edit the effect out <span class="emoji" data-emoji="scream">😱</span></li>
+</ul></li>
+</ul>
+</section>
+<section id="gam-changer" class="slide level2">
+<h2><a href="https://interpret.ml/gam-changer/">GAM Changer</a></h2>
+
+<img data-src="https://user-images.githubusercontent.com/15007159/184291928-c675b83e-be82-4206-bd30-47dc93008fec.gif" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="causal-discovery" class="slide level2">
+<h2>Causal discovery? <span class="emoji" data-emoji="thinking">🤔</span></h2>
+
+<img data-src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3QzZHJ0aWp6cTF0N2EzNGpkcHQwZW8xM3NlaGk5NjFoank2NjR1cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SaKvh2fShKr1hYZssC/giphy.gif" class="r-stretch"></section>
+<section id="key-takeaways" class="slide level2 smaller">
+<h2>Key takeaways</h2>
+<ul>
+<li><p>ML is great at identifying and utilizing patterns and associations in data to make predictions</p></li>
+<li><p>Causal knowledge can be used to improve models!</p></li>
+<li><p>Some quotes I like from <a href="https://www.amazon.com/Becoming-Data-Head-Understand-Statistics/dp/1119741742">Becoming A Data Head</a>:</p></li>
+</ul>
+<div class="columns">
+<div class="column" style="width:50%;">
+<blockquote>
+<p>“There are clever ways to use observational data to suggest some causal relationships. [They ALL] rely on strong assumptions and clever statistics.”</p>
+</blockquote>
+<blockquote>
+<p>“Any claims of causality with observational data should be met with skeptimicism.”</p>
+</blockquote>
+</div><div class="column" style="width:50%;">
+<p><img data-src="images/data-head.jpg" style="width:70.0%"></p>
+</div></div>
+</section>
+<section id="questions" class="slide level2">
+<h2>Questions? <span class="emoji" data-emoji="raising_hand">🙋</span></h2>
+
+<img data-src="https://imgs.xkcd.com/comics/correlation.png" class="r-stretch"><p>Source: <a href="https://xkcd.com/552/">xkcd comic</a></p>
+
+<div class="quarto-auto-generated-content">
+<div class="footer footer-default">
+
+</div>
+</div>
+</section>
+    </div>
+  </div>
+
+  <script>window.backupDefine = window.define; window.define = undefined;</script>
+  <script src="site_libs/revealjs/dist/reveal.js"></script>
+  <!-- reveal.js plugins -->
+  <script src="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.js"></script>
+  <script src="site_libs/revealjs/plugin/pdf-export/pdfexport.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/menu.js"></script>
+  <script src="site_libs/revealjs/plugin/reveal-menu/quarto-menu.js"></script>
+  <script src="site_libs/revealjs/plugin/quarto-support/support.js"></script>
+  
+
+  <script src="site_libs/revealjs/plugin/notes/notes.js"></script>
+  <script src="site_libs/revealjs/plugin/search/search.js"></script>
+  <script src="site_libs/revealjs/plugin/zoom/zoom.js"></script>
+  <script src="site_libs/revealjs/plugin/math/math.js"></script>
+  <script>window.define = window.backupDefine; window.backupDefine = undefined;</script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+'controlsAuto': true,
+'previewLinksAuto': false,
+'pdfSeparateFragments': false,
+'autoAnimateEasing': "ease",
+'autoAnimateDuration': 1,
+'autoAnimateUnmatched': true,
+'menu': {"side":"left","useTextContentForMissingTitles":true,"markers":false,"loadIcons":false,"custom":[{"title":"Tools","icon":"<i class=\"fas fa-gear\"></i>","content":"<ul class=\"slide-menu-items\">\n<li class=\"slide-tool-item active\" data-item=\"0\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.fullscreen(event)\"><kbd>f</kbd> Fullscreen</a></li>\n<li class=\"slide-tool-item\" data-item=\"1\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.speakerMode(event)\"><kbd>s</kbd> Speaker View</a></li>\n<li class=\"slide-tool-item\" data-item=\"2\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.overview(event)\"><kbd>o</kbd> Slide Overview</a></li>\n<li class=\"slide-tool-item\" data-item=\"3\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.togglePdfExport(event)\"><kbd>e</kbd> PDF Export Mode</a></li>\n<li class=\"slide-tool-item\" data-item=\"4\"><a href=\"#\" onclick=\"RevealMenuToolHandlers.keyboardHelp(event)\"><kbd>?</kbd> Keyboard Help</a></li>\n</ul>"}],"openButton":true},
+'smaller': false,
+ 
+        // Display controls in the bottom right corner
+        controls: false,
+
+        // Help the user learn the controls by providing hints, for example by
+        // bouncing the down arrow when they first encounter a vertical slide
+        controlsTutorial: false,
+
+        // Determines where controls appear, "edges" or "bottom-right"
+        controlsLayout: 'edges',
+
+        // Visibility rule for backwards navigation arrows; "faded", "hidden"
+        // or "visible"
+        controlsBackArrows: 'faded',
+
+        // Display a presentation progress bar
+        progress: true,
+
+        // Display the page number of the current slide
+        slideNumber: 'c/t',
+
+        // 'all', 'print', or 'speaker'
+        showSlideNumber: 'all',
+
+        // Add the current slide number to the URL hash so that reloading the
+        // page/copying the URL will return you to the same slide
+        hash: true,
+
+        // Start with 1 for the hash rather than 0
+        hashOneBasedIndex: false,
+
+        // Flags if we should monitor the hash and change slides accordingly
+        respondToHashChanges: true,
+
+        // Push each slide change to the browser history
+        history: true,
+
+        // Enable keyboard shortcuts for navigation
+        keyboard: true,
+
+        // Enable the slide overview mode
+        overview: true,
+
+        // Disables the default reveal.js slide layout (scaling and centering)
+        // so that you can use custom CSS layout
+        disableLayout: false,
+
+        // Vertical centering of slides
+        center: false,
+
+        // Enables touch navigation on devices with touch input
+        touch: true,
+
+        // Loop the presentation
+        loop: false,
+
+        // Change the presentation direction to be RTL
+        rtl: false,
+
+        // see https://revealjs.com/vertical-slides/#navigation-mode
+        navigationMode: 'linear',
+
+        // Randomizes the order of slides each time the presentation loads
+        shuffle: false,
+
+        // Turns fragments on and off globally
+        fragments: true,
+
+        // Flags whether to include the current fragment in the URL,
+        // so that reloading brings you to the same fragment position
+        fragmentInURL: false,
+
+        // Flags if the presentation is running in an embedded mode,
+        // i.e. contained within a limited portion of the screen
+        embedded: false,
+
+        // Flags if we should show a help overlay when the questionmark
+        // key is pressed
+        help: true,
+
+        // Flags if it should be possible to pause the presentation (blackout)
+        pause: true,
+
+        // Flags if speaker notes should be visible to all viewers
+        showNotes: false,
+
+        // Global override for autoplaying embedded media (null/true/false)
+        autoPlayMedia: null,
+
+        // Global override for preloading lazy-loaded iframes (null/true/false)
+        preloadIframes: null,
+
+        // Number of milliseconds between automatically proceeding to the
+        // next slide, disabled when set to 0, this value can be overwritten
+        // by using a data-autoslide attribute on your slides
+        autoSlide: 0,
+
+        // Stop auto-sliding after user input
+        autoSlideStoppable: true,
+
+        // Use this method for navigation when auto-sliding
+        autoSlideMethod: null,
+
+        // Specify the average time in seconds that you think you will spend
+        // presenting each slide. This is used to show a pacing timer in the
+        // speaker view
+        defaultTiming: null,
+
+        // Enable slide navigation via mouse wheel
+        mouseWheel: false,
+
+        // The display mode that will be used to show slides
+        display: 'block',
+
+        // Hide cursor if inactive
+        hideInactiveCursor: true,
+
+        // Time before the cursor is hidden (in ms)
+        hideCursorTime: 5000,
+
+        // Opens links in an iframe preview overlay
+        previewLinks: false,
+
+        // Transition style (none/fade/slide/convex/concave/zoom)
+        transition: 'none',
+
+        // Transition speed (default/fast/slow)
+        transitionSpeed: 'default',
+
+        // Transition style for full page slide backgrounds
+        // (none/fade/slide/convex/concave/zoom)
+        backgroundTransition: 'none',
+
+        // Number of slides away from the current that are visible
+        viewDistance: 3,
+
+        // Number of slides away from the current that are visible on mobile
+        // devices. It is advisable to set this to a lower number than
+        // viewDistance in order to save resources.
+        mobileViewDistance: 2,
+
+        // The "normal" size of the presentation, aspect ratio will be preserved
+        // when the presentation is scaled to fit different resolutions. Can be
+        // specified using percentage units.
+        width: 1050,
+
+        height: 700,
+
+        // Factor of the display size that should remain empty around the content
+        margin: 0.1,
+
+        math: {
+          mathjax: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js',
+          config: 'TeX-AMS_HTML-full',
+          tex2jax: {
+            inlineMath: [['\\(','\\)']],
+            displayMath: [['\\[','\\]']],
+            balanceBraces: true,
+            processEscapes: false,
+            processRefs: true,
+            processEnvironments: true,
+            preview: 'TeX',
+            skipTags: ['script','noscript','style','textarea','pre','code'],
+            ignoreClass: 'tex2jax_ignore',
+            processClass: 'tex2jax_process'
+          },
+        },
+
+        // reveal.js plugins
+        plugins: [QuartoLineHighlight, PdfExport, RevealMenu, QuartoSupport,
+
+          RevealMath,
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
+    <script id="quarto-html-after-body" type="application/javascript">
+    window.document.addEventListener("DOMContentLoaded", function (event) {
+      const toggleBodyColorMode = (bsSheetEl) => {
+        const mode = bsSheetEl.getAttribute("data-mode");
+        const bodyEl = window.document.querySelector("body");
+        if (mode === "dark") {
+          bodyEl.classList.add("quarto-dark");
+          bodyEl.classList.remove("quarto-light");
+        } else {
+          bodyEl.classList.add("quarto-light");
+          bodyEl.classList.remove("quarto-dark");
+        }
+      }
+      const toggleBodyColorPrimary = () => {
+        const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+        if (bsSheetEl) {
+          toggleBodyColorMode(bsSheetEl);
+        }
+      }
+      toggleBodyColorPrimary();  
+      const tabsets =  window.document.querySelectorAll(".panel-tabset-tabby")
+      tabsets.forEach(function(tabset) {
+        const tabby = new Tabby('#' + tabset.id);
+      });
+      const isCodeAnnotation = (el) => {
+        for (const clz of el.classList) {
+          if (clz.startsWith('code-annotation-')) {                     
+            return true;
+          }
+        }
+        return false;
+      }
+      const onCopySuccess = function(e) {
+        // button target
+        const button = e.trigger;
+        // don't keep focus
+        button.blur();
+        // flash "checked"
+        button.classList.add('code-copy-button-checked');
+        var currentTitle = button.getAttribute("title");
+        button.setAttribute("title", "Copied!");
+        let tooltip;
+        if (window.bootstrap) {
+          button.setAttribute("data-bs-toggle", "tooltip");
+          button.setAttribute("data-bs-placement", "left");
+          button.setAttribute("data-bs-title", "Copied!");
+          tooltip = new bootstrap.Tooltip(button, 
+            { trigger: "manual", 
+              customClass: "code-copy-button-tooltip",
+              offset: [0, -8]});
+          tooltip.show();    
+        }
+        setTimeout(function() {
+          if (tooltip) {
+            tooltip.hide();
+            button.removeAttribute("data-bs-title");
+            button.removeAttribute("data-bs-toggle");
+            button.removeAttribute("data-bs-placement");
+          }
+          button.setAttribute("title", currentTitle);
+          button.classList.remove('code-copy-button-checked');
+        }, 1000);
+        // clear code selection
+        e.clearSelection();
+      }
+      const getTextToCopy = function(trigger) {
+          const codeEl = trigger.previousElementSibling.cloneNode(true);
+          for (const childEl of codeEl.children) {
+            if (isCodeAnnotation(childEl)) {
+              childEl.remove();
+            }
+          }
+          return codeEl.innerText;
+      }
+      const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+        text: getTextToCopy
+      });
+      clipboard.on('success', onCopySuccess);
+      if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+        // For code content inside modals, clipBoardJS needs to be initialized with a container option
+        // TODO: Check when it could be a function (https://github.com/zenorocha/clipboard.js/issues/860)
+        const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+          text: getTextToCopy,
+          container: window.document.getElementById('quarto-embedded-source-code-modal')
+        });
+        clipboardModal.on('success', onCopySuccess);
+      }
+        var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+        var mailtoRegex = new RegExp(/^mailto:/);
+          var filterRegex = new RegExp('/' + window.location.host + '/');
+        var isInternal = (href) => {
+            return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+        }
+        // Inspect non-navigation links and adorn them if external
+     	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+        for (var i=0; i<links.length; i++) {
+          const link = links[i];
+          if (!isInternal(link.href)) {
+            // undo the damage that might have been done by quarto-nav.js in the case of
+            // links that we want to consider external
+            if (link.dataset.originalHref !== undefined) {
+              link.href = link.dataset.originalHref;
+            }
+          }
+        }
+      function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+        const config = {
+          allowHTML: true,
+          maxWidth: 500,
+          delay: 100,
+          arrow: false,
+          appendTo: function(el) {
+              return el.closest('section.slide') || el.parentElement;
+          },
+          interactive: true,
+          interactiveBorder: 10,
+          theme: 'light-border',
+          placement: 'bottom-start',
+        };
+        if (contentFn) {
+          config.content = contentFn;
+        }
+        if (onTriggerFn) {
+          config.onTrigger = onTriggerFn;
+        }
+        if (onUntriggerFn) {
+          config.onUntrigger = onUntriggerFn;
+        }
+          config['offset'] = [0,0];
+          config['maxWidth'] = 700;
+        window.tippy(el, config); 
+      }
+      const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+      for (var i=0; i<noterefs.length; i++) {
+        const ref = noterefs[i];
+        tippyHover(ref, function() {
+          // use id or data attribute instead here
+          let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+          try { href = new URL(href).hash; } catch {}
+          const id = href.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note) {
+            return note.innerHTML;
+          } else {
+            return "";
+          }
+        });
+      }
+      const findCites = (el) => {
+        const parentEl = el.parentElement;
+        if (parentEl) {
+          const cites = parentEl.dataset.cites;
+          if (cites) {
+            return {
+              el,
+              cites: cites.split(' ')
+            };
+          } else {
+            return findCites(el.parentElement)
+          }
+        } else {
+          return undefined;
+        }
+      };
+      var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+      for (var i=0; i<bibliorefs.length; i++) {
+        const ref = bibliorefs[i];
+        const citeInfo = findCites(ref);
+        if (citeInfo) {
+          tippyHover(citeInfo.el, function() {
+            var popup = window.document.createElement('div');
+            citeInfo.cites.forEach(function(cite) {
+              var citeDiv = window.document.createElement('div');
+              citeDiv.classList.add('hanging-indent');
+              citeDiv.classList.add('csl-entry');
+              var biblioDiv = window.document.getElementById('ref-' + cite);
+              if (biblioDiv) {
+                citeDiv.innerHTML = biblioDiv.innerHTML;
+              }
+              popup.appendChild(citeDiv);
+            });
+            return popup.innerHTML;
+          });
+        }
+      }
+    });
+    </script>
+    
+
+</body></html>

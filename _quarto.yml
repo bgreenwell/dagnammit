@@ -1,0 +1,6 @@
+project:
+  title: "dagnammit"
+  type: website
+  output-dir: docs
+editor: visual
+

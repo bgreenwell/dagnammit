@@ -1,0 +1,902 @@
+---
+title: "DAG Nammit"
+subtitle: "The Challenges and Dagners of Causally Interpreting Machine Learning Models"
+author: "Brandon M. Greenwell"
+institute: "Slides: https://github.com/bgreenwell/dagnammit"
+from: markdown+emoji
+format: 
+  revealjs:
+    theme: simple
+    css: custom.css
+    slide-number: true
+    code-copy: true
+  
+---
+
+```{r setup}
+#| include: false
+library(ggplot2)
+library(patchwork)
+
+library(pdp)
+library(vip)
+
+library(xgboost)
+
+theme_set(theme_bw())
+```
+
+## Notes {visibility="hidden"}
+
+* [Red text]{style="color: red;"}
+* [Yellow background]{style="background-color: yellow"}.
+
+## :warning: Disclaimers :warning: {visibility="hidden"}
+
+::: {.callout-warning}
+This talk does not provide sufficient coverage of any of the topics surrounding modern day causal inference!
+:::
+
+::: {.callout-warning}
+I am NOT a causal expert! (But I would consider myslef an ML/IML expert! :sunglasses:)
+:::
+
+::: {.callout-warning}
+Sorry not sorry for the overuse of emojis ... :gorilla: :dash:
+:::
+
+
+## About me {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+- B.S. and M.S. in Applied Statistics (WSU)
+- Ph.D. in Applied Matehmatics (AFIT)
+- Director, Data Science at 84.51˚ 
+- Current UC LCB adjunct :man_teacher: (~7 years)
+
+Some R packages :package: :
+
+- [pdp](https://CRAN.R-project.org/package=pdp) (partial dependence plots)
+- [vip](https://CRAN.R-project.org/package=vip) (variable importance plots)
+- [fastshap](https://CRAN.R-project.org/package=fastshap) (faster SHAP values)
+
+Some books :books: :
+
+- [Hands-On Machine Learning with R](https://bradleyboehmke.github.io/HOML/) 
+- [Tree-Based Methods for Statistical Learning](https://www.routledge.com/Tree-Based-Methods-for-Statistical-Learning-in-R/Greenwell/p/book/9780367532468?srsltid=AfmBOoq9xbq6yMdXzO2BUsLfLVm0XyVDFyFmqu4sh5xkCcZBLXMUZ4jI)
+:::
+
+::: {.column width="50%"}
+![](images/logos.png){width="60%" fig-align=center}
+
+![](images/books.png){width="60%" fig-align=center}
+:::
+
+::::
+
+
+## Why does explainability matter? {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+* **Model debugging** - Why did ~~my model~~ **[Netflix]{style="color: red;"}** make this mistake?
+* **Feature Engineering** - How can I improve my model?
+* **Detecting fairness issues** - Does my model discriminate?
+* **Human-AI cooperation** - How can I understand and trust the model's decisions?
+* **Regulatory compliance** - Does my model satisfy legal requirements?
+* **High-risk applications** - Healthcare, finance, judicial, ...
+* Common sense
+
+:::
+
+::: {.column width="40%"}
+![](images/netflix.png)
+:::
+
+::::
+
+
+## Levels and methods of explainability
+
+
+:::: {.columns}
+
+::: {.column width="50%"}
+[**Levels of explainability**]{style="color: forestgreen;"}
+
+* Global
+  - [Which variables seem "important?"](https://journal.r-project.org/archive/2020/RJ-2020-013/index.html) ([vip](https://cran.r-project.org/package=vip))
+  - [How does each feature impact the model's predictions?](https://journal.r-project.org/archive/2017/RJ-2017-016/index.html) ([pdp](https://cran.r-project.org/package=pdp))
+* Local
+  - Explaining individual predictions ([fastshap](https://cran.r-project.org/package=fastshap))
+
+:::
+
+::: {.column width="50%"}
+[**Methods of explainability**]{style="color: forestgreen;"}
+
+* Model-specific
+  - Model coefficients
+  - Inspect tree structure :evergreen_tree:
+* Model-agnostic 
+  - Can be applied to any prediction model :warning:
+
+:::
+
+::::
+
+
+## Black-box vs. [glass]{style="color: dodgerblue;"}-box models {.smaller}
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**Black**-box models :black_large_square::
+
+* Often require (expensive) post-hoc techniques that require additional assumptions to explain
+  - :eyes: Looking at you permutation methods! :smirk:
+* Often misleading without proper constraints (e.g., interactions and monotonicity)
+* IMO, [*multicollinearity*](https://en.wikipedia.org/wiki/Multicollinearity) is even more of a problem here!
+
+:::
+
+::: {.column width="50%"}
+**[glass]{style="color: dodgerblue;"}**-box models :ice_cube::
+
+* Natutrally interpretable structure
+ - Business rules and rule-based models (e.g., CORELS)
+ - Small decision trees
+ - Additive linear and nonlinear models (e.g., GLMs, GAMs, and GA2Ms)
+ - [Explainable boosting machines](https://interpret.ml/docs/ebm.html)!
+   ![](images/iml-logo.png){width="60%" fig-align=center}
+:::
+
+::::
+
+
+## Interpretability vs. explainability
+
+- [*Explainable machine learning*]{style="color: cornflowerblue;"}: "use of post hoc methods to understand how a model makes predictions"
+
+. . .
+
+- [*Interpretable machine learning*]{style="color: cornflowerblue;"}: "the ability to explain or to present in understandable terms to a human."
+
+. . .
+
+- In essense: "[interpretability]{style="color: darkorange;"} > [explainability]{style="color: darkorange;"}"
+
+- Definitions vary across the literature and I tend to use these two synonymously!
+
+
+## Useful resources
+
+![](images/iml-books.png){width="100%" fig-align=center}
+
+
+## The problem with observational data...
+
+{{< video https://www.youtube.com/embed/ntnalq-2nNU?si=VmgMiBQmFxQr4eOC >}}
+
+
+## Causation is a controversial topic 
+
+>"Causation is for other people... it is very dicey... You know, we have real problems to solve. I can't dick around, frankly, thinking about other things like causation right now."
+>
+>        --Chief Analytics Officer (NYC Mayor's office, 2013?)
+
+![](images/ellie-tweet.png){fig-align=center}
+
+
+## Correlation does not imply causation {.smaller}
+
+. . .
+
+["...but this does not necessarily stop people from drawing causal inferences from correlational staements."](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC10194916/)
+
+. . .
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+**Causal fallacies**:
+
+- Post hoc ergo propter hoc (i.e., "rooster syndrome") 
+  * Does the rooster’s crowing cause the sun to rise?
+  * Coincidental vaccine adverse events
+- Cum hoc ergo propter hoc
+  * Shoe size and reading ability
+  * Ice cream sales and shark attacks
+  * [Spurious correlations by Tyler Vigen](https://www.tylervigen.com/spurious-correlations)
+
+:::
+
+::: {.column width="50%"}
+
+![](images/rock-a-doodle.jpg){width="60%" fig-align=center}
+:::
+
+::::
+
+
+## Some causal fallacies in the wild
+
+![](images/headlines.png)
+
+
+## Customer retention example {.smaller}
+
+- Initial goal is to train a model to predict whether a customer will renew their software subscription (taken from [Lundberg et al. (2021)](https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html))
+- Eight features were identified for predicting retention (`Did.renew`=0/1):
+  1. Customer discount offered upon renewal (`Discount`)
+  2. Ad spending on this type of customer since last renewal (`Ad.spend`)
+  3. Customer’s monthly usage (`Monthly.usage`)
+  4. Time since last upgrade upon renewal (`Last.upgrade`)
+  5. No. bugs reported by customer since last renewal (`Bugs.reported`)
+  6. No. interactions with customer since last renewal (`Interactions`)
+  7. No. sales calls with customer since last renewal (`Sales.calls`)
+  8. Health of regional economy upon renewal (`Economy`)
+
+- 10k total records: 8k for training and 2k for validation
+
+## Interpreting a linear model
+
+Output from an additive logistic regression fit:
+
+```{r retention-logistic-regression}
+#| echo: false
+ret <- read.csv("data/retention.csv")
+set.seed(1011)
+trn.ids <- sample(nrow(ret), size = 8000, replace = FALSE)
+ret.trn <- ret[trn.ids, ]
+ret.trn$Product.need <- NULL
+ret.trn$Bugs.faced <- NULL
+fit <- glm(Did.renew ~ ., data = ret.trn, family = binomial)
+round(summary(fit)$coefficients, digits = 3)
+```
+
+::: {.callout-tip}
+Checking [*variance inflation factor*](https://en.wikipedia.org/wiki/Variance_inflation_factor)s (VIFs) is always a good idea!
+:::
+
+
+
+## Correlation matrix
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| out-width: "100%"
+#| fig-width: 6
+#| fig-asp: 1
+X <- subset(ret.trn, select = -Did.renew)
+corrplot::corrplot(cor(X), method = "ellipse", order = "AOE", type = "upper")
+```
+
+
+## Interpreting an ML model
+
+* No "simple" prediction formula for most black-box models!
+* Usually rely on post-hoc techniques to explain
+* Most of these require good visualizations
+* Readily available in different software (open-source and propprietary)
+* Often misapplied and/or misinterpreted!
+
+
+## Retention example (cont.)
+
+Variable importance scores from an [XGBoost](https://xgboost.readthedocs.io/en/stable/) fit:
+
+```{r variable-importance}
+#| echo: false
+#| fig-align: center
+#| fig-width: 6
+#| fig-asp: 0.618
+bst <- readRDS("data/bst.rds")
+
+shap <- readRDS("data/shap.rds")
+# Use vip to plot SHAP-based VI scores
+vi <- data.frame(
+  "Variable" = colnames(shap),
+  "Importance" = apply(shap, MARGIN = 2, FUN = function(x) mean(abs(x)))
+)
+vi <- tibble::as_tibble(vi)
+class(vi) <- c("vi", class(vi))
+vip(vi, geom = "point") + ylab("Importance (SHAP)") +
+  vip(bst, geom = "point") + ylab("Importance (Gain)")
+```
+
+
+## [Partial dependence (PD) plots](https://christophm.github.io/interpretable-ml-book/pdp.html)
+
+```{r partial-dependence}
+#| echo: false
+#| fig-align: center
+#| fig-width: 6
+#| fig-asp: 0.618
+pds <- readRDS("data/pds.rds")
+pdps <- lapply(pds, FUN = function(p) {
+  autoplot(p) + ylim(0, 1) + ylab("Partial dependence")
+})
+gridExtra::grid.arrange(grobs = pdps, nrow = 2)
+```
+
+
+## Interpreting the PD plots
+
+- `Ad.spend` and `Discount` are important to this (fictional) business because they can be directly manipulated :control_knobs:
+
+. . .
+
+- :raised_hands::tada::partying_face: Hurrah! We can improve retention by
+  * :arrow_up: **Increasing** ad spend 
+  * :arrow_down: **Decreasing** discount amount
+
+. . .
+
+:::{.r-stack}
+ **[NOT SO FAST]{style="color: red;"}!!!**
+:::
+
+
+## The true data generator {.smaller}
+
+$$
+\begin{aligned}
+\mathsf{logit}\left(p\right) = 1.26 &\times \mathtt{Product.need} + \\
+0.56 &\times\mathtt{Monthly.usage} + \\
+0.7 &\times \mathtt{Economy} + \\
+0.35 &\times \mathtt{Discount} + \\
+0.35 &\times \left(1 - \mathtt{Bugs.faced} / 20\right) + \\
+0.035 &\times \mathtt{Sales.calls} + \\
+0.105 &\times \mathtt{Interactions} + \\
+0.7 &\times \left(\mathtt{Last.upgrade} / 4 + 0.25\right)^{-1} + \\
+0 &\times \mathtt{Ad.spend} + \\
+&-3.15 + \epsilon\
+\end{aligned}
+$$
+
+
+## Partial dependence vs. truth! :scream:
+
+PD plot (**black**) vs. true causal relationship ([**red**]{style="color: red;"})
+
+```{r partial-dependence-vs-truth}
+#| echo: false
+#| fig-align: center
+#| fig-width: 6
+#| fig-asp: 0.618
+pds.truth <- readRDS("data/pds_truth.rds")
+pdps.all <- lapply(c(3, 5, 7), FUN = function(i) {
+  autoplot(pds[[i]]) + 
+    geom_line(data = pds.truth[[i]], color = "red") +
+    ylim(0, 1) + 
+    ylab("Partial dependence")
+})
+gridExtra::grid.arrange(grobs = pdps.all, nrow = 1)
+```
+
+
+## Even the experts slip up!
+
+![](images/sorry.png)
+
+[Statistical Learning with Big Data](https://www.youtube.com/watch?v=0EWJZIC4JxA) (fantastic talk!)
+
+
+## So now what?
+
+. . .
+
+</br>
+
+:::{.r-stack}
+**Causal interpretation requires a [causal model](https://en.wikipedia.org/wiki/Causal_model)!!**
+:::
+
+</br> 
+
+. . .
+
+::: {.callout-tip}
+## Watch the first talk by Peter Tennant!
+[Interpretable Machine Learning & Causal Inference Workshop
+](https://www.youtube.com/watch?v=0S8LZUxi0eg)
+:::
+
+{{< video https://youtu.be/0S8LZUxi0eg?si=_vYsI49QjFqr-xWJ >}}
+
+
+## [Directed asyclic graph](https://en.wikipedia.org/wiki/Directed_acyclic_graph)s (DAGs)
+
+* Useful for representing causal relationships and assumptions 
+  - **[Directed]{style="color: cornflowerblue;"}**: One-sided arrows (&rarr;) connect (assumed) causes and effects
+  - **[Asyclic]{style="color: cornflowerblue;"}**: no directed path can form a closed loop
+* Help determine whether the effect(s) of interest *can* be estimated from available data
+* Based on strong assumptions that are often unverifiable
+
+
+## DAGs in machine learning
+
+Assume we have five features (`X1`--`X5`) and a response (`Y`). Causally interpreting an ML model assumes a very particular DAG!
+
+:::: {.columns}
+
+::: {.column width="50%"}
+**[How your algorithm sees it]{style="color: red;"}**:
+
+```{mermaid}
+%%| fig-align: center
+flowchart TB
+  X1 --> Y
+  X2 --> Y
+  X3 --> Y
+  X4 --> Y
+  X5 --> Y
+```
+:::
+
+::: {.column width="50%"}
+**[How the universe works]{style="color: forestgreen;"}**:
+
+```{mermaid}
+%%| fig-align: center
+flowchart TB
+  X1 --> X3
+  X1 --> Y
+  X2 --> X3
+  X2 --> Y
+  X3 --> X4
+  X3 --> Y
+  X4 --> Y
+  X5 --> Y
+```
+:::
+
+::::
+
+
+## Estimation and confounding {.smaller}
+
+* In causal inference, a common goal is to estimate the average (caual) effect of some "treatment" on an outcome of interest (e.g., effect of an ad campaign on sales)
+
+  - When the treatment is binary, the effect estimate is referred to as the [*average treatment effect*](https://en.wikipedia.org/wiki/Average_treatment_effect) (ATE)
+
+* Estimation typically requires [adjusting (and not adjusting) for certain variables](https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf)
+
+* A *confounder* is a variable that effects both the treatment and outcome
+
+  - Confounders must be identified, measured, and appropriately adjusted for in the analysis
+
+* Need to be careful with other [covariate roles](https://dagitty.net/learn/graphs/roles.html), like [*colliders*](https://en.wikipedia.org/wiki/Collider_(statistics)), *mediators*, etc. 
+
+
+## Adjustment sets are key
+
+```{mermaid}
+%%| fig-align: center
+flowchart LR
+  X1 --> X3
+  X1 --> Y
+  X2 --> X3
+  X2 --> Y
+  X3 --> X4
+  X3 --> Y
+  X4 --> Y
+  X5 --> Y
+```
+
+- Minimal sufficient adjustment set for estimating 
+
+  * *[Total effect]{style="color: forestgreen;"}* of `X3` on `Y`: {`X1`, `X2`}
+  * *[Direct effect]{style="color: forestgreen;"}* of `X3` on `Y`: {`X1`, `X2`, `X4`}
+
+
+- Tools like [DAGitty](https://www.dagitty.net/) can help automate this!
+
+
+## [DAGitty](https://www.dagitty.net/) (copy and paste)
+
+```
+dag {
+bb="0,0,1,1"
+X1 [pos="0.462,0.332"]
+X2 [pos="0.425,0.238"]
+X3 [exposure,pos="0.532,0.277"]
+X4 [pos="0.529,0.396"]
+X5 [pos="0.363,0.416"]
+Y [outcome,pos="0.439,0.464"]
+X1 -> X3
+X1 -> Y
+X2 -> X3
+X2 -> Y
+X3 -> X4
+X3 -> Y
+X4 -> Y
+X5 -> Y
+}
+```
+
+
+## Useful resources
+
+![](images/ci-books.png){width="100%" fig-align=center}
+
+
+## Retention example (cont.)
+
+Assume strong domain expertise has allowed us to generate [the following DAG]((https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html)): 
+
+![](images/dag.svg){width="80%" fig-align=center}
+
+
+## Retention example (cont.) {.smaller}
+
+Can we interpret any of the PD plots causally?
+
+. . .
+
+Maybe for `Economy`?!
+
+::: {.panel-tabset}
+
+### PD plot
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-width: 6
+#| fig-asp: 0.618
+autoplot(pds[[3L]]) + ylim(0, 1) +
+    geom_line(data = pds.truth[[3]], color = "red") +
+    ylim(0, 1) + 
+    ylab("Partial dependence")
+```
+
+### Pearson correlations
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-width: 6
+#| fig-asp: 0.618
+corrplot::corrplot(cor(X))
+```
+
+:::
+
+
+---
+
+### "[Causal Interpretations of Black-Box Models](https://www.tandfonline.com/doi/full/10.1080/07350015.2019.1624293?scroll=top&needAccess=true)"
+
+</br>
+
+![](images/article.png){width="100%" fig-align=center}
+
+
+## Mathematical background 
+
+The [partial dependence](https://projecteuclid.org/journals/annals-of-statistics/volume-29/issue-5/Greedy-function-approximation-A-gradient-boosting-machine/10.1214/aos/1013203451.full) (PD) of $Y$ on $X_S$ is defined as
+
+$$
+\begin{aligned}
+g_s\left(x_s\right) &= E_{X_c}\left[g\left(x_s, X_c\right)\right] \\
+&= \int g\left(x_S, x_C\right) dP\left(x_C\right) \\
+&\approx \frac{1}{N}\sum_{i=1}^N g\left(x_S, X_{iC}\right)
+\end{aligned}
+$$
+
+. . .
+
+* This is the same as [Pearl's *back-door adjustment formula*](https://projecteuclid.org/journals/statistical-science/volume-8/issue-3/Bayesian-Analysis-in-Expert-Systems--Comment--Graphical-Models/10.1214/ss/1177010894.full)
+
+* Under _**certain conditions**_, PD plots can be interpreted causally!
+
+
+## Retention example (cont.)
+
+Using another XGBoost model, here's the estimated PD of `Did.renew` on `Ad.spend`, conditional on `Monthly.usage` and `Last.upgrade`: ... :drum:
+
+. . .
+
+```{r adjusted-partial-dependence}
+#| echo: false
+#| fig-align: center
+#| fig-width: 6
+#| fig-asp: 0.618
+pd_ad <- readRDS("data/pd_ad_adjusted.rds")
+autoplot(pd_ad) + ylim(0, 1) + 
+  ylab("Partial dependence") #+ ggtitle("Adjusted RFO")
+```
+
+. . .
+
+Ummm ... maybe a case of *estimand* vs. *estimate*? :thinking:
+
+
+## Stop permuting features?! :scream: {.smaller}
+
+![](images/stop-permuting.png){fig-align="center"}
+
+> ...PaP metrics can vastly over-emphasize correlated features in both variable importance measures and partial dependence plots.
+
+
+## Retention example (cont.)
+
+```{r retention-splom}
+#| echo: false
+#| fig-align: center
+#| fig-width: 6
+#| fig-asp: 0.618
+samp <- readRDS("/Users/bgreenwell/Dropbox/talks/dagnammit/data/samp.rds")
+palette("Okabe-Ito")
+pairs(samp, col = adjustcolor(ret.trn$Did.renew + 1, alpha.f = 0.4))
+palette("default")
+```
+
+
+## Double/debiased machine learning
+
+Given a causal model, double ML *[essentially](https://docs.doubleml.org/stable/workflow/workflow.html)* involves three steps:
+
+1) Predict the outcome ($y$) from an [appropriate adjustment set]{style="color: forestgreen;"} and get the residuals ($r_y$)
+
+2) Predict the treatment ($x$) from an [appropriate adjustment set]{style="color: green;"} and get the residuals ($r_x$)
+
+3) *Regress* $r_y$ on $r_x$ to create a model of the heterogeneous treatment effect
+
+
+
+## Double ML for `Ad.spend`
+
+::: {.panel-tabset}
+
+### R code
+
+```{r ad-spend-dml-code}
+#| eval: false
+#| echo: true
+dml_data <- DoubleML::DoubleMLData$new(
+  data = ret.trn,                              # training data
+  y_col = "Did.renew",                         # response
+  d_cols = "Ad.spend",                         # treatment
+  x_cols = c("Last.upgrade", "Monthly.usage")  # adjustment set
+)
+lrnr <- mlr3::lrn("regr.ranger", num.trees = 500)
+set.seed(1810)  # for reproducibility
+dml_plr = DoubleML::DoubleMLPLR$new(
+  dml_data, ml_l = lrnr$clone(), ml_m = lrnr$clone()
+)
+dml_plr$fit()
+```
+
+### Results
+
+```{r ad-spend-dml-results}
+#| eval: false
+#| echo: true
+# Print results
+print(dml_plr)
+# ------------------ Fit summary       ------------------
+#   Estimates and significance testing of the effect of target variables
+#          Estimate. Std. Error t value Pr(>|t|)
+# Ad.spend  -0.09634    0.25197  -0.382    0.702
+
+# Compute 95% confidence interval
+print(dml_plr$confint())
+#               2.5 %   97.5 %
+# Ad.spend -0.5901917 0.397511
+```
+
+:::
+
+
+## Challenges with DAG-based inference
+
+* Faithful DAGs seem hard to come by
+  - What if you have 800 potential features?
+  - Is the right domain expertise even available?
+* What about unmeasured confounders?
+* DAGs are based on strong (and often unverifiable) assumptions
+* Oftentimes multiple reasonable DAGs will exist 
+  - [Sensitivity analysis](https://cran.r-project.org/package=causalsens)!
+
+
+## Designed experiments
+
+* [RCT](https://en.wikipedia.org/wiki/Randomized_controlled_trial)s are arguably still the gold standard, but ...
+  - :innocent: There can be ethical concerns
+  - :moneybag: Can be expensive to implement
+
+However...
+
+. . .
+
+::: {.callout-tip}
+Responsible, transparent use of machine learning can help narrow down the hypothesis space!
+:::
+
+
+## Ingot cracking example
+
+I'm reminded of an old (but still fantastic) [data mining lecture from Richard De Veaux](https://www.youtube.com/watch?v=mgNI8Gloass) (skip to the 44:30 mark)
+
+* 20,000 lb. ingots made in a giant mold
+* Roughtly 25% of ingots develop cracks
+* Cracked ingots cost $30,000 to recast
+* Roughly 900 observations (ingots) on 149 variables
+* What's **causing** them to crack?
+
+![](images/ingot.jpg){width="50%" fig-align="center"}
+
+
+## Ingot cracking example (cont.)
+
+![](images/ingot-tree.png){width="50%" fig-align="center"}
+
+* Lots of iterations, but... "Looks like Chrome(!?)"
+* :detective: A [glass]{style="color: dodgerblue;"}-box model gave clues for generating a hypothesis (i.e., which variable to focus on)
+* [Follow-up randomized experiments led to substantial improvement!]{style="color: forestgreen;"}
+
+
+## Adding constraints (where feasible)
+
+* Often useful to constrain the functional form of the model in some way
+
+  - Business considerations
+  - Domain knowledge
+
+* Enforcing sparsity (e.g., [EBMs with Sparsity](https://arxiv.org/abs/2311.07452))
+* [Enforcing monotonicty](https://xgboost.readthedocs.io/en/latest/tutorials/monotonic.html) between features and the *predicted output* can be done in several ways during training (e.g., linear and tree-based models)
+
+  - Can also be accomplished through [*model editing*](https://dl.acm.org/doi/10.1145/3534678.3539074)
+
+
+## Pneumonia example
+
+* Data contains 46 features on 14199 pneumonia patients
+  - Patient demographics (e.g., age)
+  - :triangular_ruler: Various measuremnts (e.g., heart rate)
+  - :microscope: Lab test results (e.g., WBC) 
+  - :x_ray: Chest x-ray results (e.g., pleural effusion) 
+* Too many to construct a useful DAG?
+* Goal is to predict probability of death (0/1)
+* Data from [Caruana et al. (2015)](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/06/KDD2015FinalDraftIntelligibleModels4HealthCare_igt143e-caruanaA.pdf) and [Wang et al. (2022)](https://dl.acm.org/doi/10.1145/3534678.3539074)
+
+
+## Pneumonia example (cont.)
+
+Living past 100 decreases risk?
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-width: 6
+#| fig-asp: 0.618
+pneumonia <- jsonlite::read_json("data/pneumonia-model.json")
+age <- pneumonia$features[[1L]]
+x <- unlist(age$binEdge)
+y <- unlist(age$additive)
+y <- c(y, y[length(y)])
+plot(x, y, 
+  type = "s", ylim = c(-1, 1), las = 1, 
+  xlab = "Age (years)",
+  ylab = "Predicted risk"
+)
+```
+
+
+## Pneumonia example (cont.)
+
+Adding monotonic constraints can be helpful!
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-width: 6
+#| fig-asp: 0.618
+y.edit <- y
+y.edit[81:85] <- 0.4574
+plot(x, y.edit, 
+  type = "s", ylim = c(-1, 1), las = 1, 
+  xlab = "Age (years)",
+  ylab = "Predicted risk"
+)
+```
+
+
+## Pneumonia example (cont.)
+
+Having asthma lowers a patient’s risk of dying from pneumonia?
+
+```{r}
+#| echo: false
+#| fig-align: center
+#| fig-width: 6
+#| fig-asp: 0.618
+pneumonia <- jsonlite::read_json("data/pneumonia-model.json")
+asm <- pneumonia$features[[6L]]
+res <- data.frame(x = c("No", "Yes"), y = unlist(asm$additive))
+#x <- unlist(diab$additive)
+#names(x) <- c("No", "Yes")
+#dotchart(x)
+ggplot(res, mapping = aes(x = x, y = y)) +
+  #geom_point(size = 3) + 
+  geom_col() +
+  geom_hline(yintercept = 0) +
+  ylim(-0.25, 0.25) +
+  xlab("Asthma") +
+  ylab("Predicted risk")
+```
+
+
+## Pneumonia example (cont.)
+
+According to the doctors, asthmatic patients (`A`) would likely receive better care earlier (`T`): 
+
+```{dot pneumonia-dag}
+digraph G {
+  layout=neato
+  node [shape=circle] A; D;
+  node [shape=circle, style="dashed", color="red"] T;
+  A -> T;
+  A -> D;
+  T -> D;
+}
+```
+
+
+## Pneumonia example (cont.)
+
+* If we use the model as is to make hospital admission decisions, asthmatic patients are likely to miss out on care they need 
+* Interpretability and causal knowledge can help identify such dangerous patterns and improve the model:
+  - Force monotonicity (e.g., `A` > `!A`)
+  - Remove the asthma feature
+  - Edit the effect out :scream:
+
+
+## [GAM Changer](https://interpret.ml/gam-changer/)
+
+![](https://user-images.githubusercontent.com/15007159/184291928-c675b83e-be82-4206-bd30-47dc93008fec.gif){fig-align="center"}
+
+
+## Causal discovery? :thinking:
+
+![](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3QzZHJ0aWp6cTF0N2EzNGpkcHQwZW8xM3NlaGk5NjFoank2NjR1cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SaKvh2fShKr1hYZssC/giphy.gif)
+
+
+## Key takeaways {.smaller}
+
+* ML is great at identifying and utilizing patterns and associations in data to make predictions
+
+* Causal knowledge can be used to improve models!
+
+* Some quotes I like from [Becoming A Data Head](https://www.amazon.com/Becoming-Data-Head-Understand-Statistics/dp/1119741742):
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+>"There are clever ways to use observational data to suggest some causal relationships. [They ALL] rely on strong assumptions and clever statistics."
+
+>"Any claims of causality with observational data should be met with skeptimicism."
+
+:::
+
+::: {.column width="50%"}
+![](images/data-head.jpg){width="70%"}
+
+:::
+::::
+
+
+## Questions? :raising_hand:
+
+![](https://imgs.xkcd.com/comics/correlation.png)
+
+Source: [xkcd comic](https://xkcd.com/552/)
