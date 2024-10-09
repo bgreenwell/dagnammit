@@ -18,7 +18,7 @@
     "href": "dagnammit.html#levels-and-methods-of-explainability",
     "title": "DAG Nammit",
     "section": "Levels and methods of explainability",
-    "text": "Levels and methods of explainability\n\n\nLevels of explainability\n\nGlobal\n\nWhich variables seem “important?” (vip)\nHow does each feature impact the model’s predictions? (pdp)\n\nLocal\n\nExplaining individual predictions (fastshap)\n\n\n\nMethods of explainability\n\nModel-specific\n\nModel coefficients\nInspect tree structure 🌲\n\nModel-agnostic\n\nCan be applied to any prediction model ⚠️"
+    "text": "Levels and methods of explainability\n\n\nLevels of explainability\n\nGlobal\n\nWhich variables seem “important” and how do they impact the model’s predictions?\n\nLocal\n\nExplaining individual predictions\n\n\n\nMethods of explainability\n\nModel-specific\n\nModel coefficients\nInspect tree structure 🌲\n\nModel-agnostic\n\nCan be applied to any prediction model ⚠️"
   },
   {
     "objectID": "dagnammit.html#black-box-vs.-glass-box-models",
@@ -42,25 +42,18 @@
     "text": "Useful resources"
   },
   {
-    "objectID": "dagnammit.html#the-problem-with-observational-data",
-    "href": "dagnammit.html#the-problem-with-observational-data",
+    "objectID": "dagnammit.html#so-whats-the-problem-with-causally-interpreting-predictive-models",
+    "href": "dagnammit.html#so-whats-the-problem-with-causally-interpreting-predictive-models",
     "title": "DAG Nammit",
-    "section": "The problem with observational data…",
-    "text": "The problem with observational data…"
-  },
-  {
-    "objectID": "dagnammit.html#causation-is-a-controversial-topic",
-    "href": "dagnammit.html#causation-is-a-controversial-topic",
-    "title": "DAG Nammit",
-    "section": "Causation is a controversial topic",
-    "text": "Causation is a controversial topic\n\n“Causation is for other people… it is very dicey… You know, we have real problems to solve. I can’t dick around, frankly, thinking about other things like causation right now.”\n   --Chief Analytics Officer (NYC Mayor's office, 2013?)"
+    "section": "So what’s the problem with causally interpreting predictive models?",
+    "text": "So what’s the problem with causally interpreting predictive models?\n\n\n\n\n\n\n\nImportant\n\n\nMachine learning is often applied to observational or happenstance data!"
   },
   {
     "objectID": "dagnammit.html#correlation-does-not-imply-causation",
     "href": "dagnammit.html#correlation-does-not-imply-causation",
     "title": "DAG Nammit",
-    "section": "Correlation does not imply causation",
-    "text": "Correlation does not imply causation\n\n“…but this does not necessarily stop people from drawing causal inferences from correlational staements.”\n\n\n\n\nCausal fallacies:\n\nPost hoc ergo propter hoc (i.e., “rooster syndrome”)\n\nDoes the rooster’s crowing cause the sun to rise?\nCoincidental vaccine adverse events\n\nCum hoc ergo propter hoc\n\nShoe size and reading ability\nIce cream sales and shark attacks\nSpurious correlations by Tyler Vigen"
+    "section": "Correlation does not imply causation 🙄",
+    "text": "Correlation does not imply causation 🙄\n\n“…but this does not necessarily stop people from drawing causal inferences from correlational staements.”\n\n\n\n\nSome common causal fallacies:\n\nPost hoc ergo propter hoc (i.e., “rooster syndrome”)\n\nDoes the rooster’s crowing cause the sun to rise?\nCoincidental vaccine adverse events\n\nCum hoc ergo propter hoc\n\nShoe size and reading ability\nIce cream sales and shark attacks\nSpurious correlations by Tyler Vigen"
   },
   {
     "objectID": "dagnammit.html#some-causal-fallacies-in-the-wild",

@@ -109,10 +109,9 @@ Some books :books: :
 [**Levels of explainability**]{style="color: forestgreen;"}
 
 * Global
-  - [Which variables seem "important?"](https://journal.r-project.org/archive/2020/RJ-2020-013/index.html) ([vip](https://cran.r-project.org/package=vip))
-  - [How does each feature impact the model's predictions?](https://journal.r-project.org/archive/2017/RJ-2017-016/index.html) ([pdp](https://cran.r-project.org/package=pdp))
+  - [Which variables seem "important"](https://journal.r-project.org/archive/2020/RJ-2020-013/index.html) and [how do they impact the model's predictions?](https://journal.r-project.org/archive/2017/RJ-2017-016/index.html) 
 * Local
-  - Explaining individual predictions ([fastshap](https://cran.r-project.org/package=fastshap))
+  - Explaining individual predictions 
 
 :::
 
@@ -178,21 +177,18 @@ Some books :books: :
 ![](images/iml-books.png){width="100%" fig-align=center}
 
 
-## The problem with observational data...
+## So what's the problem with causally interpreting predictive models?
+
+. . .
+
+::: {.callout-important}
+Machine learning is often applied to *observational* or *happenstance* data!
+:::
 
 {{< video https://www.youtube.com/embed/ntnalq-2nNU?si=VmgMiBQmFxQr4eOC >}}
 
 
-## Causation is a controversial topic 
-
->"Causation is for other people... it is very dicey... You know, we have real problems to solve. I can't dick around, frankly, thinking about other things like causation right now."
->
->        --Chief Analytics Officer (NYC Mayor's office, 2013?)
-
-![](images/ellie-tweet.png){fig-align=center}
-
-
-## Correlation does not imply causation {.smaller}
+## Correlation does not imply causation :roll_eyes: {.smaller}
 
 . . .
 
@@ -204,12 +200,12 @@ Some books :books: :
 
 ::: {.column width="50%"}
 
-**Causal fallacies**:
+**Some common causal fallacies**:
 
-- Post hoc ergo propter hoc (i.e., "rooster syndrome") 
+- [Post hoc ergo propter hoc](https://en.wikipedia.org/wiki/Post_hoc_ergo_propter_hoc) (i.e., "rooster syndrome") 
   * Does the rooster’s crowing cause the sun to rise?
   * Coincidental vaccine adverse events
-- Cum hoc ergo propter hoc
+- [Cum hoc ergo propter hoc](https://en.wikipedia.org/wiki/Correlation_does_not_imply_causation#General_pattern)
   * Shoe size and reading ability
   * Ice cream sales and shark attacks
   * [Spurious correlations by Tyler Vigen](https://www.tylervigen.com/spurious-correlations)
