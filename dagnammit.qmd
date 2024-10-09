@@ -169,7 +169,7 @@ Some books :books: :
 
 - In essense: "[interpretability]{style="color: darkorange;"} > [explainability]{style="color: darkorange;"}"
 
-- Definitions vary across the literature and I tend to use these two synonymously!
+- These definitions vary across the literature and I tend to use them synonymously!
 
 
 ## Useful resources
@@ -177,7 +177,7 @@ Some books :books: :
 ![](images/iml-books.png){width="100%" fig-align=center}
 
 
-## So what's the problem with causally interpreting predictive models?
+## So what's the problem(s) with causally interpreting predictive models?
 
 . . .
 
@@ -188,7 +188,7 @@ Machine learning is often applied to *observational* or *happenstance* data!
 {{< video https://www.youtube.com/embed/ntnalq-2nNU?si=VmgMiBQmFxQr4eOC >}}
 
 
-## Correlation does not imply causation :roll_eyes: {.smaller}
+## Correlation doesn't imply causation :roll_eyes: {.smaller}
 
 . . .
 
@@ -583,7 +583,6 @@ The [partial dependence](https://projecteuclid.org/journals/annals-of-statistics
 $$
 \begin{aligned}
 g_s\left(x_s\right) &= E_{X_c}\left[g\left(x_s, X_c\right)\right] \\
-&= \int g\left(x_S, x_C\right) dP\left(x_C\right) \\
 &\approx \frac{1}{N}\sum_{i=1}^N g\left(x_S, X_{iC}\right)
 \end{aligned}
 $$
@@ -597,7 +596,7 @@ $$
 
 ## Retention example (cont.)
 
-Using another XGBoost model, here's the estimated PD of `Did.renew` on `Ad.spend`, conditional on `Monthly.usage` and `Last.upgrade`: ... :drum:
+PD of `Did.renew` on `Ad.spend`, adjusted for only `Monthly.usage` and `Last.upgrade`: ... :drum:
 
 . . .
 
@@ -839,11 +838,11 @@ According to the doctors, asthmatic patients (`A`) would likely receive better c
 ```{dot pneumonia-dag}
 digraph G {
   layout=neato
-  node [shape=circle] A; D;
+  node [shape=circle] A; R;
   node [shape=circle, style="dashed", color="red"] T;
   A -> T;
-  A -> D;
-  T -> D;
+  A -> R;
+  T -> R;
 }
 ```
 
@@ -867,7 +866,7 @@ digraph G {
 ![](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3QzZHJ0aWp6cTF0N2EzNGpkcHQwZW8xM3NlaGk5NjFoank2NjR1cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SaKvh2fShKr1hYZssC/giphy.gif)
 
 
-## Key takeaways {.smaller}
+## Key :key: takeaways {.smaller}
 
 * ML is great at identifying and utilizing patterns and associations in data to make predictions
 

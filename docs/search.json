@@ -32,7 +32,7 @@
     "href": "dagnammit.html#interpretability-vs.-explainability",
     "title": "DAG Nammit",
     "section": "Interpretability vs. explainability",
-    "text": "Interpretability vs. explainability\n\nExplainable machine learning: “use of post hoc methods to understand how a model makes predictions”\n\n\n\nInterpretable machine learning: “the ability to explain or to present in understandable terms to a human.”\n\n\n\n\nIn essense: “interpretability &gt; explainability”\nDefinitions vary across the literature and I tend to use these two synonymously!"
+    "text": "Interpretability vs. explainability\n\nExplainable machine learning: “use of post hoc methods to understand how a model makes predictions”\n\n\n\nInterpretable machine learning: “the ability to explain or to present in understandable terms to a human.”\n\n\n\n\nIn essense: “interpretability &gt; explainability”\nThese definitions vary across the literature and I tend to use them synonymously!"
   },
   {
     "objectID": "dagnammit.html#useful-resources",
@@ -42,18 +42,18 @@
     "text": "Useful resources"
   },
   {
-    "objectID": "dagnammit.html#so-whats-the-problem-with-causally-interpreting-predictive-models",
-    "href": "dagnammit.html#so-whats-the-problem-with-causally-interpreting-predictive-models",
+    "objectID": "dagnammit.html#so-whats-the-problems-with-causally-interpreting-predictive-models",
+    "href": "dagnammit.html#so-whats-the-problems-with-causally-interpreting-predictive-models",
     "title": "DAG Nammit",
-    "section": "So what’s the problem with causally interpreting predictive models?",
-    "text": "So what’s the problem with causally interpreting predictive models?\n\n\n\n\n\n\n\nImportant\n\n\nMachine learning is often applied to observational or happenstance data!"
+    "section": "So what’s the problem(s) with causally interpreting predictive models?",
+    "text": "So what’s the problem(s) with causally interpreting predictive models?\n\n\n\n\n\n\n\nImportant\n\n\nMachine learning is often applied to observational or happenstance data!"
   },
   {
-    "objectID": "dagnammit.html#correlation-does-not-imply-causation",
-    "href": "dagnammit.html#correlation-does-not-imply-causation",
+    "objectID": "dagnammit.html#correlation-doesnt-imply-causation",
+    "href": "dagnammit.html#correlation-doesnt-imply-causation",
     "title": "DAG Nammit",
-    "section": "Correlation does not imply causation 🙄",
-    "text": "Correlation does not imply causation 🙄\n\n“…but this does not necessarily stop people from drawing causal inferences from correlational staements.”\n\n\n\n\nSome common causal fallacies:\n\nPost hoc ergo propter hoc (i.e., “rooster syndrome”)\n\nDoes the rooster’s crowing cause the sun to rise?\nCoincidental vaccine adverse events\n\nCum hoc ergo propter hoc\n\nShoe size and reading ability\nIce cream sales and shark attacks\nSpurious correlations by Tyler Vigen"
+    "section": "Correlation doesn’t imply causation 🙄",
+    "text": "Correlation doesn’t imply causation 🙄\n\n“…but this does not necessarily stop people from drawing causal inferences from correlational staements.”\n\n\n\n\nSome common causal fallacies:\n\nPost hoc ergo propter hoc (i.e., “rooster syndrome”)\n\nDoes the rooster’s crowing cause the sun to rise?\nCoincidental vaccine adverse events\n\nCum hoc ergo propter hoc\n\nShoe size and reading ability\nIce cream sales and shark attacks\nSpurious correlations by Tyler Vigen"
   },
   {
     "objectID": "dagnammit.html#some-causal-fallacies-in-the-wild",
@@ -200,14 +200,14 @@
     "href": "dagnammit.html#mathematical-background",
     "title": "DAG Nammit",
     "section": "Mathematical background",
-    "text": "Mathematical background\nThe partial dependence (PD) of \\(Y\\) on \\(X_S\\) is defined as\n\\[\n\\begin{aligned}\ng_s\\left(x_s\\right) &= E_{X_c}\\left[g\\left(x_s, X_c\\right)\\right] \\\\\n&= \\int g\\left(x_S, x_C\\right) dP\\left(x_C\\right) \\\\\n&\\approx \\frac{1}{N}\\sum_{i=1}^N g\\left(x_S, X_{iC}\\right)\n\\end{aligned}\n\\]\n\n\nThis is the same as Pearl’s back-door adjustment formula\nUnder certain conditions, PD plots can be interpreted causally!"
+    "text": "Mathematical background\nThe partial dependence (PD) of \\(Y\\) on \\(X_S\\) is defined as\n\\[\n\\begin{aligned}\ng_s\\left(x_s\\right) &= E_{X_c}\\left[g\\left(x_s, X_c\\right)\\right] \\\\\n&\\approx \\frac{1}{N}\\sum_{i=1}^N g\\left(x_S, X_{iC}\\right)\n\\end{aligned}\n\\]\n\n\nThis is the same as Pearl’s back-door adjustment formula\nUnder certain conditions, PD plots can be interpreted causally!"
   },
   {
     "objectID": "dagnammit.html#retention-example-cont.-3",
     "href": "dagnammit.html#retention-example-cont.-3",
     "title": "DAG Nammit",
     "section": "Retention example (cont.)",
-    "text": "Retention example (cont.)\nUsing another XGBoost model, here’s the estimated PD of Did.renew on Ad.spend, conditional on Monthly.usage and Last.upgrade: … 🥁\n\n\n\n\n\n\n\n\n\n\n\n\nUmmm … maybe a case of estimand vs. estimate? 🤔"
+    "text": "Retention example (cont.)\nPD of Did.renew on Ad.spend, adjusted for only Monthly.usage and Last.upgrade: … 🥁\n\n\n\n\n\n\n\n\n\n\n\n\nUmmm … maybe a case of estimand vs. estimate? 🤔"
   },
   {
     "objectID": "dagnammit.html#stop-permuting-features",
@@ -305,7 +305,7 @@
     "href": "dagnammit.html#pneumonia-example-cont.-3",
     "title": "DAG Nammit",
     "section": "Pneumonia example (cont.)",
-    "text": "Pneumonia example (cont.)\nAccording to the doctors, asthmatic patients (A) would likely receive better care earlier (T):\n\n\n\n\n\n\n\nG\n\n\n\nA\n\nA\n\n\n\nD\n\nD\n\n\n\nA-&gt;D\n\n\n\n\n\nT\n\nT\n\n\n\nA-&gt;T\n\n\n\n\n\nT-&gt;D"
+    "text": "Pneumonia example (cont.)\nAccording to the doctors, asthmatic patients (A) would likely receive better care earlier (T):\n\n\n\n\n\n\n\nG\n\n\n\nA\n\nA\n\n\n\nR\n\nR\n\n\n\nA-&gt;R\n\n\n\n\n\nT\n\nT\n\n\n\nA-&gt;T\n\n\n\n\n\nT-&gt;R"
   },
   {
     "objectID": "dagnammit.html#pneumonia-example-cont.-4",
@@ -332,8 +332,8 @@
     "objectID": "dagnammit.html#key-takeaways",
     "href": "dagnammit.html#key-takeaways",
     "title": "DAG Nammit",
-    "section": "Key takeaways",
-    "text": "Key takeaways\n\nML is great at identifying and utilizing patterns and associations in data to make predictions\nCausal knowledge can be used to improve models!\nSome quotes I like from Becoming A Data Head:\n\n\n\n\n“There are clever ways to use observational data to suggest some causal relationships. [They ALL] rely on strong assumptions and clever statistics.”\n\n\n“Any claims of causality with observational data should be met with skeptimicism.”"
+    "section": "Key 🔑 takeaways",
+    "text": "Key 🔑 takeaways\n\nML is great at identifying and utilizing patterns and associations in data to make predictions\nCausal knowledge can be used to improve models!\nSome quotes I like from Becoming A Data Head:\n\n\n\n\n“There are clever ways to use observational data to suggest some causal relationships. [They ALL] rely on strong assumptions and clever statistics.”\n\n\n“Any claims of causality with observational data should be met with skeptimicism.”"
   },
   {
     "objectID": "dagnammit.html#questions",
