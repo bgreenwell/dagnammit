@@ -52,27 +52,23 @@ Sorry not sorry for the overuse of emojis ... :gorilla: :dash:
 :::: {.columns}
 
 ::: {.column width="50%"}
-- B.S. and M.S. in Applied Statistics (WSU)
-- Ph.D. in Applied Matehmatics (AFIT)
-- Director, Data Science at 84.51˚ 
-- Current UC LCB adjunct :man_teacher: (~7 years)
-
-Some R packages :package: :
-
-- [pdp](https://CRAN.R-project.org/package=pdp) (partial dependence plots)
-- [vip](https://CRAN.R-project.org/package=vip) (variable importance plots)
-- [fastshap](https://CRAN.R-project.org/package=fastshap) (faster SHAP values)
-
-Some books :books: :
-
-- [Hands-On Machine Learning with R](https://bradleyboehmke.github.io/HOML/) 
-- [Tree-Based Methods for Statistical Learning](https://www.routledge.com/Tree-Based-Methods-for-Statistical-Learning-in-R/Greenwell/p/book/9780367532468?srsltid=AfmBOoq9xbq6yMdXzO2BUsLfLVm0XyVDFyFmqu4sh5xkCcZBLXMUZ4jI)
+- :man_student: B.S. & M.S. in Applied Statistics ([WSU](https://www.wright.edu/))
+- :man_student: Ph.D. in Applied Matehmatics ([AFIT](https://www.afit.edu/))
+- :clapper: Director, Data Science at [84.51˚](https://www.8451.com/) 
+- :man_teacher: UC LCB adjunct (~7 years)
+- Some R packages :package: :
+  - [pdp](https://CRAN.R-project.org/package=pdp) (partial dependence plots)
+  - [vip](https://CRAN.R-project.org/package=vip) (variable importance plots)
+  - [fastshap](https://CRAN.R-project.org/package=fastshap) (faster SHAP values)
+- Some books :books: :
+  - [Hands-On Machine Learning with R](https://bradleyboehmke.github.io/HOML/) 
+  - [Tree-Based Methods for Statistical Learning](https://www.routledge.com/Tree-Based-Methods-for-Statistical-Learning-in-R/Greenwell/p/book/9780367532468?srsltid=AfmBOoq9xbq6yMdXzO2BUsLfLVm0XyVDFyFmqu4sh5xkCcZBLXMUZ4jI)
 :::
 
 ::: {.column width="50%"}
-![](images/logos.png){width="60%" fig-align=center}
+![](images/logos.png){width="50%" fig-align=center}
 
-![](images/books.png){width="60%" fig-align=center}
+![](images/books.png){width="50%" fig-align=center}
 :::
 
 ::::
@@ -93,83 +89,36 @@ Some books :books: :
 
 :::
 
-::: {.column width="40%"}
-![](images/netflix.png)
+::: {.column width="50%"}
+![](images/netflix.png){width="70%" fig-align=center}
 :::
 
 ::::
 
 
-## Levels and methods of explainability
+## Interpretability in a nutshell :peanuts:
 
-
-:::: {.columns}
-
-::: {.column width="50%"}
-[**Levels of explainability**]{style="color: forestgreen;"}
-
-* Global
-  - [Which variables seem "important"](https://journal.r-project.org/archive/2020/RJ-2020-013/index.html) and [how do they impact the model's predictions?](https://journal.r-project.org/archive/2017/RJ-2017-016/index.html) 
-* Local
-  - Explaining individual predictions 
-
-:::
-
-::: {.column width="50%"}
-[**Methods of explainability**]{style="color: forestgreen;"}
-
-* Model-specific
-  - Model coefficients
-  - Inspect tree structure :evergreen_tree:
-* Model-agnostic 
-  - Can be applied to any prediction model :warning:
+* "[*Interpretability*]{style="color: cornflowerblue;"} &#8834; [*Explainability*]{style="color: cornflowerblue;"}"
+* Global vs. local explainability
+* :black_medium_square:**Black**-box vs. :window:**[glass]{style="color: dodgerblue;"}**-box models
+* :warning: [Model-agnostic](https://christophm.github.io/interpretable-ml-book/agnostic.html) :warning: vs. [model-specific](https://christophm.github.io/interpretable-ml-book/simple.html) techniques
+* [*Multicollinearity*](https://en.wikipedia.org/wiki/Multicollinearity) is the nemesis of interpretability!
 * :technologist: **Lots of good software**!
-:::
-
-::::
-
-
-## Black-box vs. [glass]{style="color: dodgerblue;"}-box models {.smaller}
 
 :::: {.columns}
 
-::: {.column width="50%"}
-**Black**-box models :black_large_square::
-
-* Often require (expensive) post-hoc techniques that require additional assumptions to explain
-  - :eyes: Looking at you permutation methods! :smirk:
-* Often misleading without proper constraints (e.g., interactions and monotonicity)
-* IMO, [*multicollinearity*](https://en.wikipedia.org/wiki/Multicollinearity) is even more of a problem here!
-
+::: {.column width="20%"}
+::: {style="text-align: right"}
+<hr style="height:5px; visibility:hidden;" />
+:point_right:
+:::
 :::
 
-::: {.column width="50%"}
-**[glass]{style="color: dodgerblue;"}**-box models :ice_cube::
-
-* Natutrally interpretable structure
- - Business rules and rule-based models (e.g., CORELS)
- - Small decision trees
- - Additive linear and nonlinear models (e.g., GLMs, GAMs, and GA2Ms)
- - [Explainable boosting machines](https://interpret.ml/docs/ebm.html)!
-   ![](images/iml-logo.png){width="60%" fig-align=center}
+::: {.column width="80%"}
+![](images/iml-logo.png){width="70%" fig-align=left}
 :::
 
 ::::
-
-
-## Interpretability vs. explainability
-
-- [*Explainable machine learning*]{style="color: cornflowerblue;"}: "use of post hoc methods to understand how a model makes predictions"
-
-. . .
-
-- [*Interpretable machine learning*]{style="color: cornflowerblue;"}: "the ability to explain or to present in understandable terms to a human."
-
-. . .
-
-- In essense: "[interpretability]{style="color: darkorange;"} > [explainability]{style="color: darkorange;"}"
-
-- These definitions vary across the literature and I tend to use them synonymously!
 
 
 ## Useful resources
@@ -177,12 +126,12 @@ Some books :books: :
 ![](images/iml-books.png){width="100%" fig-align=center}
 
 
-## So what's the problem(s) with causally interpreting predictive models?
+## So what's the problem(s) with causally interpreting machine learning models?
 
 . . .
 
 ::: {.callout-important}
-Machine learning is often applied to *observational* or *happenstance* data!
+Machine learning is often applied to [*observational*](https://en.wikipedia.org/wiki/Observational_study) or *happenstance data*!
 :::
 
 {{< video https://www.youtube.com/embed/ntnalq-2nNU?si=VmgMiBQmFxQr4eOC >}}
@@ -240,9 +189,9 @@ Machine learning is often applied to *observational* or *happenstance* data!
 
 - 10k total records: 8k for training and 2k for validation
 
-## Interpreting a linear model
+## Retention example (cont.)
 
-Output from an additive logistic regression fit:
+Output from an additive [logistic regression](https://en.wikipedia.org/wiki/Logistic_regression) fit:
 
 ```{r retention-logistic-regression}
 #| echo: false
@@ -257,36 +206,27 @@ round(summary(fit)$coefficients, digits = 3)
 ```
 
 ::: {.callout-tip}
-Checking [*variance inflation factor*](https://en.wikipedia.org/wiki/Variance_inflation_factor)s (VIFs) is always a good idea!
+Checking [*variance inflation factor*](https://en.wikipedia.org/wiki/Variance_inflation_factor)s (VIFs) is always a good idea, even for **black**-box models!
 :::
-
-
-
-## Correlation matrix
-
-```{r}
-#| echo: false
-#| fig-align: center
-#| out-width: "100%"
-#| fig-width: 6
-#| fig-asp: 1
-X <- subset(ret.trn, select = -Did.renew)
-corrplot::corrplot(cor(X), method = "ellipse", order = "AOE", type = "upper")
-```
-
-
-## Interpreting an ML model
-
-* No "simple" prediction formula for most black-box models!
-* Usually rely on post-hoc techniques to explain
-* Most of these require good visualizations
-* Readily available in different software (open-source and propprietary)
-* Often misapplied and/or misinterpreted!
 
 
 ## Retention example (cont.)
 
-Variable importance scores from an [XGBoost](https://xgboost.readthedocs.io/en/stable/) fit:
+Pearson correlation matrix:
+```{r corrplot}
+#| echo: false
+#| fig-align: center
+#| out-width: "80%"
+#| fig-width: 6
+#| fig-asp: 1
+X <- subset(ret.trn, select = -Did.renew)
+corrplot::corrplot(cor(X), method = "ellipse", order = "AOE")
+```
+
+
+## Retention example (cont.)
+
+[Variable importance](https://journal.r-project.org/archive/2020/RJ-2020-013/index.html) scores from an [XGBoost](https://xgboost.readthedocs.io/en/stable/) fit:
 
 ```{r variable-importance}
 #| echo: false
@@ -308,7 +248,7 @@ vip(vi, geom = "point") + ylab("Importance (SHAP)") +
 ```
 
 
-## [Partial dependence (PD) plots](https://christophm.github.io/interpretable-ml-book/pdp.html)
+## [Partial dependence](https://journal.r-project.org/archive/2017/RJ-2017-016/index.html) (PD) plots
 
 ```{r partial-dependence}
 #| echo: false
@@ -392,7 +332,7 @@ gridExtra::grid.arrange(grobs = pdps.all, nrow = 1)
 </br>
 
 :::{.r-stack}
-**Causal interpretation requires a [causal model](https://en.wikipedia.org/wiki/Causal_model)!!**
+**Causal interpretation requires a [*causal model*](https://en.wikipedia.org/wiki/Causal_model)!!**
 :::
 
 </br> 
@@ -400,7 +340,7 @@ gridExtra::grid.arrange(grobs = pdps.all, nrow = 1)
 . . .
 
 ::: {.callout-tip}
-## Watch the first talk by Peter Tennant!
+## :tv: Watch the first talk by Peter Tennant!
 [Interpretable Machine Learning & Causal Inference Workshop
 ](https://www.youtube.com/watch?v=0S8LZUxi0eg)
 :::
@@ -419,14 +359,14 @@ gridExtra::grid.arrange(grobs = pdps.all, nrow = 1)
 
 ## DAGs in machine learning
 
-Assume we have five features (`X1`--`X5`) and a response (`Y`). Causally interpreting an ML model assumes a very particular DAG!
+Assume we have five features (`X1`--`X5`) and a response (`Y`). Causally interpreting a machine learning model assumes a very particular DAG!
 
 :::: {.columns}
 
 ::: {.column width="50%"}
 **[How your algorithm sees it]{style="color: red;"}**:
 
-```{mermaid}
+```{mermaid doe-dag}
 %%| fig-align: center
 flowchart TB
   X1 --> Y
@@ -440,7 +380,7 @@ flowchart TB
 ::: {.column width="50%"}
 **[How the universe works]{style="color: forestgreen;"}**:
 
-```{mermaid}
+```{mermaid real-dag}
 %%| fig-align: center
 flowchart TB
   X1 --> X3
@@ -472,11 +412,20 @@ flowchart TB
 * Need to be careful with other [covariate roles](https://dagitty.net/learn/graphs/roles.html), like [*colliders*](https://en.wikipedia.org/wiki/Collider_(statistics)), *mediators*, etc. 
 
 
-## Adjustment sets are key
+## Adjustment sets are key :key:
+:::: {.columns}
 
-```{mermaid}
+::: {.column width="70%"}
+Minimal sufficient adjustment set for estimating
+
+* *[Total effect]{style="color: forestgreen;"}* of `X3` on `Y`: {`X1`, `X2`}
+* *[Direct effect]{style="color: forestgreen;"}* of `X3` on `Y`: {`X1`, `X2`, `X4`}
+:::
+
+::: {.column width="30%"}
+```{mermaid example-dag}
 %%| fig-align: center
-flowchart LR
+flowchart TB
   X1 --> X3
   X1 --> Y
   X2 --> X3
@@ -486,17 +435,14 @@ flowchart LR
   X4 --> Y
   X5 --> Y
 ```
+:::
 
-- Minimal sufficient adjustment set for estimating 
+::::
+::: {.callout-tip}
+Tools like [DAGitty](https://www.dagitty.net/) can help automate this!
+:::
 
-  * *[Total effect]{style="color: forestgreen;"}* of `X3` on `Y`: {`X1`, `X2`}
-  * *[Direct effect]{style="color: forestgreen;"}* of `X3` on `Y`: {`X1`, `X2`, `X4`}
-
-
-- Tools like [DAGitty](https://www.dagitty.net/) can help automate this!
-
-
-## [DAGitty](https://www.dagitty.net/) (copy and paste)
+## Copy and paste this code into [DAGitty](https://www.dagitty.net/)
 
 ```
 dag {
@@ -529,42 +475,6 @@ X5 -> Y
 Assume strong domain expertise has allowed us to generate [the following DAG]((https://shap.readthedocs.io/en/latest/example_notebooks/overviews/Be%20careful%20when%20interpreting%20predictive%20models%20in%20search%20of%20causal%20insights.html)): 
 
 ![](images/dag.svg){width="80%" fig-align=center}
-
-
-## Retention example (cont.) {.smaller}
-
-Can we interpret any of the PD plots causally?
-
-. . .
-
-Maybe for `Economy`?!
-
-::: {.panel-tabset}
-
-### PD plot
-
-```{r}
-#| echo: false
-#| fig-align: center
-#| fig-width: 6
-#| fig-asp: 0.618
-autoplot(pds[[3L]]) + ylim(0, 1) +
-    geom_line(data = pds.truth[[3]], color = "red") +
-    ylim(0, 1) + 
-    ylab("Partial dependence")
-```
-
-### Pearson correlations
-
-```{r}
-#| echo: false
-#| fig-align: center
-#| fig-width: 6
-#| fig-asp: 0.618
-corrplot::corrplot(cor(X))
-```
-
-:::
 
 
 ---
@@ -636,16 +546,15 @@ palette("default")
 ```
 
 
-## Double/debiased machine learning
+## [Double/debiased machine learning](https://docs.doubleml.org/stable/index.html#double-machine-learning-algorithm)
 
-Given a causal model, double ML *[essentially](https://docs.doubleml.org/stable/workflow/workflow.html)* involves three steps:
+Given a causal model, double ML :warning:*[essentially](https://docs.doubleml.org/stable/workflow/workflow.html)*:warning: involves three steps:
 
-1) Predict the outcome ($y$) from an [appropriate adjustment set]{style="color: forestgreen;"} and get the residuals ($r_y$)
+1) Predict the outcome ($y$) from an [appropriate adjustment set](https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf) and get the residuals ($r_y$)
 
-2) Predict the treatment ($x$) from an [appropriate adjustment set]{style="color: green;"} and get the residuals ($r_x$)
+2) Predict the treatment ($x$) from the *same adjustment set* and get the residuals ($r_x$)
 
-3) *Regress* $r_y$ on $r_x$ to create a model of the heterogeneous treatment effect
-
+3) *Regress* $r_y$ on $r_x$ to create a model of the average causal effect (i.e., the slope)
 
 
 ## Double ML for `Ad.spend`
@@ -690,17 +599,6 @@ print(dml_plr$confint())
 ```
 
 :::
-
-
-## Challenges with DAG-based inference
-
-* Faithful DAGs seem hard to come by
-  - What if you have 800 potential features?
-  - Is the right domain expertise even available?
-* What about unmeasured confounders?
-* DAGs are based on strong (and often unverifiable) assumptions
-* Oftentimes multiple reasonable DAGs will exist 
-  - [Sensitivity analysis](https://cran.r-project.org/package=causalsens)!
 
 
 ## Designed experiments
@@ -760,16 +658,15 @@ I'm reminded of an old (but still fantastic) [data mining lecture from Richard D
   - :triangular_ruler: Various measuremnts (e.g., heart rate)
   - :microscope: Lab test results (e.g., WBC) 
   - :x_ray: Chest x-ray results (e.g., pleural effusion) 
-* Too many to construct a useful DAG?
-* Goal is to predict probability of death (0/1)
+* Goal is to predict probability of death (0/1) using a [GA2M](https://interpret.ml/docs/ebm.html)
 * Data from [Caruana et al. (2015)](https://www.microsoft.com/en-us/research/wp-content/uploads/2017/06/KDD2015FinalDraftIntelligibleModels4HealthCare_igt143e-caruanaA.pdf) and [Wang et al. (2022)](https://dl.acm.org/doi/10.1145/3534678.3539074)
 
 
 ## Pneumonia example (cont.)
 
-Living past 100 decreases risk?
+Living past 100 decreases risk? :face_with_diagonal_mouth:
 
-```{r}
+```{r ebm-age}
 #| echo: false
 #| fig-align: center
 #| fig-width: 6
@@ -791,7 +688,7 @@ plot(x, y,
 
 Adding monotonic constraints can be helpful!
 
-```{r}
+```{r ebm-age-mono}
 #| echo: false
 #| fig-align: center
 #| fig-width: 6
@@ -808,9 +705,9 @@ plot(x, y.edit,
 
 ## Pneumonia example (cont.)
 
-Having asthma lowers a patient’s risk of dying from pneumonia?
+Having asthma lowers a patient’s risk of dying from pneumonia? :exploding_head:
 
-```{r}
+```{r ebm-asthma}
 #| echo: false
 #| fig-align: center
 #| fig-width: 6
@@ -851,9 +748,9 @@ digraph G {
 
 * If we use the model as is to make hospital admission decisions, asthmatic patients are likely to miss out on care they need 
 * Interpretability and causal knowledge can help identify such dangerous patterns and improve the model:
-  - Force monotonicity (e.g., `A` > `!A`)
+  - Force monotonicity (e.g., [asthmatic]{style="color: firebrick;"} > [non-asthmatic]{style="color: forestgreen;"})
   - Remove the asthma feature
-  - Edit the effect out :scream:
+  - Edit the effect out :scream: (e.g., using [GAM Changer](https://interpret.ml/gam-changer/))
 
 
 ## [GAM Changer](https://interpret.ml/gam-changer/)
@@ -863,30 +760,29 @@ digraph G {
 
 ## Causal discovery? :thinking:
 
-![](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExY3QzZHJ0aWp6cTF0N2EzNGpkcHQwZW8xM3NlaGk5NjFoank2NjR1cyZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SaKvh2fShKr1hYZssC/giphy.gif)
+![](https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExOGUzaHQydjQ2MnExeHdqaWh0OGw2aHY3YzBwMWRtcnhscTJ0NXFwMSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/SaKvh2fShKr1hYZssC/giphy.gif)
 
 
-## Key :key: takeaways {.smaller}
+## :key: Key takeaways {.smaller}
 
-* ML is great at identifying and utilizing patterns and associations in data to make predictions
+* Machine learning models are great at identifying and utilizing patterns and associations in the data to make predictions
 
-* Causal knowledge can be used to improve models!
+* Causal knowledge can be used to improve these models!
 
 * Some quotes I like from [Becoming A Data Head](https://www.amazon.com/Becoming-Data-Head-Understand-Statistics/dp/1119741742):
 
 :::: {.columns}
 
-::: {.column width="50%"}
+::: {.column width="70%"}
 
 >"There are clever ways to use observational data to suggest some causal relationships. [They ALL] rely on strong assumptions and clever statistics."
 
->"Any claims of causality with observational data should be met with skeptimicism."
+>"Any claims of causality with observational data should be met with skeptimicism." [(**ANY!!**)]
 
 :::
 
-::: {.column width="50%"}
-![](images/data-head.jpg){width="70%"}
-
+::: {.column width="30%"}
+![](images/data-head.jpg){width="100%" fig-align=center}
 :::
 ::::
 

@@ -4,7 +4,7 @@
     "href": "dagnammit.html#about-me",
     "title": "DAG Nammit",
     "section": "About me",
-    "text": "About me\n\n\n\nB.S. and M.S. in Applied Statistics (WSU)\nPh.D. in Applied Matehmatics (AFIT)\nDirector, Data Science at 84.51˚\nCurrent UC LCB adjunct 👨‍🏫 (~7 years)\n\nSome R packages 📦 :\n\npdp (partial dependence plots)\nvip (variable importance plots)\nfastshap (faster SHAP values)\n\nSome books 📚 :\n\nHands-On Machine Learning with R\nTree-Based Methods for Statistical Learning"
+    "text": "About me\n\n\n\n👨‍🎓 B.S. & M.S. in Applied Statistics (WSU)\n👨‍🎓 Ph.D. in Applied Matehmatics (AFIT)\n🎬 Director, Data Science at 84.51˚\n👨‍🏫 UC LCB adjunct (~7 years)\nSome R packages 📦 :\n\npdp (partial dependence plots)\nvip (variable importance plots)\nfastshap (faster SHAP values)\n\nSome books 📚 :\n\nHands-On Machine Learning with R\nTree-Based Methods for Statistical Learning"
   },
   {
     "objectID": "dagnammit.html#why-does-explainability-matter",
@@ -14,25 +14,11 @@
     "text": "Why does explainability matter?\n\n\n\nModel debugging - Why did my model Netflix make this mistake?\nFeature Engineering - How can I improve my model?\nDetecting fairness issues - Does my model discriminate?\nHuman-AI cooperation - How can I understand and trust the model’s decisions?\nRegulatory compliance - Does my model satisfy legal requirements?\nHigh-risk applications - Healthcare, finance, judicial, …\nCommon sense"
   },
   {
-    "objectID": "dagnammit.html#levels-and-methods-of-explainability",
-    "href": "dagnammit.html#levels-and-methods-of-explainability",
+    "objectID": "dagnammit.html#interpretability-in-a-nutshell",
+    "href": "dagnammit.html#interpretability-in-a-nutshell",
     "title": "DAG Nammit",
-    "section": "Levels and methods of explainability",
-    "text": "Levels and methods of explainability\n\n\nLevels of explainability\n\nGlobal\n\nWhich variables seem “important” and how do they impact the model’s predictions?\n\nLocal\n\nExplaining individual predictions\n\n\n\nMethods of explainability\n\nModel-specific\n\nModel coefficients\nInspect tree structure 🌲\n\nModel-agnostic\n\nCan be applied to any prediction model ⚠️\n\n🧑‍💻 Lots of good software!"
-  },
-  {
-    "objectID": "dagnammit.html#black-box-vs.-glass-box-models",
-    "href": "dagnammit.html#black-box-vs.-glass-box-models",
-    "title": "DAG Nammit",
-    "section": "Black-box vs. glass-box models",
-    "text": "Black-box vs. glass-box models\n\n\nBlack-box models ⬛:\n\nOften require (expensive) post-hoc techniques that require additional assumptions to explain\n\n👀 Looking at you permutation methods! 😏\n\nOften misleading without proper constraints (e.g., interactions and monotonicity)\nIMO, multicollinearity is even more of a problem here!\n\n\nglass-box models 🧊:\n\nNatutrally interpretable structure\nBusiness rules and rule-based models (e.g., CORELS)\nSmall decision trees\nAdditive linear and nonlinear models (e.g., GLMs, GAMs, and GA2Ms)\nExplainable boosting machines!"
-  },
-  {
-    "objectID": "dagnammit.html#interpretability-vs.-explainability",
-    "href": "dagnammit.html#interpretability-vs.-explainability",
-    "title": "DAG Nammit",
-    "section": "Interpretability vs. explainability",
-    "text": "Interpretability vs. explainability\n\nExplainable machine learning: “use of post hoc methods to understand how a model makes predictions”\n\n\n\nInterpretable machine learning: “the ability to explain or to present in understandable terms to a human.”\n\n\n\n\nIn essense: “interpretability &gt; explainability”\nThese definitions vary across the literature and I tend to use them synonymously!"
+    "section": "Interpretability in a nutshell 🥜",
+    "text": "Interpretability in a nutshell 🥜\n\n“Interpretability ⊂ Explainability”\nGlobal vs. local explainability\n◼️Black-box vs. 🪟glass-box models\n⚠️ Model-agnostic ⚠️ vs. model-specific techniques\nMulticollinearity is the nemesis of interpretability!\n🧑‍💻 Lots of good software!\n\n\n\n\n\n👉"
   },
   {
     "objectID": "dagnammit.html#useful-resources",
@@ -42,11 +28,11 @@
     "text": "Useful resources"
   },
   {
-    "objectID": "dagnammit.html#so-whats-the-problems-with-causally-interpreting-predictive-models",
-    "href": "dagnammit.html#so-whats-the-problems-with-causally-interpreting-predictive-models",
+    "objectID": "dagnammit.html#so-whats-the-problems-with-causally-interpreting-machine-learning-models",
+    "href": "dagnammit.html#so-whats-the-problems-with-causally-interpreting-machine-learning-models",
     "title": "DAG Nammit",
-    "section": "So what’s the problem(s) with causally interpreting predictive models?",
-    "text": "So what’s the problem(s) with causally interpreting predictive models?\n\n\n\n\n\n\n\nImportant\n\n\nMachine learning is often applied to observational or happenstance data!"
+    "section": "So what’s the problem(s) with causally interpreting machine learning models?",
+    "text": "So what’s the problem(s) with causally interpreting machine learning models?\n\n\n\n\n\n\n\nImportant\n\n\nMachine learning is often applied to observational or happenstance data!"
   },
   {
     "objectID": "dagnammit.html#correlation-doesnt-imply-causation",
@@ -70,29 +56,22 @@
     "text": "Customer retention example\n\nInitial goal is to train a model to predict whether a customer will renew their software subscription (taken from Lundberg et al. (2021))\nEight features were identified for predicting retention (Did.renew=0/1):\n\nCustomer discount offered upon renewal (Discount)\nAd spending on this type of customer since last renewal (Ad.spend)\nCustomer’s monthly usage (Monthly.usage)\nTime since last upgrade upon renewal (Last.upgrade)\nNo. bugs reported by customer since last renewal (Bugs.reported)\nNo. interactions with customer since last renewal (Interactions)\nNo. sales calls with customer since last renewal (Sales.calls)\nHealth of regional economy upon renewal (Economy)\n\n10k total records: 8k for training and 2k for validation"
   },
   {
-    "objectID": "dagnammit.html#interpreting-a-linear-model",
-    "href": "dagnammit.html#interpreting-a-linear-model",
-    "title": "DAG Nammit",
-    "section": "Interpreting a linear model",
-    "text": "Interpreting a linear model\nOutput from an additive logistic regression fit:\n\n\n              Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept)     -0.665      0.134  -4.961    0.000\nSales.calls      0.074      0.060   1.238    0.216\nInteractions     0.091      0.056   1.612    0.107\nEconomy          0.597      0.091   6.589    0.000\nLast.upgrade    -0.022      0.005  -4.190    0.000\nDiscount        -5.950      0.311 -19.106    0.000\nMonthly.usage    0.351      0.146   2.406    0.016\nAd.spend         0.602      0.062   9.766    0.000\nBugs.reported    0.259      0.035   7.345    0.000\n\n\n\n\n\n\n\n\nTip\n\n\nChecking variance inflation factors (VIFs) is always a good idea!"
-  },
-  {
-    "objectID": "dagnammit.html#correlation-matrix",
-    "href": "dagnammit.html#correlation-matrix",
-    "title": "DAG Nammit",
-    "section": "Correlation matrix",
-    "text": "Correlation matrix"
-  },
-  {
-    "objectID": "dagnammit.html#interpreting-an-ml-model",
-    "href": "dagnammit.html#interpreting-an-ml-model",
-    "title": "DAG Nammit",
-    "section": "Interpreting an ML model",
-    "text": "Interpreting an ML model\n\nNo “simple” prediction formula for most black-box models!\nUsually rely on post-hoc techniques to explain\nMost of these require good visualizations\nReadily available in different software (open-source and propprietary)\nOften misapplied and/or misinterpreted!"
-  },
-  {
     "objectID": "dagnammit.html#retention-example-cont.",
     "href": "dagnammit.html#retention-example-cont.",
+    "title": "DAG Nammit",
+    "section": "Retention example (cont.)",
+    "text": "Retention example (cont.)\nOutput from an additive logistic regression fit:\n\n\n              Estimate Std. Error z value Pr(&gt;|z|)\n(Intercept)     -0.665      0.134  -4.961    0.000\nSales.calls      0.074      0.060   1.238    0.216\nInteractions     0.091      0.056   1.612    0.107\nEconomy          0.597      0.091   6.589    0.000\nLast.upgrade    -0.022      0.005  -4.190    0.000\nDiscount        -5.950      0.311 -19.106    0.000\nMonthly.usage    0.351      0.146   2.406    0.016\nAd.spend         0.602      0.062   9.766    0.000\nBugs.reported    0.259      0.035   7.345    0.000\n\n\n\n\n\n\n\n\nTip\n\n\nChecking variance inflation factors (VIFs) is always a good idea, even for black-box models!"
+  },
+  {
+    "objectID": "dagnammit.html#retention-example-cont.-1",
+    "href": "dagnammit.html#retention-example-cont.-1",
+    "title": "DAG Nammit",
+    "section": "Retention example (cont.)",
+    "text": "Retention example (cont.)\nPearson correlation matrix:"
+  },
+  {
+    "objectID": "dagnammit.html#retention-example-cont.-2",
+    "href": "dagnammit.html#retention-example-cont.-2",
     "title": "DAG Nammit",
     "section": "Retention example (cont.)",
     "text": "Retention example (cont.)\nVariable importance scores from an XGBoost fit:"
@@ -137,7 +116,7 @@
     "href": "dagnammit.html#so-now-what",
     "title": "DAG Nammit",
     "section": "So now what?",
-    "text": "So now what?\n\n\n\nCausal interpretation requires a causal model!!\n\n\n\n\n\n\n\n\n\n\nWatch the first talk by Peter Tennant!\n\n\nInterpretable Machine Learning & Causal Inference Workshop"
+    "text": "So now what?\n\n\n\nCausal interpretation requires a causal model!!\n\n\n\n\n\n\n\n\n\n\n📺 Watch the first talk by Peter Tennant!\n\n\nInterpretable Machine Learning & Causal Inference Workshop"
   },
   {
     "objectID": "dagnammit.html#directed-asyclic-graphs-dags",
@@ -151,7 +130,7 @@
     "href": "dagnammit.html#dags-in-machine-learning",
     "title": "DAG Nammit",
     "section": "DAGs in machine learning",
-    "text": "DAGs in machine learning\nAssume we have five features (X1–X5) and a response (Y). Causally interpreting an ML model assumes a very particular DAG!\n\n\nHow your algorithm sees it:\n\n\n\n\n\nflowchart TB\n  X1 --&gt; Y\n  X2 --&gt; Y\n  X3 --&gt; Y\n  X4 --&gt; Y\n  X5 --&gt; Y\n\n\n\n\n\n\n\nHow the universe works:\n\n\n\n\n\nflowchart TB\n  X1 --&gt; X3\n  X1 --&gt; Y\n  X2 --&gt; X3\n  X2 --&gt; Y\n  X3 --&gt; X4\n  X3 --&gt; Y\n  X4 --&gt; Y\n  X5 --&gt; Y"
+    "text": "DAGs in machine learning\nAssume we have five features (X1–X5) and a response (Y). Causally interpreting a machine learning model assumes a very particular DAG!\n\n\nHow your algorithm sees it:\n\n\n\n\n\nflowchart TB\n  X1 --&gt; Y\n  X2 --&gt; Y\n  X3 --&gt; Y\n  X4 --&gt; Y\n  X5 --&gt; Y\n\n\n\n\n\n\n\nHow the universe works:\n\n\n\n\n\nflowchart TB\n  X1 --&gt; X3\n  X1 --&gt; Y\n  X2 --&gt; X3\n  X2 --&gt; Y\n  X3 --&gt; X4\n  X3 --&gt; Y\n  X4 --&gt; Y\n  X5 --&gt; Y"
   },
   {
     "objectID": "dagnammit.html#estimation-and-confounding",
@@ -164,15 +143,15 @@
     "objectID": "dagnammit.html#adjustment-sets-are-key",
     "href": "dagnammit.html#adjustment-sets-are-key",
     "title": "DAG Nammit",
-    "section": "Adjustment sets are key",
-    "text": "Adjustment sets are key\n\n\n\n\n\nflowchart LR\n  X1 --&gt; X3\n  X1 --&gt; Y\n  X2 --&gt; X3\n  X2 --&gt; Y\n  X3 --&gt; X4\n  X3 --&gt; Y\n  X4 --&gt; Y\n  X5 --&gt; Y\n\n\n\n\n\n\n\nMinimal sufficient adjustment set for estimating\n\nTotal effect of X3 on Y: {X1, X2}\nDirect effect of X3 on Y: {X1, X2, X4}\n\nTools like DAGitty can help automate this!"
+    "section": "Adjustment sets are key 🔑",
+    "text": "Adjustment sets are key 🔑\n\n\nMinimal sufficient adjustment set for estimating\n\nTotal effect of X3 on Y: {X1, X2}\nDirect effect of X3 on Y: {X1, X2, X4}\n\n\n\n\n\n\n\nflowchart TB\n  X1 --&gt; X3\n  X1 --&gt; Y\n  X2 --&gt; X3\n  X2 --&gt; Y\n  X3 --&gt; X4\n  X3 --&gt; Y\n  X4 --&gt; Y\n  X5 --&gt; Y\n\n\n\n\n\n\n\n\n\n\n\n\n\nTip\n\n\nTools like DAGitty can help automate this!"
   },
   {
-    "objectID": "dagnammit.html#dagitty-copy-and-paste",
-    "href": "dagnammit.html#dagitty-copy-and-paste",
+    "objectID": "dagnammit.html#copy-and-paste-this-code-into-dagitty",
+    "href": "dagnammit.html#copy-and-paste-this-code-into-dagitty",
     "title": "DAG Nammit",
-    "section": "DAGitty (copy and paste)",
-    "text": "DAGitty (copy and paste)\ndag {\nbb=\"0,0,1,1\"\nX1 [pos=\"0.462,0.332\"]\nX2 [pos=\"0.425,0.238\"]\nX3 [exposure,pos=\"0.532,0.277\"]\nX4 [pos=\"0.529,0.396\"]\nX5 [pos=\"0.363,0.416\"]\nY [outcome,pos=\"0.439,0.464\"]\nX1 -&gt; X3\nX1 -&gt; Y\nX2 -&gt; X3\nX2 -&gt; Y\nX3 -&gt; X4\nX3 -&gt; Y\nX4 -&gt; Y\nX5 -&gt; Y\n}"
+    "section": "Copy and paste this code into DAGitty",
+    "text": "Copy and paste this code into DAGitty\ndag {\nbb=\"0,0,1,1\"\nX1 [pos=\"0.462,0.332\"]\nX2 [pos=\"0.425,0.238\"]\nX3 [exposure,pos=\"0.532,0.277\"]\nX4 [pos=\"0.529,0.396\"]\nX5 [pos=\"0.363,0.416\"]\nY [outcome,pos=\"0.439,0.464\"]\nX1 -&gt; X3\nX1 -&gt; Y\nX2 -&gt; X3\nX2 -&gt; Y\nX3 -&gt; X4\nX3 -&gt; Y\nX4 -&gt; Y\nX5 -&gt; Y\n}"
   },
   {
     "objectID": "dagnammit.html#useful-resources-1",
@@ -182,18 +161,11 @@
     "text": "Useful resources"
   },
   {
-    "objectID": "dagnammit.html#retention-example-cont.-1",
-    "href": "dagnammit.html#retention-example-cont.-1",
+    "objectID": "dagnammit.html#retention-example-cont.-3",
+    "href": "dagnammit.html#retention-example-cont.-3",
     "title": "DAG Nammit",
     "section": "Retention example (cont.)",
     "text": "Retention example (cont.)\nAssume strong domain expertise has allowed us to generate the following DAG:\n\n\n\n%3\n\n\n\nBugs reported\n\nBugs reported\n\n\n\nMonthly usage\n\nMonthly usage\n\n\n\nAd spend\n\nAd spend\n\n\n\nMonthly usage-&gt;Ad spend\n\n\n\n\n\nBugs faced\n\nBugs faced\n\n\n\nMonthly usage-&gt;Bugs faced\n\n\n\n\n\nDid renew\n\nDid renew\n\n\n\nMonthly usage-&gt;Did renew\n\n\n\n\n\nSales calls\n\nSales calls\n\n\n\nInteractions\n\nInteractions\n\n\n\nSales calls-&gt;Interactions\n\n\n\n\n\nProduct need\n\nProduct need\n\n\n\nSales calls-&gt;Product need\n\n\n\n\n\nSales calls-&gt;Did renew\n\n\n\n\n\nEconomy\n\nEconomy\n\n\n\nEconomy-&gt;Did renew\n\n\n\n\n\nDiscount\n\nDiscount\n\n\n\nDiscount-&gt;Did renew\n\n\n\n\n\nLast upgrade\n\nLast upgrade\n\n\n\nLast upgrade-&gt;Ad spend\n\n\n\n\n\nLast upgrade-&gt;Did renew\n\n\n\n\n\nInteractions-&gt;Did renew\n\n\n\n\n\nProduct need-&gt;Bugs reported\n\n\n\n\n\nProduct need-&gt;Monthly usage\n\n\n\n\n\nProduct need-&gt;Discount\n\n\n\n\n\nProduct need-&gt;Did renew\n\n\n\n\n\nBugs faced-&gt;Bugs reported\n\n\n\n\n\nBugs faced-&gt;Did renew"
-  },
-  {
-    "objectID": "dagnammit.html#retention-example-cont.-2",
-    "href": "dagnammit.html#retention-example-cont.-2",
-    "title": "DAG Nammit",
-    "section": "Retention example (cont.)",
-    "text": "Retention example (cont.)\nCan we interpret any of the PD plots causally?\n\nMaybe for Economy?!\n\nPD plotPearson correlations"
   },
   {
     "objectID": "dagnammit.html#mathematical-background",
@@ -203,8 +175,8 @@
     "text": "Mathematical background\nThe partial dependence (PD) of \\(Y\\) on \\(X_S\\) is defined as\n\\[\n\\begin{aligned}\ng_s\\left(x_s\\right) &= E_{X_c}\\left[g\\left(x_s, X_c\\right)\\right] \\\\\n&\\approx \\frac{1}{N}\\sum_{i=1}^N g\\left(x_S, X_{iC}\\right)\n\\end{aligned}\n\\]\n\n\nThis is the same as Pearl’s back-door adjustment formula\nUnder certain conditions, PD plots can be interpreted causally!"
   },
   {
-    "objectID": "dagnammit.html#retention-example-cont.-3",
-    "href": "dagnammit.html#retention-example-cont.-3",
+    "objectID": "dagnammit.html#retention-example-cont.-4",
+    "href": "dagnammit.html#retention-example-cont.-4",
     "title": "DAG Nammit",
     "section": "Retention example (cont.)",
     "text": "Retention example (cont.)\nPD of Did.renew on Ad.spend, adjusted for only Monthly.usage and Last.upgrade: … 🥁\n\n\n\n\n\n\n\n\n\n\n\n\nUmmm … maybe a case of estimand vs. estimate? 🤔"
@@ -217,8 +189,8 @@
     "text": "Stop permuting features?! 😱\n\n\n…PaP metrics can vastly over-emphasize correlated features in both variable importance measures and partial dependence plots."
   },
   {
-    "objectID": "dagnammit.html#retention-example-cont.-4",
-    "href": "dagnammit.html#retention-example-cont.-4",
+    "objectID": "dagnammit.html#retention-example-cont.-5",
+    "href": "dagnammit.html#retention-example-cont.-5",
     "title": "DAG Nammit",
     "section": "Retention example (cont.)",
     "text": "Retention example (cont.)"
@@ -228,7 +200,7 @@
     "href": "dagnammit.html#doubledebiased-machine-learning",
     "title": "DAG Nammit",
     "section": "Double/debiased machine learning",
-    "text": "Double/debiased machine learning\nGiven a causal model, double ML essentially involves three steps:\n\nPredict the outcome (\\(y\\)) from an appropriate adjustment set and get the residuals (\\(r_y\\))\nPredict the treatment (\\(x\\)) from an appropriate adjustment set and get the residuals (\\(r_x\\))\nRegress \\(r_y\\) on \\(r_x\\) to create a model of the heterogeneous treatment effect"
+    "text": "Double/debiased machine learning\nGiven a causal model, double ML ⚠️essentially⚠️ involves three steps:\n\nPredict the outcome (\\(y\\)) from an appropriate adjustment set and get the residuals (\\(r_y\\))\nPredict the treatment (\\(x\\)) from the same adjustment set and get the residuals (\\(r_x\\))\nRegress \\(r_y\\) on \\(r_x\\) to create a model of the average causal effect (i.e., the slope)"
   },
   {
     "objectID": "dagnammit.html#double-ml-for-ad.spend",
@@ -236,13 +208,6 @@
     "title": "DAG Nammit",
     "section": "Double ML for Ad.spend",
     "text": "Double ML for Ad.spend\n\nR codeResults\n\n\n\ndml_data &lt;- DoubleML::DoubleMLData$new(\n  data = ret.trn,                              # training data\n  y_col = \"Did.renew\",                         # response\n  d_cols = \"Ad.spend\",                         # treatment\n  x_cols = c(\"Last.upgrade\", \"Monthly.usage\")  # adjustment set\n)\nlrnr &lt;- mlr3::lrn(\"regr.ranger\", num.trees = 500)\nset.seed(1810)  # for reproducibility\ndml_plr = DoubleML::DoubleMLPLR$new(\n  dml_data, ml_l = lrnr$clone(), ml_m = lrnr$clone()\n)\ndml_plr$fit()\n\n\n\n\n# Print results\nprint(dml_plr)\n# ------------------ Fit summary       ------------------\n#   Estimates and significance testing of the effect of target variables\n#          Estimate. Std. Error t value Pr(&gt;|t|)\n# Ad.spend  -0.09634    0.25197  -0.382    0.702\n\n# Compute 95% confidence interval\nprint(dml_plr$confint())\n#               2.5 %   97.5 %\n# Ad.spend -0.5901917 0.397511"
-  },
-  {
-    "objectID": "dagnammit.html#challenges-with-dag-based-inference",
-    "href": "dagnammit.html#challenges-with-dag-based-inference",
-    "title": "DAG Nammit",
-    "section": "Challenges with DAG-based inference",
-    "text": "Challenges with DAG-based inference\n\nFaithful DAGs seem hard to come by\n\nWhat if you have 800 potential features?\nIs the right domain expertise even available?\n\nWhat about unmeasured confounders?\nDAGs are based on strong (and often unverifiable) assumptions\nOftentimes multiple reasonable DAGs will exist\n\nSensitivity analysis!"
   },
   {
     "objectID": "dagnammit.html#designed-experiments",
@@ -277,14 +242,14 @@
     "href": "dagnammit.html#pneumonia-example",
     "title": "DAG Nammit",
     "section": "Pneumonia example",
-    "text": "Pneumonia example\n\nData contains 46 features on 14199 pneumonia patients\n\nPatient demographics (e.g., age)\n📐 Various measuremnts (e.g., heart rate)\n🔬 Lab test results (e.g., WBC)\n🩻 Chest x-ray results (e.g., pleural effusion)\n\nToo many to construct a useful DAG?\nGoal is to predict probability of death (0/1)\nData from Caruana et al. (2015) and Wang et al. (2022)"
+    "text": "Pneumonia example\n\nData contains 46 features on 14199 pneumonia patients\n\nPatient demographics (e.g., age)\n📐 Various measuremnts (e.g., heart rate)\n🔬 Lab test results (e.g., WBC)\n🩻 Chest x-ray results (e.g., pleural effusion)\n\nGoal is to predict probability of death (0/1) using a GA2M\nData from Caruana et al. (2015) and Wang et al. (2022)"
   },
   {
     "objectID": "dagnammit.html#pneumonia-example-cont.",
     "href": "dagnammit.html#pneumonia-example-cont.",
     "title": "DAG Nammit",
     "section": "Pneumonia example (cont.)",
-    "text": "Pneumonia example (cont.)\nLiving past 100 decreases risk?"
+    "text": "Pneumonia example (cont.)\nLiving past 100 decreases risk? 🫤"
   },
   {
     "objectID": "dagnammit.html#pneumonia-example-cont.-1",
@@ -298,7 +263,7 @@
     "href": "dagnammit.html#pneumonia-example-cont.-2",
     "title": "DAG Nammit",
     "section": "Pneumonia example (cont.)",
-    "text": "Pneumonia example (cont.)\nHaving asthma lowers a patient’s risk of dying from pneumonia?"
+    "text": "Pneumonia example (cont.)\nHaving asthma lowers a patient’s risk of dying from pneumonia? 🤯"
   },
   {
     "objectID": "dagnammit.html#pneumonia-example-cont.-3",
@@ -312,7 +277,7 @@
     "href": "dagnammit.html#pneumonia-example-cont.-4",
     "title": "DAG Nammit",
     "section": "Pneumonia example (cont.)",
-    "text": "Pneumonia example (cont.)\n\nIf we use the model as is to make hospital admission decisions, asthmatic patients are likely to miss out on care they need\nInterpretability and causal knowledge can help identify such dangerous patterns and improve the model:\n\nForce monotonicity (e.g., A &gt; !A)\nRemove the asthma feature\nEdit the effect out 😱"
+    "text": "Pneumonia example (cont.)\n\nIf we use the model as is to make hospital admission decisions, asthmatic patients are likely to miss out on care they need\nInterpretability and causal knowledge can help identify such dangerous patterns and improve the model:\n\nForce monotonicity (e.g., asthmatic &gt; non-asthmatic)\nRemove the asthma feature\nEdit the effect out 😱 (e.g., using GAM Changer)"
   },
   {
     "objectID": "dagnammit.html#gam-changer",
@@ -332,8 +297,8 @@
     "objectID": "dagnammit.html#key-takeaways",
     "href": "dagnammit.html#key-takeaways",
     "title": "DAG Nammit",
-    "section": "Key 🔑 takeaways",
-    "text": "Key 🔑 takeaways\n\nML is great at identifying and utilizing patterns and associations in data to make predictions\nCausal knowledge can be used to improve models!\nSome quotes I like from Becoming A Data Head:\n\n\n\n\n“There are clever ways to use observational data to suggest some causal relationships. [They ALL] rely on strong assumptions and clever statistics.”\n\n\n“Any claims of causality with observational data should be met with skeptimicism.”"
+    "section": "🔑 Key takeaways",
+    "text": "🔑 Key takeaways\n\nMachine learning models are great at identifying and utilizing patterns and associations in the data to make predictions\nCausal knowledge can be used to improve these models!\nSome quotes I like from Becoming A Data Head:\n\n\n\n\n“There are clever ways to use observational data to suggest some causal relationships. [They ALL] rely on strong assumptions and clever statistics.”\n\n\n“Any claims of causality with observational data should be met with skeptimicism.” [(ANY!!)]"
   },
   {
     "objectID": "dagnammit.html#questions",
