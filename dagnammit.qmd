@@ -1,6 +1,6 @@
 ---
 title: "DAG Nammit"
-subtitle: "The Challenges and Dagners of Causally Interpreting Machine Learning Models"
+subtitle: "The Challenges and Dangers of Causally Interpreting Machine Learning Models"
 author: "Brandon M. Greenwell"
 institute: "Slides: https://github.com/bgreenwell/dagnammit"
 from: markdown+emoji
