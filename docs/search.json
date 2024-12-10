@@ -207,7 +207,7 @@
     "href": "dagnammit.html#double-ml-for-ad.spend",
     "title": "DAG Nammit",
     "section": "Double ML for Ad.spend",
-    "text": "Double ML for Ad.spend\n\nR codeResults\n\n\n\ndml_data &lt;- DoubleML::DoubleMLData$new(\n  data = ret.trn,                              # training data\n  y_col = \"Did.renew\",                         # response\n  d_cols = \"Ad.spend\",                         # treatment\n  x_cols = c(\"Last.upgrade\", \"Monthly.usage\")  # adjustment set\n)\nlrnr &lt;- mlr3::lrn(\"regr.ranger\", num.trees = 500)\nset.seed(1810)  # for reproducibility\ndml_plr = DoubleML::DoubleMLPLR$new(\n  dml_data, ml_l = lrnr$clone(), ml_m = lrnr$clone()\n)\ndml_plr$fit()\n\n\n\n\n# Print results\nprint(dml_plr)\n# ------------------ Fit summary       ------------------\n#   Estimates and significance testing of the effect of target variables\n#          Estimate. Std. Error t value Pr(&gt;|t|)\n# Ad.spend  -0.09634    0.25197  -0.382    0.702\n\n# Compute 95% confidence interval\nprint(dml_plr$confint())\n#               2.5 %   97.5 %\n# Ad.spend -0.5901917 0.397511\n\n\nThis just happened to work in this example!!! But why shouldn’t it?"
+    "text": "Double ML for Ad.spend\n\nR codeResults\n\n\n\ndml_data &lt;- DoubleML::DoubleMLData$new(\n  data = ret.trn,                              # training data\n  y_col = \"Did.renew\",                         # response\n  d_cols = \"Ad.spend\",                         # treatment\n  x_cols = c(\"Last.upgrade\", \"Monthly.usage\")  # adjustment set\n)\nlrnr &lt;- mlr3::lrn(\"regr.ranger\", num.trees = 500)\nset.seed(1810)  # for reproducibility\ndml_plr = DoubleML::DoubleMLPLR$new(\n  dml_data, ml_l = lrnr$clone(), ml_m = lrnr$clone()\n)\ndml_plr$fit()\n\n\n\n\n# Print results\nprint(dml_plr)\n# ------------------ Fit summary       ------------------\n#   Estimates and significance testing of the effect of target variables\n#          Estimate. Std. Error t value Pr(&gt;|t|)\n# Ad.spend  -0.09634    0.25197  -0.382    0.702\n\n# Compute 95% confidence interval\nprint(dml_plr$confint())\n#               2.5 %   97.5 %\n# Ad.spend -0.5901917 0.397511\n\n\nThis just happened to work in this example! But why shouldn’t it?"
   },
   {
     "objectID": "dagnammit.html#designed-experiments",
@@ -313,5 +313,12 @@
     "title": "DAG Nammit",
     "section": "Double/debiased machine learning (DML)",
     "text": "Double/debiased machine learning (DML)\n\\[\n\\begin{align}\n  y &= \\theta t + g\\left(\\boldsymbol{x}\\right) + U, \\quad E\\left(U|t, \\boldsymbol{x}\\right) = 0\\\\\n  t &= m\\left(\\boldsymbol{x}\\right) + V, \\quad E\\left(V|\\boldsymbol{x}\\right) = 0\n\\end{align}\n\\]\nDML ⚠️essentially⚠️ involves three steps:\n\nPredict the outcome (\\(y\\)) from an appropriate adjustment set (\\(\\boldsymbol{x}\\)) and get the residuals (\\(r_y\\))\nPredict the treatment (\\(t\\)) from the same adjustment set (\\(\\boldsymbol{x}\\)) and get the residuals (\\(r_x\\))\nRegress \\(r_y\\) on \\(r_x\\) to create a model of the average causal effect (i.e., the slope)"
+  },
+  {
+    "objectID": "dagnammit.html#yet-another-simulation-example",
+    "href": "dagnammit.html#yet-another-simulation-example",
+    "title": "DAG Nammit",
+    "section": "Yet another simulation example…",
+    "text": "Yet another simulation example…\nIn this example, we’ll work with simulated data from the following causal model:\n\\[\\begin{equation*}\n\\log\\left(\\frac{p}{1 - p}\\right) = \\theta t + g\\left(\\boldsymbol{x}\\right),\n\\end{equation*}\\] where \\(p = Pr\\left(Y = 1 | t, \\boldsymbol{x}\\right)\\) and the nuisance functions are given by \\[\\begin{align*}\n  g\\left(\\boldsymbol{x}\\right) &= 10  \\sin\\left(\\pi x_1\\right) - 5  \\cos\\left(x_2\\right) + 20 x_3^2 + 10 x_4 + 5 x_5,\\\\\n  m\\left(\\boldsymbol{x}\\right)  &= 3 \\sin\\left(x_1\\right) + \\left(\\frac{1}{4}\\right)\\frac{\\exp\\left(x_2\\right)}{1 + \\exp\\left(x_2\\right)} - 2  x_3^2 + 2 x_4 + 2 x_5 = E\\left(t|\\boldsymbol{x}\\right),\n\\end{align*}\\]\n\nWalk through the python code in this notebook"
   }
 ]

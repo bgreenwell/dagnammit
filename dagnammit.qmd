@@ -612,7 +612,7 @@ print(dml_plr$confint())
 :::
 
 
-## Yet another simulation example...
+## Yet another simulation example... {.smaller}
 
 In this example, we'll work with simulated data from the following causal model:
 
@@ -626,7 +626,7 @@ where $p = Pr\left(Y = 1 | t, \boldsymbol{x}\right)$ and the nuisance functions 
 \end{align*}
 
 :::{.r-stack}
- **[Walk through notebook]{style="color: blue;"}**
+ **Walk through the python code in [this notebook](https://github.com/bgreenwell/dagnammit/blob/main/code/dml-binary-simulation.ipynb)**
 :::
 
 ## Designed experiments
