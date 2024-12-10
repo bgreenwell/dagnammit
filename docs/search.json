@@ -200,14 +200,14 @@
     "href": "dagnammit.html#doubledebiased-machine-learning",
     "title": "DAG Nammit",
     "section": "Double/debiased machine learning",
-    "text": "Double/debiased machine learning\nGiven a causal model, double ML ⚠️essentially⚠️ involves three steps:\n\nPredict the outcome (\\(y\\)) from an appropriate adjustment set and get the residuals (\\(r_y\\))\nPredict the treatment (\\(x\\)) from the same adjustment set and get the residuals (\\(r_x\\))\nRegress \\(r_y\\) on \\(r_x\\) to create a model of the average causal effect (i.e., the slope)"
+    "text": "Double/debiased machine learning\n\\[\n\\begin{align}\n  y &= \\theta t + g\\left(\\boldsymbol{x}\\right) + U, \\quad E\\left(U|t, \\boldsymbol{x}\\right) = 0\\\\\n  t &= m\\left(\\boldsymbol{x}\\right) + V, \\quad E\\left(V|\\boldsymbol{x}\\right) = 0\n\\end{align}\n\\]\nGiven a causal model, double ML ⚠️essentially⚠️ involves three steps:\n\nPredict the outcome (\\(y\\)) from an appropriate adjustment set (\\(\\boldsymbol{x}\\)) and get the residuals (\\(r_y\\))\nPredict the treatment (\\(t\\)) from the same adjustment set (\\(\\boldsymbol{x}\\)) and get the residuals (\\(r_x\\))\nRegress \\(r_y\\) on \\(r_x\\) to create a model of the average causal effect (i.e., the slope)"
   },
   {
     "objectID": "dagnammit.html#double-ml-for-ad.spend",
     "href": "dagnammit.html#double-ml-for-ad.spend",
     "title": "DAG Nammit",
     "section": "Double ML for Ad.spend",
-    "text": "Double ML for Ad.spend\n\nR codeResults\n\n\n\ndml_data &lt;- DoubleML::DoubleMLData$new(\n  data = ret.trn,                              # training data\n  y_col = \"Did.renew\",                         # response\n  d_cols = \"Ad.spend\",                         # treatment\n  x_cols = c(\"Last.upgrade\", \"Monthly.usage\")  # adjustment set\n)\nlrnr &lt;- mlr3::lrn(\"regr.ranger\", num.trees = 500)\nset.seed(1810)  # for reproducibility\ndml_plr = DoubleML::DoubleMLPLR$new(\n  dml_data, ml_l = lrnr$clone(), ml_m = lrnr$clone()\n)\ndml_plr$fit()\n\n\n\n\n# Print results\nprint(dml_plr)\n# ------------------ Fit summary       ------------------\n#   Estimates and significance testing of the effect of target variables\n#          Estimate. Std. Error t value Pr(&gt;|t|)\n# Ad.spend  -0.09634    0.25197  -0.382    0.702\n\n# Compute 95% confidence interval\nprint(dml_plr$confint())\n#               2.5 %   97.5 %\n# Ad.spend -0.5901917 0.397511"
+    "text": "Double ML for Ad.spend\n\nR codeResults\n\n\n\ndml_data &lt;- DoubleML::DoubleMLData$new(\n  data = ret.trn,                              # training data\n  y_col = \"Did.renew\",                         # response\n  d_cols = \"Ad.spend\",                         # treatment\n  x_cols = c(\"Last.upgrade\", \"Monthly.usage\")  # adjustment set\n)\nlrnr &lt;- mlr3::lrn(\"regr.ranger\", num.trees = 500)\nset.seed(1810)  # for reproducibility\ndml_plr = DoubleML::DoubleMLPLR$new(\n  dml_data, ml_l = lrnr$clone(), ml_m = lrnr$clone()\n)\ndml_plr$fit()\n\n\n\n\n# Print results\nprint(dml_plr)\n# ------------------ Fit summary       ------------------\n#   Estimates and significance testing of the effect of target variables\n#          Estimate. Std. Error t value Pr(&gt;|t|)\n# Ad.spend  -0.09634    0.25197  -0.382    0.702\n\n# Compute 95% confidence interval\nprint(dml_plr$confint())\n#               2.5 %   97.5 %\n# Ad.spend -0.5901917 0.397511\n\n\nThis just happened to work in this example!!! But why shouldn’t it?"
   },
   {
     "objectID": "dagnammit.html#designed-experiments",
@@ -306,5 +306,12 @@
     "title": "DAG Nammit",
     "section": "Questions? 🙋",
     "text": "Questions? 🙋\n\nSource: xkcd comic"
+  },
+  {
+    "objectID": "dagnammit.html#doubledebiased-machine-learning-dml",
+    "href": "dagnammit.html#doubledebiased-machine-learning-dml",
+    "title": "DAG Nammit",
+    "section": "Double/debiased machine learning (DML)",
+    "text": "Double/debiased machine learning (DML)\n\\[\n\\begin{align}\n  y &= \\theta t + g\\left(\\boldsymbol{x}\\right) + U, \\quad E\\left(U|t, \\boldsymbol{x}\\right) = 0\\\\\n  t &= m\\left(\\boldsymbol{x}\\right) + V, \\quad E\\left(V|\\boldsymbol{x}\\right) = 0\n\\end{align}\n\\]\nDML ⚠️essentially⚠️ involves three steps:\n\nPredict the outcome (\\(y\\)) from an appropriate adjustment set (\\(\\boldsymbol{x}\\)) and get the residuals (\\(r_y\\))\nPredict the treatment (\\(t\\)) from the same adjustment set (\\(\\boldsymbol{x}\\)) and get the residuals (\\(r_x\\))\nRegress \\(r_y\\) on \\(r_x\\) to create a model of the average causal effect (i.e., the slope)"
   }
 ]

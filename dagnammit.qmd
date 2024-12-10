@@ -546,13 +546,20 @@ palette("default")
 ```
 
 
-## [Double/debiased machine learning](https://docs.doubleml.org/stable/index.html#double-machine-learning-algorithm)
+## [Double/debiased machine learning](https://docs.doubleml.org/stable/index.html#double-machine-learning-algorithm) (DML)
 
-Given a causal model, double ML :warning:*[essentially](https://docs.doubleml.org/stable/workflow/workflow.html)*:warning: involves three steps:
+$$
+\begin{align}
+  y &= \theta t + g\left(\boldsymbol{x}\right) + U, \quad E\left(U|t, \boldsymbol{x}\right) = 0\\
+  t &= m\left(\boldsymbol{x}\right) + V, \quad E\left(V|\boldsymbol{x}\right) = 0
+\end{align}
+$$
 
-1) Predict the outcome ($y$) from an [appropriate adjustment set](https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf) and get the residuals ($r_y$)
+DML :warning:*[essentially](https://docs.doubleml.org/stable/workflow/workflow.html)*:warning: involves three steps:
 
-2) Predict the treatment ($x$) from the *same adjustment set* and get the residuals ($r_x$)
+1) Predict the outcome ($y$) from an [appropriate adjustment set](https://ftp.cs.ucla.edu/pub/stat_ser/r493.pdf) ($\boldsymbol{x}$) and get the residuals ($r_y$)
+
+2) Predict the treatment ($t$) from the *same adjustment set* ($\boldsymbol{x}$) and get the residuals ($r_x$)
 
 3) *Regress* $r_y$ on $r_x$ to create a model of the average causal effect (i.e., the slope)
 
@@ -598,8 +605,29 @@ print(dml_plr$confint())
 # Ad.spend -0.5901917 0.397511
 ```
 
+:::{.r-stack}
+ **[This just happened to work in this example!]{style="color: red;"}** But why shouldn't it?
 :::
 
+:::
+
+
+## Yet another simulation example...
+
+In this example, we'll work with simulated data from the following causal model:
+
+\begin{equation*}
+\log\left(\frac{p}{1 - p}\right) = \theta t + g\left(\boldsymbol{x}\right),
+\end{equation*}
+where $p = Pr\left(Y = 1 | t, \boldsymbol{x}\right)$ and the nuisance functions are given by
+\begin{align*}
+  g\left(\boldsymbol{x}\right) &= 10  \sin\left(\pi x_1\right) - 5  \cos\left(x_2\right) + 20 x_3^2 + 10 x_4 + 5 x_5,\\
+  m\left(\boldsymbol{x}\right)  &= 3 \sin\left(x_1\right) + \left(\frac{1}{4}\right)\frac{\exp\left(x_2\right)}{1 + \exp\left(x_2\right)} - 2  x_3^2 + 2 x_4 + 2 x_5 = E\left(t|\boldsymbol{x}\right),
+\end{align*}
+
+:::{.r-stack}
+ **[Walk through notebook]{style="color: blue;"}**
+:::
 
 ## Designed experiments
 
