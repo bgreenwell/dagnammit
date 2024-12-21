@@ -605,10 +605,6 @@ print(dml_plr$confint())
 # Ad.spend -0.5901917 0.397511
 ```
 
-:::{.r-stack}
- **[This just happened to work in this example!]{style="color: red;"}** But why shouldn't it?
-:::
-
 :::
 
 
